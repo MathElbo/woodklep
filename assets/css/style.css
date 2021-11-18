@@ -1,0 +1,44 @@
+/* General Content */
+
+
+
+/* Navbar */
+
+.navLogo {
+    height: 30px;
+    width: 30px;
+}
+
+/* Footer */
+
+.footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 60px;
+    line-height: 60px;
+    background-color: #212529;
+    text-align: center;
+}
+
+/* Chess :( */
+
+#board{
+    width: 100%;
+    text-align: center;
+}
+
+.lightSquare {
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    display: inline-block;
+}
+
+.darkSquare{
+    background-color: grey;
+    width: 100px;
+    height: 100px;
+    border: 1px solid black;
+    display: inline-block;
+}
