@@ -94,6 +94,11 @@ $fullname = $pinfo["name"] . ' ' . $pinfo["infix"] . ' ' . $pinfo["lastname"];
             <td>Straatnaam</td>
             <td><?php echo $pinfo["streetname"]; ?></td>
           </tr>
+          <tr>
+            <td>Huisnummer</td>
+            <td><?php echo $pinfo["housenumber"]; ?></td>
+          </tr>
+          <tr>
             <td>Postcode</td>
             <td><?php echo $pinfo["postalcode"]; ?></td>
           </tr>

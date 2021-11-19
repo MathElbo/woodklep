@@ -32,6 +32,9 @@ session_start(); ?>
     include("./layout-content/homepage.php");
   }
   ?>
+  <br>
+  <br>
+  <br>
 
   <!-- include footer -->
   <?php include("./layout-basic/footer.php"); ?>
