@@ -22,15 +22,18 @@
         <a class="nav-link" href="./index.php?content=homepage">Home</a></li>
       <li class="<?php if ($content == 'contact') echo 'active' ?> nav-item">
         <a class="nav-link" href="index.php?content=contact">Contact</a></li>
-      <li class="<?php if ($content == 'inloggen') {echo 'active';} else if (isset($_SESSION["id"])){echo 'disabled';} ?> nav-item">
-        <a class="nav-link" href="index.php?content=inloggen">Inloggen</a></li>
-      <?php if (isset($_SESSION["id"])) {
-        echo "
-      <li><a class='nav-link' href='index.php?content=uitloggen'>uitloggen</a></li>";
+      <?php 
+      if (empty($_SESSION["id"])) {
+        echo "<li><class='";
+        if ($content == ' inloggen') echo 'active';
+        echo " nav-item>
+        <a class ='nav-link' href='index.php?content=inloggen'>Inloggen</a></li>";
       }
-
-      ?>
-      
+        if (isset($_SESSION["id"])) {
+        echo "
+      <li><a class='nav-link' href='index.php?content=uitloggen'>Uitloggen</a></li>";
+      }
+      ?> 
     </ul>
   </div>
 </nav>
