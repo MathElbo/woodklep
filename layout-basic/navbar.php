@@ -22,8 +22,11 @@
         <a class="nav-link" href="./index.php?content=homepage">Home</a></li>
       <li class="<?php if ($content == 'contact') echo 'active' ?> nav-item">
         <a class="nav-link" href="index.php?content=contact">Contact</a></li>
+        <li class="<?php if ($content == 'overons') echo 'active' ?> nav-item">
+        <a class="nav-link" href="index.php?content=overons">over ons</a></li>
       <li class="<?php if ($content == 'inloggen') echo 'active' ?> nav-item">
         <a class="nav-link" href="index.php?content=inloggen">Inloggen</a></li>
+
     </ul>
 
     <a href="index.php?content=redirect"><i class="fas fa-user" title="Mijn account"></i></a>
