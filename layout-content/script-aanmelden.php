@@ -43,11 +43,12 @@ if (!empty($email)) {
                                               `infix`, 
                                               `lastname`, 
                                               `birthday`, 
-                                              `streetname`, 
+                                              `streetname`,
+                                              `housenumber`, 
                                               `postalcode`, 
                                               `city`, 
                                               `userid`) 
-                                              VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$id');";
+                                              VALUES (NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, '$id');";
     }
 
     $createpinfo = mysqli_query($conn, $sql);

@@ -22,17 +22,26 @@
         <a class="nav-link" href="./index.php?content=homepage">Home</a></li>
       <li class="<?php if ($content == 'contact') echo 'active' ?> nav-item">
         <a class="nav-link" href="index.php?content=contact">Contact</a></li>
+<<<<<<< HEAD
         <li class="<?php if ($content == 'overons') echo 'active' ?> nav-item">
         <a class="nav-link" href="index.php?content=overons">over ons</a></li>
       <li class="<?php if ($content == 'inloggen') echo 'active' ?> nav-item">
         <a class="nav-link" href="index.php?content=inloggen">Inloggen</a></li>
 
+=======
+      <?php 
+      if (empty($_SESSION["id"])) {
+        echo "<li><class='";
+        if ($content == ' inloggen') echo 'active';
+        echo " nav-item>
+        <a class ='nav-link' href='index.php?content=inloggen'>Inloggen</a></li>";
+      }
+        if (isset($_SESSION["id"])) {
+        echo "
+      <li><a class='nav-link' href='index.php?content=uitloggen'>Uitloggen</a></li>";
+      }
+      ?> 
+>>>>>>> 2671c400702fa3621af98737119969d0cfd228dc
     </ul>
-
-    <a href="index.php?content=redirect"><i class="fas fa-user" title="Mijn account"></i></a>
-    <?php if (isset($_SESSION["id"])) {
-      echo "<a href='index.php?content=uitloggen'><i class='fas fa-sign-out-alt'></i></a>";
-        } 
-    ?>
   </div>
 </nav>
