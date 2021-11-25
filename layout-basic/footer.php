@@ -90,7 +90,7 @@
             <p><i class="fa fa-home fa-1.5x" aria-hidden="true"></i> Netherlands, Delft 10200 NL</p>
             <p>
                 <i class="fa fa-envelope fa-1.5x" aria-hidden="true"></i>
-              20151411@student.hhs.nl
+              <a class="text-reset" href="mailto:woodklep@gmail.com">woodklep@gmail.com</a>
             </p>
             <p><i class="fa fa-phone-square fa-1.5x" aria-hidden="true"></i> + 01 234 567 88</p>
           </div>
