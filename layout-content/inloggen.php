@@ -52,7 +52,7 @@ if (isset($_SESSION["register"])) {
 
 
 
-<section class="container-fluid content-inloggen">
+<section class="container-fluid content-inloggen" style="background-color:gray">
   <div class="container">
     <div class="row">
       <!-- Error message display -->
