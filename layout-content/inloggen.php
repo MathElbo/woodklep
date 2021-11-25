@@ -65,7 +65,7 @@ if (isset($_SESSION["register"])) {
       </div>
       <!-- Inlog form -->
       <div class="col-12 col-md-11 offset-md-1">
-        <h2>Inloggen</h2>
+        <h2>Inloggen en Registreren</h2>
       </div>
       <div class="col-12 col-md-4 offset-md-1">
         <p>Bestaande klant:</p>
