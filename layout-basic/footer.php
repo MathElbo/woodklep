@@ -15,13 +15,13 @@
       
       <!-- Right -->
       <div>
-        <a href="" class="me-4 text-reset">
+        <a href="https://www.facebook.com/woodklep" class="me-4 text-reset" target="_blank">
             <i class="fa fa-facebook-official fa-3x" aria-hidden="true"></i>
         </a>
-        <a href="" class="me-4 text-reset">
+        <a href="https://nl.pinterest.com/" class="me-4 text-reset" target="_blank">
             <i class="fa fa-pinterest-square fa-3x" aria-hidden="true"></i>
         </a>
-        <a href="" class="me-4 text-reset">
+        <a href="https://www.linkedin.com/" class="me-4 text-reset" target="_blank">
             <i class="fa fa-linkedin-square fa-3x" aria-hidden="true"></i>
         </a>
       </div>
@@ -67,10 +67,10 @@
               Useful links
             </h6>
             <p>
-              <a href="#!" class="text-reset">Pricing</a>
+              <a class="text-reset" href="index.php?content=pricing">Pricing</a>
             </p>
             <p>
-              <a href="#!" class="text-reset">Settings</a>
+              <a href="index.php?content=settings" class="text-reset">Settings</a>
             </p>
             <p>
               <a href="#!" class="text-reset">Orders</a>
