@@ -22,6 +22,8 @@
         <a class="nav-link" href="./index.php?content=homepage">Home</a></li>
       <li class="<?php if ($content == 'contact') echo 'active' ?> nav-item">
         <a class="nav-link" href="index.php?content=contact">Contact</a></li>
+        <li class="<?php if ($content == 'overons') echo 'active' ?> nav-item">
+        <a class="nav-link" href="index.php?content=overons">Over ons</a></li>
       <?php 
       if (empty($_SESSION["id"])) {
         echo "<li><class='";

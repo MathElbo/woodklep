@@ -6,13 +6,13 @@ if (isset($_SESSION["userrole"]))
       header("Location: index.php?content=myaccount");
       break;
     case "2":
-      header("Location: index.php?content=adminpanel");
+      header("Location: index.php?content=myaccount");
       break;
     case "3":
-      header("Location: index.php?content=adminpanel");
+      header("Location: index.php?content=myaccount");
       break;
     case "4":
-      header("Location: index.php?content=adminpanel");
+      header("Location: index.php?content=myaccount");
       break;
   } else {
   header("Location: index.php?content=inloggen");
