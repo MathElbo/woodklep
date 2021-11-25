@@ -1,17 +1,27 @@
-<div class="jumbotron jumbotron-fluid homepagecolor">
-    <div class="container">
-        <h1 class="display-4 tekstkleur">Welkom</h1>
-        <div class="container">
+    <div class="jumbotron jumbotron-fluid homepagecolor">
+        <div class="backgroundsite">
             <div class="row">
+                <div class="linker col-lg-6">
+                    <div class="Grid1">
+                        
 
-                <div style="background-image: url('https://media.cdnandroid.com/item_images/77594/imagen-black-background-0big.jpg');
-background-size: cover;  width: 12000px;height:580px; padding-top: 80px; text-align: center;">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTh-pMi_rhK3nZZsbzwUCKEFd6Rtib7qFPo9w&usqp=CAU" style="height:1   70px; border-radius: 50%; border: 10px solid #fafafa;">
-                    <h1 style="font-size:100px; color:white; margin:10px;">Woodklep</h1>
-                    <p style="font-size:30px; color: white;"><em></em></p>
-                    <p style="font-size: 35px; color:#1F9AFE;"><a href="http://www.woodklep.org/index.php?content=inloggen" ;>log hier in </a></p>
+
+                    </div>
+
+
+
+
+                </div>
+            
+
+
+
+            <div class="rechts col-lg-6">
+                    <img src="https://media.istockphoto.com/photos/snowcapped-k2-peak-picture-id1288385045?b=1&k=20&m=1288385045&s=170667a&w=0&h=3M3ZRl1bxOGxcvmYZ-TOtuJ3idm0psm4c7GFba1TA5g=" class="img-responsive fit-image">
+
+
+
+
                 </div>
             </div>
         </div>
-    </div>
-</div>

@@ -21,22 +21,18 @@
 }
 /* Home page*/
 
-.homepagecolor{
-    background-color:black !important;
+.homepagecolor {
+    background-color:white !important;
 }
 
-.abc {
-    color: white !important;
+.container
+{
+background-color: white !important;
 
-    
 }
 
 .rechts{
-    margin: auto;
+    align-content: right;
 }
-
-
-
-
 
 
