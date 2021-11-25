@@ -11,9 +11,8 @@
 
 /* Contactpage */
 .jumbotron{ 
-    background-color:grey !important;
-    margin: 0 0 0 0 ;
-    
+    background-color:grey !important;  
+    overflow: hidden;
 }
 
 .tekstkleur{
@@ -22,17 +21,52 @@
 /* Home page*/
 
 .homepagecolor {
-    background-color:white !important;
-}
-
-.container
-{
-background-color: white !important;
+    background-color:blue !important;
+    padding: 0 0 0 0;
 
 }
+
 
 .rechts{
-    align-content: right;
+    padding: 4% 4% 4% 4%;
+    background-color: red;
+    height: 85vh;
 }
 
+.image{
+height: 100%;
+width: 100%;
+    object-fit: cover;
 
+
+}
+
+.links{
+    background-color: grey;
+    padding: 4% 4% 4% 4%;
+}
+
+.items{
+    background-color: green;
+    height: 30%;
+    margin-bottom: 4%;
+    display: flex;
+    overflow-wrap: break-word;
+    padding: 2% 2% 2% 2%;
+}
+.picture{
+    height: 100%;
+    border-radius: 50%;
+
+
+}
+
+.text {
+    margin-left: 100px;
+}
+
+.text2{
+    max-width: 60%;
+
+
+}

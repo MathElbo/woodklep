@@ -1,27 +1,48 @@
     <div class="jumbotron jumbotron-fluid homepagecolor">
-        <div class="backgroundsite">
-            <div class="row">
-                <div class="linker col-lg-6">
-                    <div class="Grid1">
-                        
+        <div class="row">
+
+            <div class="rechts col-lg-6 container">
+                <div class="image links">
+                    <div class="items ">
+
+                        <img class="picture" src="https://cdn.vox-cdn.com/thumbor/6WqH2YyoREHRx26bCCk1Yo04L9w=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/11701871/ive.png" alt="niks">
+                        <div class="container text2">sdadsadsdsadsaoidjasoidsdsadsalidjsaiodjasiodsaiojdioasjdiosajdiosajdoisajiodsajiodasijoajoidijoasdiosajdiosajiojsaadsa
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="items ">
+
+                        <img class="picture" src="https://cdn.vox-cdn.com/thumbor/6WqH2YyoREHRx26bCCk1Yo04L9w=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/11701871/ive.png" alt="niks">
+                        <div class="container text2">sdadsadsdsadsaoidjasoidsdsadsalidjsaiodjasiodsaiojdioasjdiosajdiosajdoisajiodsajiodasijoajoidijoasdiosajdiosajiojsaadsa
+
+                        </div>
 
 
                     </div>
 
 
 
+                    <div class="items ">
+
+                        <img class="picture" src="https://cdn.vox-cdn.com/thumbor/6WqH2YyoREHRx26bCCk1Yo04L9w=/1400x1400/filters:format(png)/cdn.vox-cdn.com/uploads/chorus_asset/file/11701871/ive.png" alt="niks">
+                        <div class="container text2">sdadsadsdsadsaoidjasoidsdsadsalidjsaiodjasiodsaiojdioasjdiosajdiosajdoisajiodsajiodasijoajoidijoasdiosajdiosajiojsaadsa
+
+                        </div>
+
+
+                    </div>
+
+
 
                 </div>
-            
 
-
-
-            <div class="rechts col-lg-6">
-                    <img src="https://media.istockphoto.com/photos/snowcapped-k2-peak-picture-id1288385045?b=1&k=20&m=1288385045&s=170667a&w=0&h=3M3ZRl1bxOGxcvmYZ-TOtuJ3idm0psm4c7GFba1TA5g=" class="img-responsive fit-image">
-
-
-
-
-                </div>
             </div>
+            <div class=" rechts col-lg-6">
+                <img src="https://media.istockphoto.com/photos/snowcapped-k2-peak-picture-id1288385045?b=1&k=20&m=1288385045&s=170667a&w=0&h=3M3ZRl1bxOGxcvmYZ-TOtuJ3idm0psm4c7GFba1TA5g=" class="image">
+            </div>
+
         </div>
+    </div>
