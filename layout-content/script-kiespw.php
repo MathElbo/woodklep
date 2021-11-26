@@ -46,7 +46,6 @@ if (isset($_SESSION["choosepw"]))
       <div class="col-12 col-md-5 offset-md-1">
         <form action="./index.php?content=script-kiespwverify" method="post">
           <div class="form-group">
-            <input class="form-control" type="text" name="username" id="email" placeholder="Gebruikersnaam">
             <input class="form-control" type="password" name="password" id="password" placeholder="Wachtwoord" required>
             <input class="form-control" type="password" name="checkpassword" id="checkpassword"
               placeholder="Herhaal wachtwoord" required>

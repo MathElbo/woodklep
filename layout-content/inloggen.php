@@ -82,6 +82,7 @@ if (isset($_SESSION["register"])) {
         <p>Nieuw bij WoodKlep doet dingen</p>
         <form action="index.php?content=script-aanmelden" method="post">
           <div class="form-group">
+            <input class="form-control" type="name" name="name" id="name" placeholder="Gebruikersnaam" required>
             <input class="form-control" type="email" name="email" id="email" placeholder="E-mail" required>
             <input class="btn btn-dark" type="submit" value="Register">
           </div>
