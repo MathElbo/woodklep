@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(0);
+
 // E-mailadres van de ontvanger
 $mail_ontv = 'woodklep@gmail.com';
 
