@@ -69,7 +69,7 @@ if (!empty($email)) {
         <table align='center' border='0' cellpadding='0' cellspacing='0' width='600'>
           <tr>
             <td bgcolor='#ffffff' style='padding: 10px 0 15px 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;'>
-              <b>Beste " . $naam . ",</b>
+              <b>Beste " . $gebruikersnaam . ",</b>
             </td>
           </tr>
           <tr>
