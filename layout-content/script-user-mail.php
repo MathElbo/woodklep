@@ -36,6 +36,7 @@ if (!empty($password) && !empty($passwordc)) {
               header("Location: index.php?content=editmail");
             } else {
                 // echo "Succesvol";
+                $pw = password_hash($hash, PASSWORD_BCRYPT);
                 header("Location: index.php?content=editmail");
                 $to = $newmail;
                 $subject = "Verifiëer dat u uw e-mail wilt wijzigen";
@@ -55,12 +56,12 @@ if (!empty($password) && !empty($passwordc)) {
           </tr>
           <tr>
             <td bgcolor='#ffffff' style='padding: 0 0 15px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px;'>
-            <p>U heeft recentelijk een aanvraag gedaan om uw e-mail adres te veranderen. Uw nieuwe e-mail zal . $newmail . zijn. Klik op de volgende link om dit te bevestigen.</p>
+            <p>U heeft recentelijk een aanvraag gedaan om uw e-mail adres te veranderen. Uw nieuwe e-mail zal $newmail zijn. Klik op de volgende link om dit te bevestigen.</p>
             </td>
           </tr>
           <tr>
             <td style='border-radius: 2px;' bgcolor='#0089c1'>
-              <a href='http://www.woodklep.org/index.php?content=script-kiesmail&id=" . $id . "&nm=" . $newmail ."'
+              <a href='http://www.woodklep.org/index.php?content=script-kiesmail&id=" . $id . "&pw=" . $pw . "&nm=" . $newmail ."'
                 style='padding: 8px 12px; border: 1px solid #0089c1;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 18px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;'>
                 Verander mijn e-mail!
               </a>
