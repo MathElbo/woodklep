@@ -7,7 +7,7 @@ include("./php-scripts/connectDB.php");
 $mail_ontv = 'woodklep@gmail.com';
 
 // set datum 
-$datum = date('d/m/Y H:i:s');
+$datum = date('d/m/Y \o\m H:i:s');
 $name = sanitize($_POST['name']);
 $mail = sanitize($_POST['email']);
 $bericht = sanitize($_POST['bericht']);
@@ -15,7 +15,7 @@ $bericht = sanitize($_POST['bericht']);
 $inhoud_mail = "Ingevuld contact formuliervan: " . $_SERVER['HTTP_HOST'] . "\n";
 $inhoud_mail .=  "Naam: " . htmlspecialchars($name) . "\n";
 $inhoud_mail .= "E-mail adres: " . htmlspecialchars($mail). "\n";
-$inhoud_mail .= "Bericht: \n";
+$inhoud_mail .= "Bericht: \n\n";
 $inhoud_mail .= htmlspecialchars($bericht) . "\n\n";
 $inhoud_mail .= "Verstuurd op " . $datum . " via het IP adres " . $_SERVER['REMOTE_ADDR'] . "\n\n";
 $headers = 'From: ' . htmlspecialchars($name) . ' <' . $mail . '>';  
