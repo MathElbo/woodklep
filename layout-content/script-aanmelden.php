@@ -5,6 +5,16 @@ include("./php-scripts/functions.php");
 $email = sanitize($_POST["email"]);
 $user = strstr($email, '@', true);
 $gebruikersnaam = sanitize($_POST["name"]);
+$role = $_POST["role"];
+$roleid;
+switch ($role){
+  case "Leerling": $roleid=1;
+  break;
+  case "Ouder": $roleid=2;
+  break;
+  case "Docent": $roleid=3;
+  break;
+}
 
 if (!empty($email)) {
 
@@ -30,7 +40,7 @@ if (!empty($email)) {
                                   '$email',
                                   '$password',
                                   '$gebruikersnaam',
-                                  1,
+                                  '$roleid',
                                   NULL)";
 
     $result = mysqli_query($conn, $sql);
