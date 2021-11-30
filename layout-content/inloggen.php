@@ -4,7 +4,7 @@ if (isset($_SESSION["login"]))
   switch ($_SESSION["login"]) {
     case "success":
       $pwclasses = "success";
-      $msg = "U bent succesvol ingelogd. U wordt nu doorverwezen naar de inlog pagina.";
+      $msg = "U bent succesvol ingelogd. U wordt nu doorverwezen naar uw gegevens.";
       header("Refresh: 4; url=./index.php?content=redirect");
       unset($_SESSION["login"]);
       break;
