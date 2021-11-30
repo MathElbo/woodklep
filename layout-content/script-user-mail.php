@@ -56,7 +56,7 @@ if (!empty($password) && !empty($passwordc)) {
           </tr>
           <tr>
             <td bgcolor='#ffffff' style='padding: 0 0 15px 0; font-family: Arial, sans-serif; font-size: 14px; line-height: 20px;'>
-            <p>U heeft recentelijk een aanvraag gedaan om uw e-mail adres te veranderen. Uw nieuwe e-mail zal . $newmail . zijn. Klik op de volgende link om dit te bevestigen.</p>
+            <p>U heeft recentelijk een aanvraag gedaan om uw e-mail adres te veranderen. Uw nieuwe e-mail zal $newmail zijn. Klik op de volgende link om dit te bevestigen.</p>
             </td>
           </tr>
           <tr>
