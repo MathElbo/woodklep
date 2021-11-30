@@ -36,6 +36,7 @@ if (!empty($password) && !empty($passwordc)) {
               header("Location: index.php?content=editmail");
             } else {
                 // echo "Succesvol";
+                $pw = password_hash($hash, PASSWORD_BCRYPT);
                 header("Location: index.php?content=editmail");
                 $to = $newmail;
                 $subject = "Verifiëer dat u uw e-mail wilt wijzigen";
@@ -60,7 +61,7 @@ if (!empty($password) && !empty($passwordc)) {
           </tr>
           <tr>
             <td style='border-radius: 2px;' bgcolor='#0089c1'>
-              <a href='http://www.woodklep.org/index.php?content=script-kiesmail&id=" . $id . "&nm=" . $newmail ."'
+              <a href='http://www.woodklep.org/index.php?content=script-kiesmail&id=" . $id . "&pw=" . $pw . "&nm=" . $newmail ."'
                 style='padding: 8px 12px; border: 1px solid #0089c1;border-radius: 2px;font-family: Helvetica, Arial, sans-serif;font-size: 18px; color: #ffffff;text-decoration: none;font-weight:bold;display: inline-block;'>
                 Verander mijn e-mail!
               </a>

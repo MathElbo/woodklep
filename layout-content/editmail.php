@@ -35,7 +35,6 @@ if (isset($_SESSION["changemail"])) {
     case "success":
       $pwclasses = "success";
       $msg = "Er is een verificatiemail naar uw oude e-mail adres gestuurd. U wordt nu doorverwezen naar uw gegevens.";
-      $email = $_SESSION["email"];
       header("Refresh: 4, url=./index.php?content=redirect");
       unset($_SESSION["changemail"]);
       unset($_SESSION["email"]);
