@@ -84,6 +84,12 @@ if (isset($_SESSION["register"])) {
           <div class="form-group">
             <input class="form-control" type="name" name="name" id="name" placeholder="Gebruikersnaam" required>
             <input class="form-control" type="email" name="email" id="email" placeholder="E-mail" required>
+            <select class="form-control" name="role" id="role" required>  
+              <option value="">Selecteer soort account</option>
+              <option value="Leerling">Leerling</option>
+              <option value="Ouder">Ouder</option>
+              <option value="Docent">Docent</option>
+            </select>
             <input class="btn btn-dark" type="submit" value="Register">
           </div>
         </form>
