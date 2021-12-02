@@ -1,19 +1,25 @@
 <?php
 
+//error_reporting(0);
+include("./php-scripts/functions.php");
+include("./php-scripts/connectDB.php");
 // E-mailadres van de ontvanger
 $mail_ontv = 'woodklep@gmail.com';
 
 // set datum 
-$datum = date('d/m/Y H:i:s');
+$datum = date('d/m/Y \o\m H:i:s');
+$name = sanitize($_POST['name']);
+$mail = sanitize($_POST['email']);
+$bericht = sanitize($_POST['bericht']);
 
 $inhoud_mail = "Ingevuld contact formuliervan: " . $_SERVER['HTTP_HOST'] . "\n";
-$inhoud_mail .=  "Naam: " . htmlspecialchars($_POST['name']) . "\n";
-$inhoud_mail .= "E-mail adres: " . htmlspecialchars($_POST['email']). "\n";
-$inhoud_mail .= "Bericht: \n";
-$inhoud_mail .= htmlspecialchars($_POST['bericht']) . "\n\n";
+$inhoud_mail .=  "Naam: " . htmlspecialchars($name) . "\n";
+$inhoud_mail .= "E-mail adres: " . htmlspecialchars($mail). "\n";
+$inhoud_mail .= "Bericht: \n\n";
+$inhoud_mail .= htmlspecialchars($bericht) . "\n\n";
 $inhoud_mail .= "Verstuurd op " . $datum . " via het IP adres " . $_SERVER['REMOTE_ADDR'] . "\n\n";
-$headers = 'From: ' . htmlspecialchars($_POST['name']) . ' <' . $_POST['email'] . '>';  
-if (mail($mail_ontv, "Ingediend Contactforumulier door " . htmlspecialchars($_POST['name']), $inhoud_mail, $headers))
+$headers = 'From: ' . htmlspecialchars($name) . ' <' . $mail . '>';  
+if (mail($mail_ontv, "Ingediend Contactforumulier door " . htmlspecialchars($name), $inhoud_mail, $headers))
 {   echo '<div class="jumbotron jumbotron-fluid homeJumbo">
         <div class="container">
             <div class="container">

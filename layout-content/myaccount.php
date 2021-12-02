@@ -120,6 +120,9 @@ $fullname = $pinfo["name"] . ' ' . $pinfo["infix"] . ' ' . $pinfo["lastname"];
             <tr>
               <td><a href="index.php?content=editlogin">Mijn wachtwoord wijzigen</a></td>
             </tr>
+            <tr>
+              <td><a href="index.php?content=editmail">Mijn e-mail wijzigen</a></td>
+            </tr>
           </tbody>
         </table>
       </div>

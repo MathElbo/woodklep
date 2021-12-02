@@ -4,6 +4,17 @@ include("./php-scripts/functions.php");
 
 $email = sanitize($_POST["email"]);
 $user = strstr($email, '@', true);
+$gebruikersnaam = sanitize($_POST["name"]);
+$role = $_POST["role"];
+$roleid;
+switch ($role){
+  case "Leerling": $roleid=1;
+  break;
+  case "Ouder": $roleid=2;
+  break;
+  case "Docent": $roleid=3;
+  break;
+}
 
 if (!empty($email)) {
 
@@ -28,8 +39,8 @@ if (!empty($email)) {
                           VALUES (NULL,
                                   '$email',
                                   '$password',
-                                  NULL,
-                                  1,
+                                  '$gebruikersnaam',
+                                  '$roleid',
                                   NULL)";
 
     $result = mysqli_query($conn, $sql);
@@ -67,13 +78,8 @@ if (!empty($email)) {
         <body style='margin: 0; padding: 0;'> 
         <table align='center' border='0' cellpadding='0' cellspacing='0' width='600'>
           <tr>
-            <td align='center' style='padding: 40px 0 0 0;'>
-              Pancake
-            </td>
-          </tr>
-          <tr>
             <td bgcolor='#ffffff' style='padding: 10px 0 15px 0; font-family: Arial, sans-serif; font-size: 16px; line-height: 20px;'>
-              <b>Beste " . $user . ",</b>
+              <b>Beste " . $gebruikersnaam . ",</b>
             </td>
           </tr>
           <tr>
@@ -119,7 +125,7 @@ if (!empty($email)) {
                         </a>
                       </td>
                       <td>
-                        <a href='https://www.facebook.com/AfasieVerenigingNederland'>
+                        <a href='https://www.facebook.com/woodklep'>
                           <img src='https://www.iconsdb.com/icons/preview/caribbean-blue/facebook-xxl.png' alt='Facebook'
                             width='38' height='38' style='display: block;' border='0' />
                         </a>
