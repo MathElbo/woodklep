@@ -29,25 +29,26 @@
 
 .rechts{
     padding: 4% 4% 4% 4%;
-    background-color: red;
+    background-color:	rgb(168,168,168);
     height: 85vh;
 }
 
 .image{
 height: 100%;
 width: 100%;
-    object-fit: cover;
+object-fit: cover;
+
 
 
 }
 
 .links{
-    background-color: grey;
+    background-color: rgb(245,245,245);
     padding: 4% 4% 4% 4%;
 }
 
 .items{
-    background-color: green;
+    background-color: rgb(245,245,245);
     height: 30%;
     margin-bottom: 4%;
     display: flex;

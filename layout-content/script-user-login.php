@@ -17,7 +17,7 @@ $passwordc = sanitize($_POST["vpasswordc"]);
 
 if (!empty($password) && !empty($passwordc)) {
   if (!strcmp($password, $passwordc)) {
-    $result = getSpecificInfo('pro4_users', 'userid', $id);
+    $result = getSpecificInfo('woodklep_users', 'userid', $id);
 
     if (mysqli_num_rows($result) == 1) {
       $record = mysqli_fetch_assoc($result);
@@ -30,7 +30,7 @@ if (!empty($password) && !empty($passwordc)) {
             $hash = RandomString();
             $blowfish = password_hash($newpassword.$hash, PASSWORD_BCRYPT);
 
-            $sql = "UPDATE `pro4_users` 
+            $sql = "UPDATE `woodklep_users` 
                         SET `password` = '$blowfish',
                             `salt` = '$hash'
                       WHERE `userid` = $id";

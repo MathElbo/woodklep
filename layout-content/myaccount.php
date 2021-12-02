@@ -23,21 +23,6 @@ $fullname = $pinfo["name"] . ' ' . $pinfo["infix"] . ' ' . $pinfo["lastname"];
 
 ?>
 
-<!-- Navbar op de myaccount pagina -->
-<div class="container-fluid">
-  <div class="container">
-    <div class="row">
-      <div class="col-12">
-        <nav class="nav nav-pills nav-fill">
-          <a class="nav-item nav-link" href="#gegevens">Gegevens</a>
-          <a class="nav-item nav-link" href="#bestellingen">Bestellingen</a>
-          <a class="nav-item nav-link" href="#aanpassen">Aanpassen/wijzigen</a>
-        </nav>
-      </div>
-    </div>
-  </div>
-</div>
-
 <!-- Content van pagina -->
 <div class="container-fluid">
   <div class="container">
