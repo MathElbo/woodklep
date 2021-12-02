@@ -1,6 +1,21 @@
 <?php
 $userrole = [3,4];
 include("./php-scripts/security.php");
+
+if (isset($_SESSION["nieuwgroep"]))
+  switch ($_SESSION["nieuwgroep"]) {
+    case "success":
+      $pwclasses = "success";
+      $msg = "Uw klas is succesvol aangemaakt";
+      //header("Refresh: 4; url=./index.php?content=redirect");
+      unset($_SESSION["nieuwgroep"]);
+      break;
+    case "error1":
+      $pwclasses = "error";
+      $msg = "U heeft geen groepsnaam ingevuld!";
+      unset($_SESSION["nieuwgroep"]);
+      break;
+  }
 ?>
 
 <section class="jumbotron jumbotron-fluid homeJumbo" style="background-color:gray">
