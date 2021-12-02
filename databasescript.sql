@@ -58,6 +58,7 @@ FOREIGN KEY (hw_opdracht_id) REFERENCES huiswerk_opdrachten(hw_opdracht_id)
 
 CREATE TABLE IF NOT EXISTS klas (
 klas_id INT NOT NULL AUTO_INCREMENT,
+klasnaam VARCHAR(255),
 PRIMARY KEY (klas_id)
 );
 
