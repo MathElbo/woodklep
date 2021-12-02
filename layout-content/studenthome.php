@@ -5,13 +5,12 @@
             <div class="row">
                 <div class="col-6">
                     <div class="row">
-
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Mijn huiswerk</h5>
-                                    <p class="card-text">Zie hier Huiswerk overzicht.</p>
-                                    <a href="#" class="btn btn-secondary">Go somewhere</a>
+                                    <p class="card-text">Een overzicht van al jou gemaakte huiswerk.</p>
+                                    <a href="./index.php?content=myhomework" class="btn btn-secondary">Klik Hier!</a>
                                 </div>
                             </div>
                             <br>
@@ -25,8 +24,6 @@
                                 </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
                 <div class="col-6">
@@ -39,7 +36,6 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
     </div>
