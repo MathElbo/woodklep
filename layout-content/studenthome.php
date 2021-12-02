@@ -11,7 +11,7 @@
                                 <div class="card-body">
                                     <h5 class="card-title">Mijn huiswerk</h5>
                                     <p class="card-text">Zie hier Huiswerk overzicht.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <a href="#" class="btn btn-secondary">Go somewhere</a>
                                 </div>
                             </div>
                             <br>
@@ -20,8 +20,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Volgende opdracht</h5>
-                                    <p class="card-text">.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <p class="card-text">tekst.</p>
+                                    <a href="#" class="btn btn-secondary">Go somewhere</a>
                                 </div>
                             </div>
                         </div>
@@ -34,7 +34,7 @@
                         <img src="./assets/img/nlogo.jpg" class="card-img-top">
                         <div class="card-body">
                             <p class="card-text">
-                                De woodklep heeft mystische schatten die jij kunt ontgrendellen!
+                                Doe "X" om doos te ontgrendellen
                             </p>
                         </div>
                     </div>

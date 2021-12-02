@@ -1,6 +1,8 @@
 CREATE DATABASE IF NOT EXISTS woodklep;
 USE woodklep;
 
+
+-- drop table woodklep_users;
 CREATE TABLE IF NOT EXISTS woodklep_users (
 userid INT AUTO_INCREMENT PRIMARY KEY,
 email VARCHAR(255) NOT NULL,
@@ -9,6 +11,8 @@ username VARCHAR (255),
 userroleid INT NOT NULL,
 salt VARCHAR (255) );
 
+
+-- drop table woodklep_personalinfo;
 CREATE TABLE IF NOT EXISTS woodklep_personalinfo (
 infoid INT AUTO_INCREMENT PRIMARY KEY,
 name VARCHAR (255),
@@ -21,3 +25,5 @@ postalcode VARCHAR(6),
 city VARCHAR(255),
 userid int
 );
+
+

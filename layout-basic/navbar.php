@@ -37,6 +37,22 @@
       <li><a class='nav-link' href='index.php?content=myaccount'>Mijn account</a></li>
       <li><a class='nav-link' href='index.php?content=uitloggen'>Uitloggen</a></li>
       ";
+
+      switch ($_SESSION["userrole"]) {
+        case "1":
+          echo "<li><a class='nav-link' href='index.php?content=studenthome'>Studenten Home</a></li>";
+          break;
+        case "2":
+          echo "<li><a class='nav-link' href='index.php?content=parenthome'>Ouders Home</a></li>";
+          break;
+        case "3":
+          echo "<li><a class='nav-link' href='index.php?content=teacherhome'>Docenten Home</a></li>";
+          break;
+        case "4":
+          header("Location: index.php?content=myaccount");
+          break;
+      }
+
       }
       ?> 
     </ul>
