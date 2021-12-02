@@ -46,7 +46,7 @@
           echo "<li><a class='nav-link' href='index.php?content=parenthome'>Ouders Home</a></li>";
           break;
         case "3":
-          echo "<li><a class='nav-link' href='index.php?content=teacherhome'>Docenten Home</a></li>";
+          echo "<li><a class='nav-link' href='index.php?content=teacherhome'>teachers Home</a></li>";
           break;
         case "4":
           header("Location: index.php?content=myaccount");
