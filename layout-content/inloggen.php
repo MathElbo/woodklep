@@ -4,7 +4,7 @@ if (isset($_SESSION["login"]))
   switch ($_SESSION["login"]) {
     case "success":
       $pwclasses = "success";
-      $msg = "U bent succesvol ingelogd. U wordt nu doorverwezen naar de inlog pagina.";
+      $msg = "U bent succesvol ingelogd. U wordt nu doorverwezen naar uw gegevens.";
       header("Refresh: 4; url=./index.php?content=redirect");
       unset($_SESSION["login"]);
       break;
@@ -52,7 +52,7 @@ if (isset($_SESSION["register"])) {
 
 
 
-<section class="container-fluid content-inloggen">
+<section class="container-fluid content-inloggen" style="background-color:gray">
   <div class="container">
     <div class="row">
       <!-- Error message display -->
@@ -82,7 +82,14 @@ if (isset($_SESSION["register"])) {
         <p>Nieuw bij WoodKlep doet dingen</p>
         <form action="index.php?content=script-aanmelden" method="post">
           <div class="form-group">
+            <input class="form-control" type="name" name="name" id="name" placeholder="Gebruikersnaam" required>
             <input class="form-control" type="email" name="email" id="email" placeholder="E-mail" required>
+            <select class="form-control" name="role" id="role" required>  
+              <option value="">Selecteer soort account</option>
+              <option value="Leerling">Leerling</option>
+              <option value="Ouder">Ouder</option>
+              <option value="Docent">Docent</option>
+            </select>
             <input class="btn btn-dark" type="submit" value="Register">
           </div>
         </form>

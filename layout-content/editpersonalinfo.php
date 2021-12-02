@@ -34,7 +34,7 @@ $pinfo = mysqli_fetch_assoc($result1);
       <input class="fadeIn second" type="text" name="name" placeholder="Voornaam" value="<?php echo $pinfo["name"]; ?>">
       <input class="fadeIn second" type="text" name="infix" placeholder="Tussenvoegsel" value="<?php echo $pinfo["infix"]; ?>">
       <input class="fadeIn second" type="text" name="lastname" placeholder="Achternaam" value="<?php echo $pinfo["lastname"]; ?>">
-      <input class="fadeIn second" type="text" name="birthday" placeholder="Geboortedatum" value="<?php echo $pinfo["birthday"]; ?>">
+      <input class="fadeIn second" type="date" name="birthday" placeholder="Geboortedatum" value="<?php echo $pinfo["birthday"]; ?>">
       <input class="mt-4 fadeIn third" type="password" name="vpassword" placeholder="Huidig wachtwoord">
       <input class="fadeIn third" type="password" name="vpasswordc" placeholder="Herhaal huidig wachtwoord">
       <input type="submit" class="fadeIn third" value="Aanpassen">

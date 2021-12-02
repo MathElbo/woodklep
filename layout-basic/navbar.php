@@ -33,6 +33,7 @@
       }
         if (isset($_SESSION["id"])) {
         echo "
+      <li><a class='nav-link' href='index.php?content=myexercises'>Mijn opdrachten</a></li>
       <li><a class='nav-link' href='index.php?content=myaccount'>Mijn account</a></li>
       <li><a class='nav-link' href='index.php?content=uitloggen'>Uitloggen</a></li>
       ";
