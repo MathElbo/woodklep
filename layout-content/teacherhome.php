@@ -1,3 +1,8 @@
+<?php
+$userrole = [3,4];
+include("./php-scripts/security.php");
+?>
+
 <div class="jumbotron jumbotron-fluid homeJumbo">
     <div class="container">
         <h1 class="display-4">Docent</h1>
@@ -9,9 +14,9 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Mijn Groepen</h5>
-                                    <p class="card-text">Zie hier Groepen overzicht.</p>
-                                    <a href="./index.php?content=docentgroepen" class="btn btn-primary">Go somewhere</a>
+                                    <h5 class="card-title">Mijn Leerlingen</h5>
+                                    <p class="card-text">Zie hier leerlingenoverzicht.</p>
+                                    <a href="./index.php?content=docentgroepen" class="btn btn-primary">Ga naar mijn leerlingen</a>
                                 </div>
                             </div>
                             <br>
@@ -20,8 +25,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Mijn Opdrachten</h5>
-                                    <p class="card-text">.</p>
-                                    <a href="#" class="btn btn-primary">Go somewhere</a>
+                                    <p class="card-text">Zie hier opdrachtenoverzicht</p>
+                                    <a href="./index.php?content=docentopdrachten" class="btn btn-primary">Ga naar mijn opdrachten</a>
                                 </div>
                             </div>
                         </div>
