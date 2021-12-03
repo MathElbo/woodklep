@@ -7,6 +7,7 @@ $id = $_SESSION["id"];
 
 if(!empty($groepid)){
     $_SESSION["groepselect"] = "success";
+    $_SESSION["groepid"] = $groepid;
     header("Location: index.php?content=docentgroepen");
 }
 else {

@@ -23,7 +23,7 @@ if (isset($_SESSION["groepselect"])){
         case "success":
             $pwclasses = "success";
             $msg = "U wordt nu doorgeleid naar de klassenpagina.";
-            header ("Refresh: 1; url=./index.php?content=klas");
+            header ("Refresh: 1; url=./index.php?content=klas&ki=". $_SESSION["groepid"]);
             unset($_SESSION["groepselect"]);
             break;
         case "error1":
