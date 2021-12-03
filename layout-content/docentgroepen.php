@@ -1,6 +1,7 @@
 <?php
 $userrole = [3,4];
 include("./php-scripts/security.php");
+include("./php-scripts/connectDB.php");
 
 if (isset($_SESSION["nieuwgroep"]))
   switch ($_SESSION["nieuwgroep"]) {
@@ -39,6 +40,24 @@ if (isset($_SESSION["nieuwgroep"]))
             <div class="form-group">
                 <select class="form-control" style="width:320px" name="groep" id="groep" required>
                     <option value="">Selecteer klas</option>
+                    <?php
+                        $id = $_SESSION['id'];
+                        $sql = "SELECT * FROM `user_klas_koppel` WHERE `userid` = $id";
+                        $klassen = mysqli_query($conn, $sql);
+                        while($klas = mysqli_fetch_array($klassen)){
+                            $klasid = $klas['klas_id'];
+                            $sql = "SELECT * FROM `klas` WHERE `klas_id` = $klasid";
+                            $klasjes = mysqli_query($conn, $sql);
+                            while($klasnaam = mysqli_fetch_array($klasjes)){
+                                echo "<option value='". $klasnaam['klas_id'] ."'>" .$klasnaam['klasnaam'] ."</option>";  // displaying data in option menu
+                            }
+                        }
+                        //$records = mysqli_query($conn, "SELECT * From klas");
+                        //while($data = mysqli_fetch_array($records)){
+                        //    echo "<option value='". $data['klas_id'] ."'>" .$data['klasnaam'] ."</option>";  // displaying data in option menu
+                        //}	
+                    ?>  
+                </select>
                 <input class="btn btn-dark" type="submit" value="Kies groep">
             </div>
         </form>
