@@ -9,7 +9,7 @@ if (isset($_SESSION["userrole"]))
       header("Location: index.php?content=parenthome");
       break;
     case "3":
-      header("Location: index.php?content=parenthome");
+      header("Location: index.php?content=teacherhome");
       break;
     case "4":
       header("Location: index.php?content=myaccount");
