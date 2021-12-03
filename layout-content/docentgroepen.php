@@ -3,7 +3,7 @@ $userrole = [3,4];
 include("./php-scripts/security.php");
 include("./php-scripts/connectDB.php");
 
-if (isset($_SESSION["nieuwgroep"]))
+if (isset($_SESSION["nieuwgroep"])){
   switch ($_SESSION["nieuwgroep"]) {
     case "success":
       $pwclasses = "success";
@@ -17,6 +17,22 @@ if (isset($_SESSION["nieuwgroep"]))
       unset($_SESSION["nieuwgroep"]);
       break;
   }
+}
+if (isset($_SESSION["groepselect"])){
+    switch ($_SESSION["groepselect"]) {
+        case "success":
+            $pwclasses = "success";
+            $msg = "U wordt nu doorgeleid naar de klassenpagina.";
+            header ("Refresh: 1; url=./index.php?content=klas");
+            unset($_SESSION["groepselect"]);
+            break;
+        case "error1":
+            $pwclasses = "error";
+            $msg = "Er is geen groep geselecteerd!";
+            unset($_SESSION["groepselect"]);
+            break;
+    }
+}
 ?>
 
 <section class="jumbotron jumbotron-fluid homeJumbo" style="background-color:gray">
@@ -36,7 +52,7 @@ if (isset($_SESSION["nieuwgroep"]))
       <div class="col-12 col-md-4 offset-md-1">
         <h2 class="display-4">Mijn klassen</h2>
         <h4 class="lead">Klassenoverzicht</h4>
-        <form action="" method="post">
+        <form action="index.php?content=script-docentgroepen" method="post">
             <div class="form-group">
                 <select class="form-control" style="width:320px" name="groep" id="groep" required>
                     <option value="">Selecteer klas</option>
