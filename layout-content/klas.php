@@ -84,7 +84,7 @@ $userinfo = mysqli_fetch_assoc($result2);*/
                             <td>". $teacherpinfo['birthday'] ."</td>
                         </tr>
                         <tr>
-                            <td><input class='btn btn-dark' type='submit' value='Stuur bericht'></td>
+                            <td><a href='mailto:woodklep@gmail.com' class='btn btn-dark'>Stuur bericht</a></td>
                         </tr>";
             }
 
