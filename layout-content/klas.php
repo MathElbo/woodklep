@@ -89,7 +89,7 @@ if(is_null(mysqli_fetch_assoc($result))){
                             <td>" . $teacherinfo['email'] . "</td>
                         </tr>
                         <tr>
-                            <td><a href='mailto:woodklep@gmail.com' class='btn btn-dark'>Stuur bericht</a></td>
+                            <td><a href='mailto:". $teacherinfo['email'] ."' class='btn btn-dark'>Stuur bericht</a></td>
                         </tr>";
             }
               }
@@ -134,7 +134,7 @@ if(is_null(mysqli_fetch_assoc($result))){
                             <td>" . $studentinfo['email'] . "</td>
                         </tr>
                         <tr>
-                            <td><a href='mailto:woodklep@gmail.com' class='btn btn-dark'>Stuur bericht</a></td>
+                            <td><a href='mailto:". $studentinfo['email'] . "' class='btn btn-dark'>Stuur bericht</a></td>
                         </tr>";
             }
               }
