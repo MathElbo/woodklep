@@ -7,7 +7,6 @@ include("./php-scripts/connectDB.php");
 include("./php-scripts/functions.php");
 $id = $_SESSION["id"];
 $userrole = $_SESSION["userrole"];
-$teachernumber = 1;
 $klasid;
 
 // Opvragen klasseninfo
@@ -16,26 +15,27 @@ if(isset($_GET["ki"])){
 }
 
 // Get all classinfo
-$sql = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $klasid";
-$result = mysqli_query($conn, $sql);
-$klasvulling = mysqli_fetch_assoc($result);
-$sql = "SELECT `userid` FROM `woodklep_users` WHERE `userroleid` = 3";
-$result4 = mysqli_query($conn, $sql);
-$allteachers = mysqli_fetch_assoc($result4);
 $sql = "SELECT * FROM `klas` WHERE `klas_id` = $klasid";
 $result3 = mysqli_query($conn, $sql);
-$classinfo = mysqli_fetch_assoc($result3);/*
-
-// Ophalen van alle persoonlijke info
-$sql = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $teacher";
-$result1 = mysqli_query($conn, $sql);
-$pinfo = mysqli_fetch_assoc($result1);
-$fullname = $pinfo["name"] . ' ' . $pinfo["infix"] . ' ' . $pinfo["lastname"];
-
-// Ophalen van gebruikersnaam enzo
-$sql = "SELECT * FROM `woodklep_users` WHERE `userid` = $teacher";
-$result2 = mysqli_query($conn, $sql);
-$userinfo = mysqli_fetch_assoc($result2);*/
+$classinfo = mysqli_fetch_assoc($result3);
+$sql = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $klasid AND `userid` = $id;";
+$result = mysqli_query($conn, $sql);
+$homepage;
+switch ($userrole) {
+  case 1: $homepage = "studenthome";
+  break;
+  case 2: $homepage = "parenthome";
+  break;
+  case 3: $homepage = "teacherhome";
+  break;
+  default: $homepage = "homepage";
+  break;
+}
+if(is_null(mysqli_fetch_assoc($result))){
+  echo '<div class="alert alert-danger" role="alert">U heeft geen toegang tot deze pagina.</div>';
+    header("Refresh: 2; url=./index.php?content=". $homepage);
+  exit();
+}
 ?>
 
 <!-- Content van pagina -->
@@ -146,7 +146,6 @@ $userinfo = mysqli_fetch_assoc($result2);*/
 
 
     <!-- Aanpassen/wijzigen -->
-    <!--
     <div class="row">
       <div class="col-12">
         <h2 class="text-center" id="aanpassen">Aanpassen/wijzigen</h2>
@@ -160,22 +159,16 @@ $userinfo = mysqli_fetch_assoc($result2);*/
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><a href="index.php?content=editpersonalinfo">Mijn gegevens wijzigen</a></td>
-            </tr>
-            <tr>
-              <td><a href="index.php?content=editaddress">Mijn adres wijzigen</a></td>
-            </tr>
-            <tr>
-              <td><a href="index.php?content=editlogin">Mijn wachtwoord wijzigen</a></td>
-            </tr>
-            <tr>
-              <td><a href="index.php?content=editmail">Mijn e-mail wijzigen</a></td>
-            </tr>
+            <?php
+            if ($userrole = 3) {
+              echo "<tr>
+              <td><a href='index.php?content=editpersonalinfo'>Mijn klas wijzigen</a></td>
+            </tr>";
+            }
+            ?>
           </tbody>
         </table>
       </div>
     </div>
-        -->
   </div>
 </div>
