@@ -38,7 +38,7 @@ for($i=1; $i<=$rows; $i++){
 
 <div class="jumbotron jumbotron-fluid homeJumbo">
     <div class="container">
-        <h1 class="display-4">Huiswerk overzicht</h1>
+        <h1 class="display-4">opdracht ?</h1>
         <div class="container">
             <div class="row">
                 <div class="col-6">
@@ -46,7 +46,7 @@ for($i=1; $i<=$rows; $i++){
                         <table class="table table-hover col-12 col-md-5">
                             <thead>
                                 <tr>
-                                    <th scope="col">Mijn Huiswerk</th>
+                                    <th scope="col">Beantwoord de volgende vragen en lever in:</th>
                                     <th></th>
                                 </tr>
                             </thead>

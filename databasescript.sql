@@ -39,20 +39,25 @@ antwoord VARCHAR (255),
 PRIMARY KEY (vraag_id)
 );
 
-
 CREATE TABLE IF NOT EXISTS huiswerk_opdrachten (
-hw_opdracht_id INT NOT NULL AUTO_INCREMENT,
-userid INT,
-PRIMARY KEY (hw_opdracht_id),
-FOREIGN KEY (userid) REFERENCES woodklep_users(userid)
+opdracht_id INT NOT NULL AUTO_INCREMENT,
+opdracht_naam VARCHAR (255),
+PRIMARY KEY (opdracht_id)
+);
+
+CREATE TABLE IF NOT EXISTS opdrachtvraag_koppel (
+ov_koppel INT NOT NULL AUTO_INCREMENT,
+opdracht_id INT,
+vraag_id INT,
+PRIMARY KEY (ov_koppel),
+FOREIGN KEY (opdracht_id) REFERENCES huiswerk_opdrachten(opdracht_id),
+FOREIGN KEY (vraag_id) REFERENCES huiswerk_vraag(vraag_id)
 );
 
 CREATE TABLE IF NOT EXISTS huiswerk_koppel (
 hwklas_id INT NOT NULL AUTO_INCREMENT,
-vraag_id INT,
 hw_opdracht_id INT,
 PRIMARY KEY (hwklas_id),
-FOREIGN KEY (vraag_id) REFERENCES huiswerk_vraag(vraag_id),
 FOREIGN KEY (hw_opdracht_id) REFERENCES huiswerk_opdrachten(hw_opdracht_id)
 );
 
