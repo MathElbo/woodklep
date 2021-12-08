@@ -46,9 +46,8 @@ if(is_null(mysqli_fetch_assoc($result))){
       </div>
     </div>
 
-    <!-- Persoonlijke gegevens -->
     <div class="row">
-      <!-- Persoonlijke info -->
+      <!-- Informatie leraren -->
       <table class="table table-hover col-12 col-md-5">
         <thead>
           <tr>
@@ -93,7 +92,7 @@ if(is_null(mysqli_fetch_assoc($result))){
             ?>
         </tbody>
       </table>
-      <!-- Mijn adres gegevens -->
+      <!-- Leerlingen -->
       <table class="table table-hover col-12 offset-0 col-md-5 offset-md-2 myacc-card">
         <thead>
           <tr>
@@ -124,15 +123,15 @@ if(is_null(mysqli_fetch_assoc($result))){
                   $studentfullname = $studentpinfo["name"] . ' ' . $studentpinfo["infix"] . ' ' . $studentpinfo["lastname"];
                 }
                 echo "<tr>
-                            <td><h6>" . $studentfullname . "</h6></td>
-                        </tr>
-                        <tr>
-                            <td>E-mail</td>
-                            <td>" . $studentinfo['email'] . "</td>
-                        </tr>
-                        <tr>
-                            <td><a href='mailto:". $studentinfo['email'] . "' class='btn btn-dark'>Stuur bericht</a></td>
-                        </tr>";
+                          <td><h6>" . $studentfullname . "</h6></td>
+                      </tr>
+                      <tr>
+                          <td>E-mail</td>
+                          <td>" . $studentinfo['email'] . "</td>
+                      </tr>
+                      <tr>
+                          <td><a href='mailto:". $studentinfo['email'] . "' class='btn btn-dark'>Stuur bericht</a></td>
+                      </tr>";
             }
               }
             ?>
@@ -140,7 +139,29 @@ if(is_null(mysqli_fetch_assoc($result))){
       </table>
     </div>
 
-
+    <div class="row">
+      <!-- Informatie Opdrachten -->
+      <table class="table table-hover col-12 col-md-5">
+        <thead>
+          <tr>
+            <th scope="col"><h3>Opdrachten</h3></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+            <?php
+            $sql9 = "SELECT * FROM `hw_klas_koppel` WHERE `klas_id` = $klasid";
+            $res9 = mysqli_query($conn, $sql9);
+            while ($huiswerkid = mysqli_fetch_array($res9)){
+              $huiswerkid = $huiswerkid['hw_opdracht_id'];
+              echo "<tr>
+                      <td><h6>" . $huiswerkid . "</h6></td>
+                    </tr>";
+              }
+            ?>
+        </tbody>
+      </table>
+    </div>
 
     <!-- Aanpassen/wijzigen -->
     <div class="row">
@@ -160,6 +181,7 @@ if(is_null(mysqli_fetch_assoc($result))){
             if ($userrole = 3) {
               echo "<tr>
               <td><a href='index.php?content=editklas&ki=". $klasid ."'>Mijn klas wijzigen</a></td>
+              <td><a href=''>Voeg opdracht toe</a></td>
             </tr>";
             }
             ?>
