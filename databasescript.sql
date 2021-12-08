@@ -54,12 +54,6 @@ FOREIGN KEY (opdracht_id) REFERENCES huiswerk_opdrachten(opdracht_id),
 FOREIGN KEY (vraag_id) REFERENCES huiswerk_vraag(vraag_id)
 );
 
-CREATE TABLE IF NOT EXISTS huiswerk_koppel (
-hwklas_id INT NOT NULL AUTO_INCREMENT,
-hw_opdracht_id INT,
-PRIMARY KEY (hwklas_id),
-FOREIGN KEY (hw_opdracht_id) REFERENCES huiswerk_opdrachten(hw_opdracht_id)
-);
 
 CREATE TABLE IF NOT EXISTS klas (
 klas_id INT NOT NULL AUTO_INCREMENT,

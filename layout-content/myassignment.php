@@ -12,24 +12,36 @@ $userrole = $_SESSION["userrole"];
 $resultu = getSpecificInfo('woodklep_users', 'userid', $id);
 $userinfo = mysqli_fetch_assoc($resultu);
 
+// get assignment_id
+if (isset($_GET["aid"])) {
+    $assignmentid = $_GET["aid"];
+} else {
+    echo "error";
+}
+
+
 //count rows
 $sql = "SELECT * from `opdrachtvraag_koppel`";
 $result = mysqli_query($conn, $sql);
 $rows = mysqli_num_rows($result);
 
+
+
 // Putt all Vraag_Id's into array vraag
 $vraag = array();
+
+
+
 
 for($i=1; $i<=$rows; $i++){
     $sql1 = "SELECT * from `opdrachtvraag_koppel`
     where ov_koppel = '$i'";
     $result1 = mysqli_query($conn, $sql1);
     $ovk = mysqli_fetch_assoc($result1);
-    if ($ovk["opdracht_id"] == 1) {
+    if ($ovk["opdracht_id"] == $assignmentid) {
     $vraag[] = $ovk["vraag_id"];
     }  
 }
-
 
 
 ?>
@@ -55,8 +67,10 @@ for($i=1; $i<=$rows; $i++){
                             <?php
                             $j = count($vraag);
                             for ($i = 1 ;$i <= $j; $i++){
+                                $k = $i - 1;
+                                $l = $vraag["$k"];
                                 $sqlv = "SELECT * from `huiswerk_vraag`
-                                WHERE vraag_id = '$i'";
+                                WHERE vraag_id = '$l'";
                                 $resultv = mysqli_query($conn, $sqlv);
                                 $varray = mysqli_fetch_assoc($resultv);
                                 echo '<tr><td>Vraag: </td> <td>';

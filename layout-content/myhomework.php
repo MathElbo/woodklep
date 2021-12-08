@@ -12,29 +12,37 @@ $userrole = $_SESSION["userrole"];
 $resultu = getSpecificInfo('woodklep_users', 'userid', $id);
 $userinfo = mysqli_fetch_assoc($resultu);
 
-//count rows
-$sql = "SELECT * from `opdrachtvraag_koppel`";
-$result = mysqli_query($conn, $sql);
-$rows = mysqli_num_rows($result);
+// First get u role from woodklep_users and see if role is student
+if ($userinfo["userroleid"] == 1) {
+  // Get klas from user_klas_koppel 
+    $sql = "SELECT * FROM `user_klas_koppel`
+            WHERE userid = '$id'";
+    $result = mysqli_query($conn, $sql);
+    $userkoppelklas = mysqli_fetch_assoc($result);
+    $klas = $userkoppelklas["klas_id"];
+    if (isset($klas)) {
+        // Get opdracht from hw_klas_koppel
+        $sql = "SELECT * from `hw_klas_koppel`";
+        $result = mysqli_query($conn, $sql);
+        $rows = mysqli_num_rows($result);
 
-// Putt all Vraag_Id's into array vraag
-$vraag = array();
+        $opdracht = array();
 
-for($i=1; $i<=$rows; $i++){
-    $sql1 = "SELECT * from `opdrachtvraag_koppel`
-    where ov_koppel = '$i'";
-    $result1 = mysqli_query($conn, $sql1);
-    $ovk = mysqli_fetch_assoc($result1);
-    if ($ovk["opdracht_id"] == 1) {
-    $vraag[] = $ovk["vraag_id"];
-    }  
+
+        for($i = 1; $i<=$rows; $i++ ) {
+        $sql = "SELECT * FROM `hw_klas_koppel`
+                WHERE hwklas_id = '$i'";
+        $result = mysqli_query($conn, $sql);
+        $klaskoppelhw = mysqli_fetch_assoc($result);
+        if ($klaskoppelhw["klas_id"] == $klas){
+        $opdracht[] = $klaskoppelhw["hw_opdracht_id"];
+        }
+
+            
+        }
+    }
 }
-
-
-
 ?>
-
-
 
 <div class="jumbotron jumbotron-fluid homeJumbo">
     <div class="container">
@@ -51,19 +59,21 @@ for($i=1; $i<=$rows; $i++){
                                 </tr>
                             </thead>
                             <tbody>
-
-                            <?php
-                            $j = count($vraag);
-                            for ($i = 1 ;$i <= $j; $i++){
-                                $sqlv = "SELECT * from `huiswerk_vraag`
-                                WHERE vraag_id = '$i'";
+                                <!-- loop opracht + link en geef Opdracht ID mee  -->
+                                <?php
+                                $j = count($opdracht);
+                                for ($i = 1 ;$i <= $j; $i++){
+                                $sqlv = "SELECT * from `huiswerk_opdrachten`
+                                WHERE opdracht_id = '$i'";
                                 $resultv = mysqli_query($conn, $sqlv);
-                                $varray = mysqli_fetch_assoc($resultv);
-                                echo '<tr><td>Vraag: </td> <td>';
-                                echo $varray["vraag"];
-                                echo '</td> </tr>';
-                            }
-                            ?>
+                                $array = mysqli_fetch_assoc($resultv);
+                                echo '<tr><td>Te doen: </td> <td>';
+                                echo $array["opdracht_naam"];
+                                echo "<li><a class='nav-link' href='index.php?content=myassignment&aid=";
+                                echo $i;
+                                echo "'>Home</a></li>";
+                                }
+                                ?>
                             </tbody>
                         </table>
                     </div>
