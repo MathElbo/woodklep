@@ -7,35 +7,32 @@ include("./php-scripts/connectDB.php");
 include("./php-scripts/functions.php");
 $id = $_SESSION["id"];
 $userrole = $_SESSION["userrole"];
-$teachernumber = 1;
-$klasid;
 
 // Opvragen klasseninfo
-if(isset($_GET["ki"])){
-    $klasid = $_GET["ki"];
-}
+$klasid = $_GET["ki"];
 
 // Get all classinfo
-$sql = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $klasid";
-$result = mysqli_query($conn, $sql);
-$klasvulling = mysqli_fetch_assoc($result);
-$sql = "SELECT `userid` FROM `woodklep_users` WHERE `userroleid` = 3";
-$result4 = mysqli_query($conn, $sql);
-$allteachers = mysqli_fetch_assoc($result4);
 $sql = "SELECT * FROM `klas` WHERE `klas_id` = $klasid";
 $result3 = mysqli_query($conn, $sql);
-$classinfo = mysqli_fetch_assoc($result3);/*
-
-// Ophalen van alle persoonlijke info
-$sql = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $teacher";
-$result1 = mysqli_query($conn, $sql);
-$pinfo = mysqli_fetch_assoc($result1);
-$fullname = $pinfo["name"] . ' ' . $pinfo["infix"] . ' ' . $pinfo["lastname"];
-
-// Ophalen van gebruikersnaam enzo
-$sql = "SELECT * FROM `woodklep_users` WHERE `userid` = $teacher";
-$result2 = mysqli_query($conn, $sql);
-$userinfo = mysqli_fetch_assoc($result2);*/
+$classinfo = mysqli_fetch_assoc($result3);
+$sql = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $klasid AND `userid` = $id;";
+$result = mysqli_query($conn, $sql);
+$homepage;
+switch ($userrole) {
+  case 1: $homepage = "studenthome";
+  break;
+  case 2: $homepage = "parenthome";
+  break;
+  case 3: $homepage = "teacherhome";
+  break;
+  default: $homepage = "homepage";
+  break;
+}
+if(is_null(mysqli_fetch_assoc($result))){
+  echo '<div class="alert alert-danger" role="alert">U heeft geen toegang tot deze pagina.</div>';
+    header("Refresh: 2; url=./index.php?content=". $homepage);
+  exit();
+}
 ?>
 
 <!-- Content van pagina -->
@@ -63,63 +60,37 @@ $userinfo = mysqli_fetch_assoc($result2);*/
             <?php
             $sql2 = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $klasid";
             $res2 = mysqli_query($conn, $sql2);
-            while ($teachersid = mysqli_fetch_array($res2)){
-                $teacherid = $teachersid['userid'];
+            while ($userid = mysqli_fetch_array($res2)){
+              $userid = $userid['userid'];
+              $sql8 = "SELECT * FROM `woodklep_users` WHERE `userid` = $userid AND `userroleid` = 3";
+              $res8 = mysqli_query($conn, $sql8);
+              while ($teacherid = mysqli_fetch_array($res8)) {
+                $teacherid = $teacherid['userid'];
                 $sql3 = "SELECT * FROM `woodklep_users` WHERE `userid` = $teacherid";
                 $res3 = mysqli_query($conn, $sql3);
                 $teacherinfo = mysqli_fetch_array($res3);
                 $sql4 = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $teacherid";
                 $res4 = mysqli_query($conn, $sql4);
                 $teacherpinfo = mysqli_fetch_array($res4);
-                $fullname = $teacherpinfo["name"] . ' ' . $teacherpinfo["infix"] . ' ' . $teacherpinfo["lastname"];
+                if(is_null($teacherpinfo['name'])||!strcmp($teacherpinfo['name'], "")){
+                  $teacherfullname = $teacherinfo['username'];
+                }
+                else {
+                  $teacherfullname = $teacherpinfo["name"] . ' ' . $teacherpinfo["infix"] . ' ' . $teacherpinfo["lastname"];
+                }
                 echo "<tr>
-                            <td><h6>" . $fullname . "</h6></td>
+                            <td><h6>" . $teacherfullname . "</h6></td>
                         </tr>
                         <tr>
                             <td>E-mail</td>
                             <td>" . $teacherinfo['email'] . "</td>
                         </tr>
                         <tr>
-                            <td>Geboortedatum</td>
-                            <td>". $teacherpinfo['birthday'] ."</td>
-                        </tr>
-                        <tr>
-                            <td><input class='btn btn-dark' type='submit' value='Stuur bericht'></td>
+                            <td><a href='mailto:". $teacherinfo['email'] ."' class='btn btn-dark'>Stuur bericht</a></td>
                         </tr>";
             }
-
-            /*$sql2 = "SELECT * FROM `woodklep_users` WHERE `userroleid` = 3";
-            $res2 = mysqli_query($conn, $sql2);
-            while ($teacherid = mysqli_fetch_array($res2)){
-                $teachersid = $teacherid['userid'];
-                $sql1 = "SELECT * FROM `user_klas_koppel` WHERE `userid` = $teachersid AND WHERE `klas_id` = $klasid";
-                $res1 = mysqli_query($conn, $sql1);
-                while ($teacherklas = mysqli_fetch_array($res1)) {
-                    $sql3 = "SELECT * FROM `woodklep_users` WHERE `userid` = $teacherklas";
-                    $res3 = mysqli_query($conn, $sql3);
-                    $userinfo = mysqli_fetch_assoc($res3);
-                    $sql4 = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $teacherklas";
-                    $res4 = mysqli_query($conn, $sql4);
-                    $pinfo = mysqli_fetch_assoc($res4);
-                    $fullname = $pinfo["name"] . ' ' . $pinfo["infix"] . ' ' . $pinfo["lastname"];
-                    echo "<tr>
-                            <td>Naam</td>
-                            <td>". $fullname ."</td>";
-                }
-            }*/
+              }
             ?>
-          <!-- <tr>
-            <td>Naam</td>
-            <td><?php //echo $fullname; ?></td>
-          </tr>
-          <tr>
-            <td>Geboortedatum</td>
-            <td><?php //echo $pinfo["birthday"]; ?></td>
-          </tr>
-          <tr>
-            <td>Email</td>
-            <td><?php //echo $userinfo["email"]; ?></td>
-          </tr> -->
         </tbody>
       </table>
       <!-- Mijn adres gegevens -->
@@ -131,22 +102,40 @@ $userinfo = mysqli_fetch_assoc($result2);*/
           </tr>
         </thead>
         <tbody>
-          <!--<tr>
-            <td>Klasnaam</td>
-            <td><?php echo $classinfo['klasnaam']; ?></td>
-          </tr>
-          <tr>
-            <td>Huisnummer</td>
-            <td><?php echo $pinfo["housenumber"]; ?></td>
-          </tr>
-          <tr>
-            <td>Postcode</td>
-            <td><?php echo $pinfo["postalcode"]; ?></td>
-          </tr>
-          <tr>
-            <td>Stad</td>
-            <td><?php echo $pinfo["city"]; ?></td>
-          </tr>-->
+        <?php
+            $sql2 = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $klasid";
+            $res2 = mysqli_query($conn, $sql2);
+            while ($userid = mysqli_fetch_array($res2)){
+              $userid = $userid['userid'];
+              $sql8 = "SELECT * FROM `woodklep_users` WHERE `userid` = $userid AND `userroleid` = 1";
+              $res8 = mysqli_query($conn, $sql8);
+              while ($studentid = mysqli_fetch_array($res8)) {
+                $studentid = $studentid['userid'];
+                $sql3 = "SELECT * FROM `woodklep_users` WHERE `userid` = $studentid";
+                $res3 = mysqli_query($conn, $sql3);
+                $studentinfo = mysqli_fetch_array($res3);
+                $sql4 = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $studentid";
+                $res4 = mysqli_query($conn, $sql4);
+                $studentpinfo = mysqli_fetch_array($res4);
+                if(is_null($studentpinfo['name'])||!strcmp($studentpinfo['name'], "")){
+                  $studentfullname = $studentinfo['username'];
+                }
+                else {
+                  $studentfullname = $studentpinfo["name"] . ' ' . $studentpinfo["infix"] . ' ' . $studentpinfo["lastname"];
+                }
+                echo "<tr>
+                            <td><h6>" . $studentfullname . "</h6></td>
+                        </tr>
+                        <tr>
+                            <td>E-mail</td>
+                            <td>" . $studentinfo['email'] . "</td>
+                        </tr>
+                        <tr>
+                            <td><a href='mailto:". $studentinfo['email'] . "' class='btn btn-dark'>Stuur bericht</a></td>
+                        </tr>";
+            }
+              }
+            ?>
         </tbody>
       </table>
     </div>
@@ -154,7 +143,6 @@ $userinfo = mysqli_fetch_assoc($result2);*/
 
 
     <!-- Aanpassen/wijzigen -->
-    <!--
     <div class="row">
       <div class="col-12">
         <h2 class="text-center" id="aanpassen">Aanpassen/wijzigen</h2>
@@ -168,22 +156,16 @@ $userinfo = mysqli_fetch_assoc($result2);*/
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td><a href="index.php?content=editpersonalinfo">Mijn gegevens wijzigen</a></td>
-            </tr>
-            <tr>
-              <td><a href="index.php?content=editaddress">Mijn adres wijzigen</a></td>
-            </tr>
-            <tr>
-              <td><a href="index.php?content=editlogin">Mijn wachtwoord wijzigen</a></td>
-            </tr>
-            <tr>
-              <td><a href="index.php?content=editmail">Mijn e-mail wijzigen</a></td>
-            </tr>
+            <?php
+            if ($userrole = 3) {
+              echo "<tr>
+              <td><a href='index.php?content=editklas&ki=". $klasid ."'>Mijn klas wijzigen</a></td>
+            </tr>";
+            }
+            ?>
           </tbody>
         </table>
       </div>
     </div>
-        -->
   </div>
 </div>
