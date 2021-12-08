@@ -66,7 +66,7 @@ hwklas_id INT NOT NULL AUTO_INCREMENT,
 hw_opdracht_id INT,
 klas_id INT,
 PRIMARY KEY (hwklas_id),
-FOREIGN KEY (hw_opdracht_id) REFERENCES huiswerk_opdrachten(hw_opdracht_id),
+FOREIGN KEY (hw_opdracht_id) REFERENCES huiswerk_opdrachten(opdracht_id),
 FOREIGN KEY (klas_id) REFERENCES klas(klas_id)
 );
 
