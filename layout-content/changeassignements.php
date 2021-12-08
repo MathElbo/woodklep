@@ -1,6 +1,6 @@
 <?php
 // Assign users that are allowed to visit this page
-$userrole = [1, 2, 3, 4];
+$userrole = [3, 4];
 include("./php-scripts/security.php");
 
 // Opvragen van gegevens van de huidige inlogger
@@ -14,23 +14,23 @@ $sql1 = "SELECT * FROM `klas` WHERE `klas_id` = $klasid";
 $result1 = mysqli_query($conn, $sql1);
 $classinfo = mysqli_fetch_assoc($result1);
 
-if (isset($_SESSION["namechange"])){
-  switch ($_SESSION["namechange"]) {
+if (isset($_SESSION["nieuweopdracht"])){
+  switch ($_SESSION["nieuweopdracht"]) {
     case "success":
       $pwclasses = "success";
-      $msg = "Klasnaam is succesvol gewijzigd";
+      $msg = "Opdracht is aangemaakt";
       //header("Refresh: 4; url=./index.php?content=redirect");
-      unset($_SESSION["namechange"]);
+      unset($_SESSION["nieuweopdracht"]);
       break;
     case "error1":
       $pwclasses = "error";
       $msg = "Er ging iets mis met de SQL Query";
-      unset($_SESSION["namechange"]);
+      unset($_SESSION["nieuweopdracht"]);
       break;
     case "error3":
       $pwclasses = "error";
       $msg = "Deze klas bestaat niet in de database";
-      unset($_SESSION['namechange']);
+      unset($_SESSION['nieuweopdracht']);
   }
 }
 ?>
@@ -51,14 +51,14 @@ if (isset($_SESSION["namechange"])){
       <h2 class="display-4"><?php echo $classinfo['klasnaam']?></h2>
       </div>
       <div class="col-12 col-md-4 offset-md-1">
-        <h3 class="display-5">Klas</h3>
+        <h3 class="display-5">Nieuwe opdracht</h3>
         <!-- Naamveranderen -->
-        <h4 class="lead">Verander naam</h4>
-        <form action="index.php?content=script-namechangeclass" method="post">
+        <h4 class="lead">Nieuwe opdracht</h4>
+        <form action="index.php?content=script-newassignement" method="post">
             <div class="form-group">
-                <input class="form-control" style="width:320px" type="name" name="name" id="name" placeholder="Nieuwe klasnaam" required>
+                <input class="form-control" style="width:320px" type="name" name="name" id="name" placeholder="Naam van opdracht" required>
                 <input type="hidden" value="<?php echo $klasid ?>" name="ki" id="ki">
-                <input class="btn btn-dark" type="submit" value="Verander klasnaam">
+                <input class="btn btn-dark" type="submit" value="Maak nieuwe opdracht">
             </div>
         </form>
         <a href="./index.php?content=klas&ki=<?php echo $klasid ?>" class="btn btn-dark">Terug naar klas: <?php echo $classinfo['klasnaam'] ?></a>

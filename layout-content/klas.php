@@ -181,7 +181,7 @@ if(is_null(mysqli_fetch_assoc($result))){
             if ($userrole = 3) {
               echo "<tr>
               <td><a href='index.php?content=editklas&ki=". $klasid ."'>Mijn klas wijzigen</a></td>
-              <td><a href=''>Voeg opdracht toe</a></td>
+              <td><a href='index.php?content=changeassignements&ki=" . $klasid. "'>Verander opdrachten</a></td>
             </tr>";
             }
             ?>
