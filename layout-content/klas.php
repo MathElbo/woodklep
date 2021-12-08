@@ -7,12 +7,9 @@ include("./php-scripts/connectDB.php");
 include("./php-scripts/functions.php");
 $id = $_SESSION["id"];
 $userrole = $_SESSION["userrole"];
-$klasid;
 
 // Opvragen klasseninfo
-if(isset($_GET["ki"])){
-    $klasid = $_GET["ki"];
-}
+$klasid = $_GET["ki"];
 
 // Get all classinfo
 $sql = "SELECT * FROM `klas` WHERE `klas_id` = $klasid";
@@ -162,7 +159,7 @@ if(is_null(mysqli_fetch_assoc($result))){
             <?php
             if ($userrole = 3) {
               echo "<tr>
-              <td><a href='index.php?content=editpersonalinfo'>Mijn klas wijzigen</a></td>
+              <td><a href='index.php?content=editklas&ki=". $klasid ."'>Mijn klas wijzigen</a></td>
             </tr>";
             }
             ?>
