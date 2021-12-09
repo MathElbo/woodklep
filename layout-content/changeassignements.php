@@ -77,63 +77,33 @@ if (isset($_SESSION['opdrachtselect'])) {
                 <input class="btn btn-dark" type="submit" value="Maak nieuwe opdracht">
             </div>
         </form>
-        <h4 class="lead">Bewerk opdracht</h4>
-        <form action="index.php?content=script-docentassignments" method="post">
-            <div class="form-group">
-                <select class="form-control" style="width:320px" name="opdracht" id="opdracht" required>
-                    <option value="">Selecteer opdracht</option>
-                    <?php
-                        $sql1 = "SELECT * FROM `hw_klas_koppel` WHERE `klas_id` = $klasid";
-                        $opdrachten = mysqli_query($conn, $sql1);
-                        while($opdracht = mysqli_fetch_array($opdrachten)){
-                            $opdrachtid = $opdracht['hw_opdracht_id'];
-                            $sql2 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $opdrachtid";
-                            $opdrachtinfos = mysqli_query($conn, $sql2);
-                            while($opdrachtinfo = mysqli_fetch_array($opdrachtinfos)){
-                                echo "<option value='". $opdrachtinfo['opdracht_id'] ."'>" .$opdrachtinfo['opdracht_naam'] ."</option>";  // displaying data in option menu
-                            }
-                        }
-                    ?>  
-                </select>
-                <input type="hidden" value="<?php echo $klasid ?>" name="ki" id="ki">
-                <input class="btn btn-dark" type="submit" value="Selecteer opdracht">
-            </div>
-        </form>
         <a href="./index.php?content=klas&ki=<?php echo $klasid ?>" class="btn btn-dark">Terug naar klas: <?php echo $classinfo['klasnaam'] ?></a>
       </div>
       <!-- Register form -->
       <div class="col-12 col-md-4">
-        <h3 class="display-5">Leerlingen</h3>
-        <h4 class="lead">Bewerk leerlingen</h4>
-        <form action="index.php?content=script-klas-change" method="post">
-            <div class="form-group">
-                <select class="form-control" style="width:320px" name="groep" id="groep" required>
-                    <option value="">Selecteer leerling</option>
-                        <?php
-                            $sql1 = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $klasid";
-                            $res1 = mysqli_query($conn, $sql1);
-                            while($users = mysqli_fetch_array($res1)){
-                                $usersid = $users['userid'];
-                                $sql2 = "SELECT * FROM `woodklep_users` WHERE `userid` = $usersid";
-                                $res2 = mysqli_query($conn, $sql2);
-                                while ($userinfo = mysqli_fetch_array($res2)) {
-                                    if($userinfo['userroleid']==1){
-                                        echo "<option value='". $userinfo['userid'] ."'>" .$userinfo['username'] ."</option>";
-                                    }
-                                }
-                            }
-                        ?>
-                </select>
-                <input class="btn btn-dark" type="submit" value="Kies leerling">
-            </div>
-        </form>
-        <h4 class="lead">Voeg leerlingen toe</h4>
-        <form action="index.php?content=script-klas-change" method="post">
-            <div class="form-group">
-            <input class="form-control" style="width:320px" type="name" name="name" id="name" placeholder="Naam leerling" required>
-            <input class="btn btn-dark" type="submit" value="Voeg leerling toe">
-            </div>
-        </form>
+        <h3 class="display-5">Opdrachten</h3>
+        <?php
+            $sql9 = "SELECT * FROM `hw_klas_koppel` WHERE `klas_id` = $klasid";
+            $res9 = mysqli_query($conn, $sql9);
+            while ($huiswerkid = mysqli_fetch_array($res9)){
+              $huiswerkid = $huiswerkid['hw_opdracht_id'];
+              $sql10 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $huiswerkid";
+              $res10 = mysqli_query($conn, $sql10);
+              while ($rec10 = mysqli_fetch_array($res10)) {
+                $sql11 = "SELECT * FROM `opdrachtvraag_koppel` WHERE `opdracht_id` = $huiswerkid";
+                $res11 = mysqli_query($conn, $sql11);
+                $vraagaatal = 0;
+                if(!$res11){
+                }
+                else {
+                  $vraagaatal = mysqli_num_rows($res11);
+                }
+                echo "<tr>
+                      <td><h6><a href='http://www.woodklep.org/index.php?content=editopdracht&oi=".$rec10['opdracht_id']."' style='color:black'><b>" . $rec10['opdracht_naam'] . "</b></a></h6></td> <td>".$vraagaatal." vragen</td>
+                    </tr>";
+              }
+            }
+          ?>
       </div>
     </div>
   </div>
