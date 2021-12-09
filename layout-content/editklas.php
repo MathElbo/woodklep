@@ -93,6 +93,14 @@ else {
       <!-- Register form -->
       <div class="col-12 col-md-4">
         <h3 class="display-5">Leerlingen</h3>
+        <h4 class="lead">Voeg leerlingen toe</h4>
+        <form action="index.php?content=script-addstudent" method="post">
+            <div class="form-group">
+            <input class="form-control" style="width:320px" type="name" name="name" id="name" placeholder="Gebruikersnaam leerling" required>
+            <input type="hidden" value="<?php echo $klasid ?>" name="ki" id="ki">
+            <input class="btn btn-dark" type="submit" value="Voeg leerling toe">
+            </div>
+        </form>
         <h4 class="lead">Bewerk leerlingen</h4>
         <form action="index.php?content=" method="post">
             <div class="form-group">
@@ -114,14 +122,6 @@ else {
                         ?>
                 </select>
                 <input class="btn btn-dark" type="submit" value="Kies leerling">
-            </div>
-        </form>
-        <h4 class="lead">Voeg leerlingen toe</h4>
-        <form action="index.php?content=script-addstudent" method="post">
-            <div class="form-group">
-            <input class="form-control" style="width:320px" type="name" name="name" id="name" placeholder="Gebruikersnaam leerling" required>
-            <input type="hidden" value="<?php echo $klasid ?>" name="ki" id="ki">
-            <input class="btn btn-dark" type="submit" value="Voeg leerling toe">
             </div>
         </form>
       </div>

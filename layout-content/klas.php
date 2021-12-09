@@ -123,7 +123,7 @@ if(is_null(mysqli_fetch_assoc($result))){
                   $studentfullname = $studentpinfo["name"] . ' ' . $studentpinfo["infix"] . ' ' . $studentpinfo["lastname"];
                 }
                 echo "<tr>
-                          <td><h6>" . $studentfullname . "</h6></td>
+                          <td><h6><a href='index.php?content=leerlingoverzicht&li=".$studentinfo['userid']."' style='color:black'>" . $studentfullname . "</a></h6></td>
                       </tr>
                       <tr>
                           <td>E-mail</td>
