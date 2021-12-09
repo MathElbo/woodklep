@@ -103,3 +103,13 @@ antwoord VARCHAR(255),
 FOREIGN KEY (studentid) REFERENCES woodklep_users(userid),
 FOREIGN KEY (vraag_id) REFERENCES huiswerk_vraag(vraag_id)
 );
+
+CREATE TABLE IF NOT EXISTS student_opdracht_voortgang(
+sov_id INT NOT NULL AUTO_INCREMENT,
+studentid INT,
+opdracht_id INT,
+gemaakt BOOLEAN,
+PRIMARY KEY (sov_id),
+FOREIGN KEY (studentid) REFERENCES woodklep_users(userid),
+FOREIGN KEY (opdracht_id) REFERENCES huiswerk_opdrachten(opdracht_id)
+);

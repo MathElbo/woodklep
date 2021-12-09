@@ -26,21 +26,18 @@ $result = mysqli_query($conn, $sql);
 $rows = mysqli_num_rows($result);
 
 
-
-// Putt all Vraag_Id's into array vraag
+// Put all Vraag_Id's into array vraag
 $vraag = array();
 
 
-
-
-for($i=1; $i<=$rows; $i++){
+for ($i = 1; $i <= $rows; $i++) {
     $sql1 = "SELECT * from `opdrachtvraag_koppel`
     where ov_koppel = '$i'";
     $result1 = mysqli_query($conn, $sql1);
     $ovk = mysqli_fetch_assoc($result1);
     if ($ovk["opdracht_id"] == $assignmentid) {
-    $vraag[] = $ovk["vraag_id"];
-    }  
+        $vraag[] = $ovk["vraag_id"];
+    }
 }
 
 
@@ -50,24 +47,19 @@ for($i=1; $i<=$rows; $i++){
 
 <div class="jumbotron jumbotron-fluid homeJumbo">
     <div class="container">
-        <h1 class="display-4">opdracht 
-        <?php 
-        echo $assignmentid;
-        ?>    
+        <h1 class="display-4">opdracht
+            <?php
+            echo $assignmentid;
+            ?>
         </h1>
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <div class="row">
-                        <table class="table table-hover col-12 col-md-5">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Beantwoord de volgende vragen en lever in:</th>
-                                    <th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            <!-- For loop om de vragen te laten zien :) --> 
+                <div class="col-12 col-md-4 offset-md-1">
+                    <form action="index.php?content=script-student-turnin&aid=
+                    <?php echo $assignmentid; ?>
+                    " method="post">
+                        <div class="form-group">
+                            <br>
                             <?php
                             $j = count($vraag);
                             for ($i = 1 ;$i <= $j; $i++){
@@ -77,14 +69,24 @@ for($i=1; $i<=$rows; $i++){
                                 WHERE vraag_id = '$l'";
                                 $resultv = mysqli_query($conn, $sqlv);
                                 $varray = mysqli_fetch_assoc($resultv);
-                                echo '<tr><td>Vraag: </td> <td>';
+                                echo '<label for="exampleFormControlInput1" class="form-label">Vraag ';
+                                echo $i;
+                                echo '</label> <br>
+                                <label for="exampleFormControlInput1" class="form-label">';
                                 echo $varray["vraag"];
-                                echo '</td> </tr>';
+                                echo '</label> <input class="form-control" type="antwoord';
+                                echo $i;
+                                echo '" name="antwoord';
+                                echo $i;
+                                echo '" id="antwoord';
+                                echo $i;
+                                echo '" placeholder="Antwoord" required> <br>';
                             }
                             ?>
-                            </tbody>
-                        </table>
-                    </div>
+                            <br>
+                            <input class="btn btn-dark" type="submit" value="Lever in">
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
