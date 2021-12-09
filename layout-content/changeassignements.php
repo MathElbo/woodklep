@@ -54,11 +54,33 @@ if (isset($_SESSION["nieuweopdracht"])){
         <h3 class="display-5">Nieuwe opdracht</h3>
         <!-- Naamveranderen -->
         <h4 class="lead">Nieuwe opdracht</h4>
-        <form action="index.php?content=script-newassignement" method="post">
+        <form action="index.php?content=script-newassignment" method="post">
             <div class="form-group">
                 <input class="form-control" style="width:320px" type="name" name="name" id="name" placeholder="Naam van opdracht" required>
                 <input type="hidden" value="<?php echo $klasid ?>" name="ki" id="ki">
                 <input class="btn btn-dark" type="submit" value="Maak nieuwe opdracht">
+            </div>
+        </form>
+        <h4 class="lead">Bewerk opdracht</h4>
+        <form action="index.php?content=" method="post">
+            <div class="form-group">
+                <select class="form-control" style="width:320px" name="opdracht" id="opdracht" required>
+                    <option value="">Selecteer opdracht</option>
+                    <?php
+                        $sql1 = "SELECT * FROM `hw_klas_koppel` WHERE `klas_id` = $klasid";
+                        $opdrachten = mysqli_query($conn, $sql1);
+                        while($opdracht = mysqli_fetch_array($opdrachten)){
+                            $opdrachtid = $opdracht['hw_opdracht_id'];
+                            $sql2 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $opdrachtid";
+                            $opdrachtinfos = mysqli_query($conn, $sql2);
+                            while($opdrachtinfo = mysqli_fetch_array($opdrachtinfos)){
+                                echo "<option value='". $opdrachtinfo['opdracht_id'] ."'>" .$opdrachtinfo['opdracht_naam'] ."</option>";  // displaying data in option menu
+                            }
+                        }
+                    ?>  
+                </select>
+                <input type="hidden" value="<?php echo $klasid ?>" name="ki" id="ki">
+                <input class="btn btn-dark" type="submit" value="Selecteer opdracht">
             </div>
         </form>
         <a href="./index.php?content=klas&ki=<?php echo $klasid ?>" class="btn btn-dark">Terug naar klas: <?php echo $classinfo['klasnaam'] ?></a>
