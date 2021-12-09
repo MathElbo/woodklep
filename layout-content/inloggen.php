@@ -46,6 +46,12 @@ if (isset($_SESSION["register"])) {
       unset($_SESSION["register"]);
       unset($_SESSION["email"]);
       break;
+    case "error1":
+      $pwclasses = "error";
+      $msg = "De ingevoerde gebruikersnaam is al in gebruik.";
+      $email = $_SESSION['email'];
+      unset($_SESSION['register']);
+      break;
     }
   }
 ?>
