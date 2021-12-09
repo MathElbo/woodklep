@@ -50,10 +50,14 @@ for($i=1; $i<=$rows; $i++){
 
 <div class="jumbotron jumbotron-fluid homeJumbo">
     <div class="container">
-        <h1 class="display-4">opdracht ?</h1>
+        <h1 class="display-4">opdracht 
+        <?php 
+        echo $assignmentid;
+        ?>    
+        </h1>
         <div class="container">
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <div class="row">
                         <table class="table table-hover col-12 col-md-5">
                             <thead>
@@ -63,7 +67,7 @@ for($i=1; $i<=$rows; $i++){
                                 </tr>
                             </thead>
                             <tbody>
-
+                            <!-- For loop om de vragen te laten zien :) --> 
                             <?php
                             $j = count($vraag);
                             for ($i = 1 ;$i <= $j; $i++){

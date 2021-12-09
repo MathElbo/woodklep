@@ -21,7 +21,7 @@ if ($userinfo["userroleid"] == 1) {
     $userkoppelklas = mysqli_fetch_assoc($result);
     $klas = $userkoppelklas["klas_id"];
     if (isset($klas)) {
-        // Get opdracht from hw_klas_koppel
+        // Get opdrachten from hw_klas_koppel
         $sql = "SELECT * from `hw_klas_koppel`";
         $result = mysqli_query($conn, $sql);
         $rows = mysqli_num_rows($result);
@@ -49,7 +49,7 @@ if ($userinfo["userroleid"] == 1) {
         <h1 class="display-4">Huiswerk overzicht</h1>
         <div class="container">
             <div class="row">
-                <div class="col-6">
+                <div class="col-12">
                     <div class="row">
                         <table class="table table-hover col-12 col-md-5">
                             <thead>
@@ -69,9 +69,9 @@ if ($userinfo["userroleid"] == 1) {
                                 $array = mysqli_fetch_assoc($resultv);
                                 echo '<tr><td>Te doen: </td> <td>';
                                 echo $array["opdracht_naam"];
-                                echo "<li><a class='nav-link' href='index.php?content=myassignment&aid=";
+                                echo "</td><td><a class='btn btn-dark' href='index.php?content=myassignment&aid=";
                                 echo $i;
-                                echo "'>Home</a></li>";
+                                echo "'>klik hier!</a>";
                                 }
                                 ?>
                             </tbody>
