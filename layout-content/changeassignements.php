@@ -99,7 +99,7 @@ if (isset($_SESSION['opdrachtselect'])) {
                   $vraagaatal = mysqli_num_rows($res11);
                 }
                 echo "<tr>
-                      <td><h6><a href='http://www.woodklep.org/index.php?content=editopdracht&oi=".$rec10['opdracht_id']."' style='color:black'><b>" . $rec10['opdracht_naam'] . "</b></a></h6></td> <td>".$vraagaatal." vragen</td>
+                      <td><h4 class='lead'><a href='http://www.woodklep.org/index.php?content=editopdracht&oi=".$rec10['opdracht_id']."' style='color:black'><b>" . $rec10['opdracht_naam'] . "</b></a></h4></td> <td>".$vraagaatal." vragen</td>
                     </tr>";
               }
             }
