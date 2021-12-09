@@ -23,7 +23,7 @@ if(mysqli_num_rows($res1) == 1){
         $userid = $rec2['userid'];
         $sql3 = "SELECT * FROM `user_klas_koppel` WHERE `userid` = $userid AND `klas_id` = $ki";
         $res3 = mysqli_query($conn, $sql3);
-        if(mysqli_num_rows($res3)) {
+        if(!mysqli_num_rows($res3)) {
             $sql4 = "INSERT INTO `user_klas_koppel` (`userid`, `klas_id`) VALUES ($userid, $ki)";
             $res4 = mysqli_query($conn, $sql4);
             if($res4) {

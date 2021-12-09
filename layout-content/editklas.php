@@ -31,7 +31,34 @@ if (isset($_SESSION["namechange"])){
       $pwclasses = "error";
       $msg = "Deze klas bestaat niet in de database";
       unset($_SESSION['namechange']);
+      break;
   }
+}
+if (isset($_SESSION['leerlingtoevoeg'])) {
+  switch ($_SESSION['leerlingtoevoeg']) {
+    case "success": 
+      $pwclasses = "success";
+      $msg = "Leerling is toegevoegd";
+      unset($_SESSION["leerlingtoevoeg"]);
+      break;
+    case "error1":
+      $pwclasses = "error";
+      $msg = "Er gaat iets mis met de database.";
+      unset($_SESSION['leerlingtoevoeg']);
+      break;
+    case "error2":
+      $pwclasses = "error";
+      $msg = "Leerling zit al in de klas";
+      unset($_SESSION['leerlingtoevoeg']);
+      break;
+    case "error3": 
+      $pwclasses = "error";
+      $msg = "Klas bestaat niet";
+      unset($_SESSION['leerlingtoevoeg']);
+      break;
+  }
+}
+else {
 }
 ?>
 
