@@ -2,6 +2,7 @@
 $userrole = [3,4];
 include("./php-scripts/security.php");
 include("./php-scripts/connectDB.php");
+$id = $_SESSION['id'];
 
 if (isset($_SESSION["nieuwgroep"])){
   switch ($_SESSION["nieuwgroep"]) {
@@ -57,7 +58,6 @@ if (isset($_SESSION["groepselect"])){
                 <select class="form-control" style="width:320px" name="groep" id="groep" required>
                     <option value="">Selecteer klas</option>
                     <?php
-                        $id = $_SESSION['id'];
                         $sql = "SELECT * FROM `user_klas_koppel` WHERE `userid` = $id";
                         $klassen = mysqli_query($conn, $sql);
                         while($klas = mysqli_fetch_array($klassen)){
@@ -89,7 +89,35 @@ if (isset($_SESSION["groepselect"])){
       <!-- Register form -->
       <div class="col-12 col-md-4">
         <h2 class="display-4">Mijn leerlingen</h2>
-        <h4 class="lead">Test 2</h4>
+        <?php
+        $sql1 = "SELECT * FROM `user_klas_koppel` WHERE `userid` = $id";
+        $res1 = mysqli_query($conn, $sql1);
+        while ($rec1 = mysqli_fetch_array($res1)) {
+          $ki = $rec1['klas_id'];
+          $sql2 = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $ki";
+          $res2 = mysqli_query($conn, $sql2);
+          while ($rec2 = mysqli_fetch_array($res2)) {
+            $li = $rec2['userid'];
+            $sql3 = "SELECT * FROM `woodklep_users` WHERE `userid` = $li AND `userroleid` = 1";
+            $res3 = mysqli_query($conn, $sql3);
+            if(!empty($res3)) {
+              $linfo = mysqli_fetch_array($res3);
+              $sql4 = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $li";
+              $res4 = mysqli_query($conn, $sql4);
+              $lpinfo = mysqli_fetch_array($res4);
+              if(is_null($lpinfo['name']) | !strcmp($lpinfo['name'],"")) {
+                $lnaam = $linfo['username'];
+              }
+              else {
+                $lnaam = $lpinfo['name'];
+              }
+              echo "<tr>
+                      <td><h4 class='lead'><a style='color:black'><b>".$lnaam."</b></a></h4></td>
+                    </tr>";
+            }
+          }
+        }
+        ?>
       </div>
     </div>
   </div>
