@@ -31,6 +31,22 @@ if (isset($_SESSION["nieuweopdracht"])){
       $pwclasses = "error";
       $msg = "Deze klas bestaat niet in de database";
       unset($_SESSION['nieuweopdracht']);
+      break;
+  }
+}
+if (isset($_SESSION['opdrachtselect'])) {
+  switch($_SESSION['opdrachtselect']) {
+    case "success": 
+      $pwclasses = "success";
+      $msg = "U wordt nu doorgeleid naar de opdrachtpagina.";
+      header ("Refresh: 1; url=./index.php?content=editopdracht&oi=". $_SESSION['opdrachtid']);
+      unset($_SESSION["opdrachtselect"]);
+      break;
+    case "error1":
+      $pwclasses = "error";
+      $msg = "Selecteer een opdracht.";
+      unset($_SESSION['opdrachtselect']);
+      break;
   }
 }
 ?>
@@ -62,7 +78,7 @@ if (isset($_SESSION["nieuweopdracht"])){
             </div>
         </form>
         <h4 class="lead">Bewerk opdracht</h4>
-        <form action="index.php?content=" method="post">
+        <form action="index.php?content=script-docentassignments" method="post">
             <div class="form-group">
                 <select class="form-control" style="width:320px" name="opdracht" id="opdracht" required>
                     <option value="">Selecteer opdracht</option>
