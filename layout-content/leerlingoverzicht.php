@@ -54,6 +54,9 @@ else {
             <tr>
                 <td><a href='mailto:<?php echo $leerlinginfo['email']?>' class='btn btn-dark'>Stuur bericht</a></td>
             </tr>
+            <tr>
+            <td><a href='index.php?content=klas&ki=<?php echo $ki?>' class='btn btn-dark'>Terug naar klas</a></td>
+            </tr>
         </tbody>
       </table>
       <!-- Leerlingen -->

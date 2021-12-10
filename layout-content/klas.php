@@ -197,6 +197,9 @@ if(is_null(mysqli_fetch_assoc($result))){
             </tr>";
             }
             ?>
+            <tr>
+              <td><a href='index.php?content=docentgroepen' class='btn btn-dark'>Terug naar jouw klassen</a></td>
+            </tr>
           </tbody>
         </table>
       </div>
