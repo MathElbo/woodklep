@@ -54,13 +54,16 @@ else {
             <tr>
                 <td><a href='mailto:<?php echo $leerlinginfo['email']?>' class='btn btn-dark'>Stuur bericht</a></td>
             </tr>
+            <tr>
+            <td><a href='index.php?content=klas&ki=<?php echo $ki?>' class='btn btn-dark'>Terug naar klas</a></td>
+            </tr>
         </tbody>
       </table>
       <!-- Leerlingen -->
       <table class="table table-hover col-12 offset-0 col-md-5 offset-md-2 myacc-card">
         <thead>
           <tr>
-            <th scope="col"><h3>Opdrachen</h3></th>
+            <th scope="col"><h3>Opdrachten</h3></th>
             <th></th>
           </tr>
         </thead>
