@@ -7,8 +7,9 @@ include("./php-scripts/connectDB.php");
 include("./php-scripts/functions.php");
 $id = $_SESSION["id"];
 $userrole = $_SESSION["userrole"];
+$ki = $_GET["ki"];
 
-// Opvragen klasseninfo
+// Opvragen leerlinginfo
 $leerlingid = $_GET["li"];
 $sql1 = "SELECT * FROM `woodklep_users` WHERE `userid` = $leerlingid";
 $res1 = mysqli_query($conn, $sql1);
@@ -65,11 +66,11 @@ else {
         </thead>
         <tbody>
         <?php 
-        $sql3 = "SELECT * FROM `user_klas_koppel` WHERE `userid` = $leerlingid";
-        $res3 = mysqli_query($conn, $sql3);
-        while ($rec3 = mysqli_fetch_array($res3)) {
-            $klasid = $rec3['klas_id'];
-            $sql4 = "SELECT * FROM `hw_klas_koppel` WHERE `klas_id` = $klasid";
+        //$sql3 = "SELECT * FROM `user_klas_koppel` WHERE `userid` = $leerlingid AND `klas_id` = $ki";
+        //$res3 = mysqli_query($conn, $sql3);
+        //while ($rec3 = mysqli_fetch_array($res3)) {
+            //$klasid = $rec3['klas_id'];
+            $sql4 = "SELECT * FROM `hw_klas_koppel` WHERE `klas_id` = $ki";
             $res4 = mysqli_query($conn, $sql4);
             while ($rec4 = mysqli_fetch_array($res4)) {
                 $opdrachtid = $rec4['hw_opdracht_id'];
@@ -120,7 +121,7 @@ else {
                     }
                 }
             }
-        }
+        //}
         ?>
         </tbody>
       </table>
