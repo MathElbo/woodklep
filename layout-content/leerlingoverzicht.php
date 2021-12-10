@@ -60,7 +60,7 @@ else {
       <table class="table table-hover col-12 offset-0 col-md-5 offset-md-2 myacc-card">
         <thead>
           <tr>
-            <th scope="col"><h3>Opdrachen</h3></th>
+            <th scope="col"><h3>Opdrachten</h3></th>
             <th></th>
           </tr>
         </thead>
