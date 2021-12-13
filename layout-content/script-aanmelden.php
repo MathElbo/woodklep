@@ -19,6 +19,7 @@ switch ($role){
 if (!empty($email)) {
 
   $result = getSpecificInfo('woodklep_users', 'email', $email);
+  $result2 = getSpecificInfo('woodklep_users', 'username', $gebruikersnaam);
 
   if (mysqli_num_rows($result)) {
     // Email is al in gebruik
@@ -26,7 +27,14 @@ if (!empty($email)) {
     $_SESSION["register"] = "error";
     $_SESSION["email"] = $email;
     header("Location: index.php?content=inloggen");
-  } else {
+  }
+  else if (mysqli_num_rows($result2)){
+    // Gebruikersnaam al in gebruik
+    $_SESSION["register"] = "error1";
+    $_SESSION['email'] = $email;
+    header("Location: index.php?content=inloggen");
+  } 
+  else {
     $password = RandomString();
     $password_hash = password_hash($password, PASSWORD_BCRYPT);
 

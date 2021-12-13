@@ -31,7 +31,34 @@ if (isset($_SESSION["namechange"])){
       $pwclasses = "error";
       $msg = "Deze klas bestaat niet in de database";
       unset($_SESSION['namechange']);
+      break;
   }
+}
+if (isset($_SESSION['leerlingtoevoeg'])) {
+  switch ($_SESSION['leerlingtoevoeg']) {
+    case "success": 
+      $pwclasses = "success";
+      $msg = "Leerling is toegevoegd";
+      unset($_SESSION["leerlingtoevoeg"]);
+      break;
+    case "error1":
+      $pwclasses = "error";
+      $msg = "Er gaat iets mis met de database.";
+      unset($_SESSION['leerlingtoevoeg']);
+      break;
+    case "error2":
+      $pwclasses = "error";
+      $msg = "Leerling zit al in de klas";
+      unset($_SESSION['leerlingtoevoeg']);
+      break;
+    case "error3": 
+      $pwclasses = "error";
+      $msg = "Klas bestaat niet";
+      unset($_SESSION['leerlingtoevoeg']);
+      break;
+  }
+}
+else {
 }
 ?>
 
@@ -66,8 +93,16 @@ if (isset($_SESSION["namechange"])){
       <!-- Register form -->
       <div class="col-12 col-md-4">
         <h3 class="display-5">Leerlingen</h3>
+        <h4 class="lead">Voeg leerlingen toe</h4>
+        <form action="index.php?content=script-addstudent" method="post">
+            <div class="form-group">
+            <input class="form-control" style="width:320px" type="name" name="name" id="name" placeholder="Gebruikersnaam leerling" required>
+            <input type="hidden" value="<?php echo $klasid ?>" name="ki" id="ki">
+            <input class="btn btn-dark" type="submit" value="Voeg leerling toe">
+            </div>
+        </form>
         <h4 class="lead">Bewerk leerlingen</h4>
-        <form action="index.php?content=script-klas-change" method="post">
+        <form action="index.php?content=" method="post">
             <div class="form-group">
                 <select class="form-control" style="width:320px" name="groep" id="groep" required>
                     <option value="">Selecteer leerling</option>
@@ -87,13 +122,6 @@ if (isset($_SESSION["namechange"])){
                         ?>
                 </select>
                 <input class="btn btn-dark" type="submit" value="Kies leerling">
-            </div>
-        </form>
-        <h4 class="lead">Voeg leerlingen toe</h4>
-        <form action="index.php?content=script-klas-change" method="post">
-            <div class="form-group">
-            <input class="form-control" style="width:320px" type="name" name="name" id="name" placeholder="Naam leerling" required>
-            <input class="btn btn-dark" type="submit" value="Voeg leerling toe">
             </div>
         </form>
       </div>

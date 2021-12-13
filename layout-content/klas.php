@@ -123,7 +123,7 @@ if(is_null(mysqli_fetch_assoc($result))){
                   $studentfullname = $studentpinfo["name"] . ' ' . $studentpinfo["infix"] . ' ' . $studentpinfo["lastname"];
                 }
                 echo "<tr>
-                          <td><h6>" . $studentfullname . "</h6></td>
+                          <td><h6><a href='index.php?content=leerlingoverzicht&li=".$studentinfo['userid']."&ki=".$klasid."' style='color:black'>" . $studentfullname . "</a></h6></td>
                       </tr>
                       <tr>
                           <td>E-mail</td>
@@ -149,16 +149,28 @@ if(is_null(mysqli_fetch_assoc($result))){
           </tr>
         </thead>
         <tbody>
-            <?php
+        <?php
             $sql9 = "SELECT * FROM `hw_klas_koppel` WHERE `klas_id` = $klasid";
             $res9 = mysqli_query($conn, $sql9);
             while ($huiswerkid = mysqli_fetch_array($res9)){
               $huiswerkid = $huiswerkid['hw_opdracht_id'];
-              echo "<tr>
-                      <td><h6>" . $huiswerkid . "</h6></td>
+              $sql10 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $huiswerkid";
+              $res10 = mysqli_query($conn, $sql10);
+              while ($rec10 = mysqli_fetch_array($res10)) {
+                $sql11 = "SELECT * FROM `opdrachtvraag_koppel` WHERE `opdracht_id` = $huiswerkid";
+                $res11 = mysqli_query($conn, $sql11);
+                $vraagaantal = 0;
+                if(!$res11){
+                }
+                else {
+                  $vraagaantal = mysqli_num_rows($res11);
+                }
+                echo "<tr>
+                      <td><h6><a href='index.php?content=editopdracht&oi=".$rec10['opdracht_id']."' style='color:black'><b>" . $rec10['opdracht_naam'] . "</b></a></h6></td> <td>".$vraagaantal." vragen</td>
                     </tr>";
               }
-            ?>
+            }
+          ?>
         </tbody>
       </table>
     </div>
@@ -185,6 +197,9 @@ if(is_null(mysqli_fetch_assoc($result))){
             </tr>";
             }
             ?>
+            <tr>
+              <td><a href='index.php?content=docentgroepen' class='btn btn-dark'>Terug naar jouw klassen</a></td>
+            </tr>
           </tbody>
         </table>
       </div>

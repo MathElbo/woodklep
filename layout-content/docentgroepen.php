@@ -2,6 +2,7 @@
 $userrole = [3,4];
 include("./php-scripts/security.php");
 include("./php-scripts/connectDB.php");
+$id = $_SESSION['id'];
 
 if (isset($_SESSION["nieuwgroep"])){
   switch ($_SESSION["nieuwgroep"]) {
@@ -57,7 +58,6 @@ if (isset($_SESSION["groepselect"])){
                 <select class="form-control" style="width:320px" name="groep" id="groep" required>
                     <option value="">Selecteer klas</option>
                     <?php
-                        $id = $_SESSION['id'];
                         $sql = "SELECT * FROM `user_klas_koppel` WHERE `userid` = $id";
                         $klassen = mysqli_query($conn, $sql);
                         while($klas = mysqli_fetch_array($klassen)){
@@ -89,7 +89,42 @@ if (isset($_SESSION["groepselect"])){
       <!-- Register form -->
       <div class="col-12 col-md-4">
         <h2 class="display-4">Mijn leerlingen</h2>
-        <h4 class="lead">Test 2</h4>
+        <?php
+            $sql1 = "SELECT * FROM `user_klas_koppel` WHERE `userid` = $id";
+            $res1 = mysqli_query($conn, $sql1);
+            while ($rec1 = mysqli_fetch_array($res1)) {
+              $ki = $rec1['klas_id'];
+              $sql10 = "SELECT * FROM `klas` WHERE `klas_id` = $ki";
+              $res10 = mysqli_query($conn, $sql10);
+              $rec10 = mysqli_fetch_array($res10);
+              echo "<b><h4 class='lead'>".$rec10['klasnaam']."</h4></b>";
+              $sql2 = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = 1";
+              $res2 = mysqli_query($conn, $sql2);
+            /*while ($userid = mysqli_fetch_array($res2)){
+              $userid = $userid['userid'];
+              $sql8 = "SELECT * FROM `woodklep_users` WHERE `userid` = $userid AND `userroleid` = 1";
+              $res8 = mysqli_query($conn, $sql8);
+              while ($studentid = mysqli_fetch_array($res8)) {
+                $studentid = $studentid['userid'];
+                $sql3 = "SELECT * FROM `woodklep_users` WHERE `userid` = $studentid";
+                $res3 = mysqli_query($conn, $sql3);
+                $studentinfo = mysqli_fetch_array($res3);
+                $sql4 = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $studentid";
+                $res4 = mysqli_query($conn, $sql4);
+                $studentpinfo = mysqli_fetch_array($res4);
+                if(is_null($studentpinfo['name'])||!strcmp($studentpinfo['name'], "")){
+                  $studentfullname = $studentinfo['username'];
+                }
+                else {
+                  $studentfullname = $studentpinfo["name"] . ' ' . $studentpinfo["infix"] . ' ' . $studentpinfo["lastname"];
+                }
+                echo "<p><b><a href='index.php?content=leerlingoverzicht&li=".$studentinfo['userid']."' style='color:black'>" . $studentfullname . "</a></b>
+                      <br>E-mail: " . $studentinfo['email'] . "<br>
+                      <a href='mailto:". $studentinfo['email'] . "' class='btn btn-dark'>Stuur bericht</a></p>";
+            }
+              }*/
+            }
+        ?>
       </div>
     </div>
   </div>
