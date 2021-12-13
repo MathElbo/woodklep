@@ -97,7 +97,7 @@ if (isset($_SESSION["groepselect"])){
               $sql10 = "SELECT * FROM `klas` WHERE `klas_id` = $ki";
               $res10 = mysqli_query($conn, $sql10);
               $rec10 = mysqli_fetch_array($res10);
-              echo "<b><h4 class='display-6'>".$rec10['klasnaam']."</h4></b>";
+              echo "<b><h4 class='display-6'><a href='index.php?content=klas&ki=".$ki."' style='Color:black'>".$rec10['klasnaam']."</a></h4></b>";
               $sql2 = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $ki";
               $res2 = mysqli_query($conn, $sql2);
               while($rec2 = mysqli_fetch_array($res2)) {

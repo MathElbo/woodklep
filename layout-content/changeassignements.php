@@ -78,6 +78,7 @@ if (isset($_SESSION['opdrachtselect'])) {
             </div>
         </form>
         <a href="./index.php?content=klas&ki=<?php echo $klasid ?>" class="btn btn-dark">Terug naar klas: <?php echo $classinfo['klasnaam'] ?></a>
+        <a href="./index.php?content=docentopdrachten" class="btn btn-dark">Terug naar mijn opdrachten</a>
       </div>
       <!-- Register form -->
       <div class="col-12 col-md-4">
