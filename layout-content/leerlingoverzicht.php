@@ -8,6 +8,9 @@ include("./php-scripts/functions.php");
 $id = $_SESSION["id"];
 $userrole = $_SESSION["userrole"];
 $ki = $_GET["ki"];
+$sql10 = "SELECT * FROM `klas` WHERE `klas_id` = $ki";
+$res10 = mysqli_query($conn, $sql10);
+$rec10 = mysqli_fetch_array($res10);
 
 // Opvragen leerlinginfo
 $leerlingid = $_GET["li"];
@@ -21,7 +24,7 @@ if(is_null($leerlingpinfo['name']) | !strcmp($leerlingpinfo['name'], "")) {
     $leerlingnaam = $leerlinginfo['username'];
 }
 else {
-    $leerlingnaam = $leerlingpinfo['name'];
+    $leerlingnaam = $leerlingpinfo['name']." ".$leerlingpinfo['infix']." ".$leerlingpinfo['lastname'];
 }
 ?>
 
@@ -29,6 +32,7 @@ else {
   <div class="container">
     <div class="row">
       <div class="col-12">
+        <h1 id="home" class="text-center"><?php echo $rec10['klasnaam']?></h1>
         <h2 id="home" class="text-center">Mijn leerling: <?php echo $leerlingnaam ?></h2>
         <h5 class="text-center">Op deze pagina kun je de gegevens van je leerling bekijken en wijzigen.</h5>
         <hr>
