@@ -97,7 +97,7 @@ if (isset($_SESSION["groepselect"])){
               $sql10 = "SELECT * FROM `klas` WHERE `klas_id` = $ki";
               $res10 = mysqli_query($conn, $sql10);
               $rec10 = mysqli_fetch_array($res10);
-              echo "<b><h4 class='lead'>".$rec10['klasnaam']."</h4></b>";
+              echo "<b><h4 class='display-6'>".$rec10['klasnaam']."</h4></b>";
               $sql2 = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $ki";
               $res2 = mysqli_query($conn, $sql2);
               while($rec2 = mysqli_fetch_array($res2)) {
@@ -115,7 +115,7 @@ if (isset($_SESSION["groepselect"])){
                   else {
                     $fullname = $rec12['name']. " " . $rec12['infix'] . " " . $rec12['lastname'];
                   }
-                  echo "<p><b><a href='index.php?content=leerlingoverzicht&li=".$ui."&ki=".$ki."' style='color:black'>" . $fullname. "</a></b>
+                  echo "<p class='lead'><b><a href='index.php?content=leerlingoverzicht&li=".$ui."&ki=".$ki."' style='color:black'>" . $fullname. "</a></b>
                         <br>E-mail: " . $rec11['email']. "<br>
                         <a href='mailto:". $rec11['email']. "' class='btn btn-dark'>Stuur bericht</a></p>";
                 }
