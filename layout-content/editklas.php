@@ -56,9 +56,30 @@ if (isset($_SESSION['leerlingtoevoeg'])) {
       $msg = "Klas bestaat niet";
       unset($_SESSION['leerlingtoevoeg']);
       break;
+    case 'error4':
+      $pwclasses = 'error';
+      $msg = 'Leerling bestaat niet';
+      unset($_SESSION['leerlingtoevoeg']);
   }
 }
-else {
+if (isset($_SESSION['leerlingverwijder'])) {
+  switch ($_SESSION['leerlingverwijder']) {
+    case 'success': 
+      $pwclasses = 'success';
+      $msg = "Leerling is succesvol verwijderd";
+      unset($_SESSION['leerlingverwijder']);
+      break;
+    case 'error1':
+      $pwclasses = 'error';
+      $msg = 'Leerling zit niet in de klas';
+      unset ($_SESSION['leerlingverwijder']);
+      break;
+    case 'error2':
+      $pwclasses = 'error';
+      $msg = 'Er ging iets mis met de SQL Query';
+      unset ($_SESSION['leerlingverwijder']);
+      break;
+  }
 }
 ?>
 
@@ -93,7 +114,7 @@ else {
       <!-- Register form -->
       <div class="col-12 col-md-4">
         <h3 class="display-5">Leerlingen</h3>
-        <h4 class="lead">Voeg leerlingen toe</h4>
+        <h4 class="lead">Voeg leerling toe</h4>
         <form action="index.php?content=script-addstudent" method="post">
             <div class="form-group">
             <input class="form-control" style="width:320px" type="name" name="name" id="name" placeholder="Gebruikersnaam leerling" required>
@@ -101,10 +122,10 @@ else {
             <input class="btn btn-dark" type="submit" value="Voeg leerling toe">
             </div>
         </form>
-        <h4 class="lead">Bewerk leerlingen</h4>
-        <form action="index.php?content=" method="post">
+        <h4 class="lead">Verwijder leerling</h4>
+        <form action="index.php?content=script-removeleerling" method="post">
             <div class="form-group">
-                <select class="form-control" style="width:320px" name="groep" id="groep" required>
+                <select class="form-control" style="width:320px" name="student" id="student" required>
                     <option value="">Selecteer leerling</option>
                         <?php
                             $sql1 = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $klasid";
@@ -121,7 +142,8 @@ else {
                             }
                         ?>
                 </select>
-                <input class="btn btn-dark" type="submit" value="Kies leerling">
+                <input type="hidden" value="<?php echo $klasid ?>" name="ki" id="ki">
+                <input class="btn btn-dark" type="submit" value="Verwijder leerling">
             </div>
         </form>
       </div>
