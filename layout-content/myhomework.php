@@ -51,10 +51,12 @@ if ($userinfo["userroleid"] == 1) {
             <div class="row">
                 <div class="col-12">
                     <div class="row">
-                        <table class="table table-hover col-12 col-md-5">
+                        <table class="table table-hover col-12">
                             <thead>
                                 <tr>
                                     <th scope="col">Mijn Huiswerk</th>
+                                    <th></th>
+                                    <th></th>
                                     <th></th>
                                 </tr>
                             </thead>
@@ -69,9 +71,46 @@ if ($userinfo["userroleid"] == 1) {
                                 $array = mysqli_fetch_assoc($resultv);
                                 echo '<tr><td>Te doen: </td> <td>';
                                 echo $array["opdracht_naam"];
-                                echo "</td><td><a class='btn btn-dark' href='index.php?content=myassignment&aid=";
+                                echo "</td>";
+
+
+                                $sql = "SELECT * from `opdrachtvraag_koppel`";
+                                $result = mysqli_query($conn, $sql);
+                                $l = mysqli_num_rows($result);
+                        
+                                $opdrachtcheck = array();
+                                
+                                for ($k = 1 ;$k <= $l; $k++){
+                                $sqlc = "SELECT * FROM `opdrachtvraag_koppel`
+                                WHERE ov_koppel  = '$k'";
+                                $resultc = mysqli_query($conn, $sqlc);
+                                $carray = mysqli_fetch_assoc($resultc);
+                                if ($carray["opdracht_id"] == $i){
+                                    $opdrachtcheck[] = $carray["vraag_id"];
+                                }
+                                }
+                                
+                                $o = 0;
+                                $l = count($opdrachtcheck);
+                                for ($k = 1; $k <= $l; $k++) {
+                                    $m = $k - 1;
+                                    $n = $opdrachtcheck["$m"];
+                                    $sqloc = "SELECT * from `huiswerk_vraag`
+                                    WHERE vraag_id = '$n'";
+                                    $resultoc = mysqli_query($conn, $sqloc);
+                                    $ocarray = mysqli_fetch_assoc($resultoc);
+                                    if (isset($ocarray["antwoord"])){
+                                        $o++ ;
+                                    }
+                                }
+                                if ($o == 0){
+                                    echo "<td>Te doen.</td>";
+                                } else {
+                                    echo "<td>Gedaan!</td>";
+                                } 
+                                echo "<td><a class='btn btn-dark' href='index.php?content=myassignment&aid=";
                                 echo $i;
-                                echo "'>klik hier!</a>";
+                                echo "'>klik hier!</a></td>";
                                 }
                                 ?>
                             </tbody>
