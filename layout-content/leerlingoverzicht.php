@@ -82,17 +82,25 @@ else {
                 $rec5 = mysqli_fetch_array($res5);
                 if(isset($_GET['oi'])){
                     if($_GET['oi']==$opdrachtid) {
-                        $url = "index.php?content=leerlingoverzicht&li=$leerlingid";
+                        $url = "index.php?content=leerlingoverzicht&li=$leerlingid&ki=$ki";
                     }
                     else {
-                        $url = "index.php?content=leerlingoverzicht&li=$leerlingid&oi=$opdrachtid";
+                        $url = "index.php?content=leerlingoverzicht&li=$leerlingid&oi=$opdrachtid&ki=$ki";
                     }
                 }
                 else {
-                    $url = "index.php?content=leerlingoverzicht&li=$leerlingid&oi=$opdrachtid";
+                    $url = "index.php?content=leerlingoverzicht&li=$leerlingid&oi=$opdrachtid&ki=$ki";
+                }
+                $sql9 = "SELECT * FROM `student_opdracht_voortgang` WHERE `studentid` = $leerlingid AND `opdracht_id` = $opdrachtid";
+                $res9 = mysqli_query($conn, $sql9);
+                if (mysqli_num_rows($res9)>0) {
+                  $afgemaakt = "Klaar!";
+                }
+                else {
+                  $afgemaakt = "Niet klaar";
                 }
                 echo "<tr>
-                <td><a href='".$url."' style='Color:black'><b>".$rec5['opdracht_naam']."</b></a></td><td>Afgesloten</td>
+                <td><a href='".$url."' style='Color:black'><b>".$rec5['opdracht_naam']."</b></a></td><td>".$afgemaakt."</td>
                 </tr>";
                 if(isset($_GET['oi'])) {
                     if($_GET['oi']==$opdrachtid) {
