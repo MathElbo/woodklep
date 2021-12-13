@@ -71,7 +71,37 @@ if ($userinfo["userroleid"] == 1) {
                                 echo $array["opdracht_naam"];
                                 echo "</td><td><a class='btn btn-dark' href='index.php?content=myassignment&aid=";
                                 echo $i;
-                                echo "'>klik hier!</a>";
+                                echo "'>klik hier!</a></td>";
+
+
+                                $sql = "SELECT * from `opdrachtvraag_koppel`";
+                                $result = mysqli_query($conn, $sql);
+                                $l = mysqli_num_rows($result);
+                        
+                                $opdrachtcheck = array();
+                                
+                                for ($k = 1 ;$k <= $l; $k++){
+                                $sqlc = "SELECT * FROM `opdrachtvraag_koppel`
+                                WHERE ov_koppel  = '$k'";
+                                $resultc = mysqli_query($conn, $sqlc);
+                                $carray = mysqli_fetch_assoc($resultc);
+                                if ($carray["opdracht_id"] == $i){
+                                    $opdrachtcheck[] = $carray["vraag_id"];
+                                }
+                                }
+                                
+                                $l = count("$opdrachtcheck");
+                                for ($k = 1; $k <= $l; $k++) {
+                                    $m = $k - 1;
+                                    $n = $opdrachtcheck["$m"];
+                                    $sqloc = "SELECT * from `huiswerk_vraag`
+                                    WHERE vraag_id = '$n'";
+                                    $resultoc = mysqli_query($conn, $sqoc);
+                                    $ocarray = mysqli_fetch_assoc($resultoc);
+                                    if (isset($ocarray["antwoord"])){
+                                        echo "kek.";
+                                    }
+
                                 }
                                 ?>
                             </tbody>

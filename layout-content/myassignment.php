@@ -55,40 +55,68 @@ for ($i = 1; $i <= $rows; $i++) {
         <div class="container">
             <div class="row">
                 <div class="col-12 col-md-4 offset-md-1">
-                    <form action="index.php?content=script-student-turnin&aid=
-                    <?php echo $assignmentid; ?>
-                    " method="post">
+                    <form action="
+                    <?php
+                    
+                    $sql = "SELECT * FROM `student_opdracht_voortgang`
+                    WHERE studentid = '$id' AND opdracht_id = '$assignmentid'";
+                    $result = mysqli_query($conn, $sql);
+                    $array = mysqli_fetch_assoc($result);
+                    
+                    if (empty($array)) {
+                    echo 'index.php?content=script-student-turnin&aid=';                        
+                    } else {
+                    echo 'index.php?content=script-student-redo&aid=';                        
+                    }
+                    
+
+                    echo $assignmentid;
+                    echo '" method="post">
                         <div class="form-group">
-                            <br>
-                            <?php
-                            $j = count($vraag);
-                            for ($i = 1 ;$i <= $j; $i++){
-                                $k = $i - 1;
-                                $l = $vraag["$k"];
-                                $sqlv = "SELECT * from `huiswerk_vraag`
+                            <br>';
+
+                    $j = count($vraag);
+                    for ($i = 1; $i <= $j; $i++) {
+                        $k = $i - 1;
+                        $l = $vraag["$k"];
+                        $sqlv = "SELECT * from `huiswerk_vraag`
                                 WHERE vraag_id = '$l'";
-                                $resultv = mysqli_query($conn, $sqlv);
-                                $varray = mysqli_fetch_assoc($resultv);
-                                echo '<label for="exampleFormControlInput1" class="form-label">Vraag ';
-                                echo $i;
-                                echo '</label> <br>
+                        $resultv = mysqli_query($conn, $sqlv);
+                        $varray = mysqli_fetch_assoc($resultv);
+                        echo '<label for="exampleFormControlInput1" class="form-label">Vraag ';
+                        echo $i;
+                        echo '</label> <br>
                                 <label for="exampleFormControlInput1" class="form-label">';
-                                echo $varray["vraag"];
-                                echo '</label> <input class="form-control" type="antwoord';
-                                echo $i;
-                                echo '" name="antwoord';
-                                echo $i;
-                                echo '" id="antwoord';
-                                echo $i;
-                                echo '" placeholder="Antwoord" required> <br>';
+                        echo $varray["vraag"];
+                        echo '</label> <input class="form-control" type="antwoord';
+                        echo $i;
+                        echo '" name="antwoord';
+                        echo $i;
+                        echo '" id="antwoord';
+                        echo $i;
+                        echo '" placeholder="';
+                        
+                        if (empty($array)) {
+                            echo 'Antwoord';                        
+                            } else {
+                            $sql = "SELECT * FROM `student_antwoord`
+                            WHERE studentid  = '$id' AND vraag_id = '$l'";
+                            $resulta = mysqli_query($conn, $sql);
+                            $aarray = mysqli_fetch_assoc($resulta);
+                            $antwoord = $aarray["antwoord"]; 
+                            echo  $antwoord ;                   
                             }
-                            ?>
+                        
+                        
+                        echo '" required> <br>';
+                    }
+                    ?>
                             <br>
                             <input class="btn btn-dark" type="submit" value="Lever in">
-                        </div>
-                    </form>
                 </div>
+                </form>
             </div>
         </div>
     </div>
+</div>
 </div>
