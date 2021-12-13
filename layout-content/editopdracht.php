@@ -13,6 +13,10 @@ $opdrachtid = $_GET["oi"];
 $sql1 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $opdrachtid";
 $res1 = mysqli_query($conn, $sql1);
 $opdrachtinfo = mysqli_fetch_array($res1);
+$sql5 = "SELECT * FROM `hw_klas_koppel` WHERE `hw_opdracht_id` = $opdrachtid";
+$res6 = mysqli_query($conn, $sql5);
+$rec5 = mysqli_fetch_array($res6);
+$ki = $rec5['klas_id'];
 
 if (isset($_SESSION["nieuwvraag"])){
     switch ($_SESSION["nieuwvraag"]) {
@@ -93,6 +97,7 @@ if (isset($_SESSION["bewerkvraag"])){
                 <input class="btn btn-dark" type="submit" value="Maak nieuwe vraag">
             </div>
         </form>
+        <a href="./index.php?content=klas&ki=<?php echo $ki?>" class="btn btn-dark">Terug naar mijn klas</a>
         <a href="./index.php?content=docentopdrachten" class="btn btn-dark">Terug naar mijn opdrachten</a>
       </div>
       <!-- Register form -->
