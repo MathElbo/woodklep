@@ -93,7 +93,7 @@ if (isset($_SESSION["register"])) {
             <select class="form-control" name="role" id="role" required>  
               <option value="">Selecteer soort account</option>
               <option value="Leerling">Leerling</option>
-              <option value="Ouder">Ouder</option>
+              <!--<option value="Ouder">Ouder</option>-->
               <option value="Docent">Docent</option>
             </select>
             <input class="btn btn-dark" type="submit" value="Register">
