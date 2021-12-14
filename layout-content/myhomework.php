@@ -104,9 +104,9 @@ if ($userinfo["userroleid"] == 1) {
                                     }
                                 }
                                 if ($o == 0){
-                                    echo "<td>Te doen.</td>";
+                                    echo "<td class='todo'>Te doen.</td>";
                                 } else {
-                                    echo "<td>Gedaan!</td>";
+                                    echo "<td class='done'>Gedaan!</td>";
                                 } 
                                 echo "<td><a class='btn btn-dark' href='index.php?content=myassignment&aid=";
                                 echo $i;

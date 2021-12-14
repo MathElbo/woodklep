@@ -71,3 +71,11 @@ object-fit: cover;
 
 
 }
+
+.done{
+    color: green;
+}
+
+.todo{
+    color: red;
+}
