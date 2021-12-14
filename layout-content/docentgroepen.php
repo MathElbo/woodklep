@@ -97,9 +97,29 @@ if (isset($_SESSION["groepselect"])){
               $sql10 = "SELECT * FROM `klas` WHERE `klas_id` = $ki";
               $res10 = mysqli_query($conn, $sql10);
               $rec10 = mysqli_fetch_array($res10);
-              echo "<b><h4 class='lead'>".$rec10['klasnaam']."</h4></b>";
-              $sql2 = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = 1";
+              echo "<b><h4 class='display-6'><a href='index.php?content=klas&ki=".$ki."' style='Color:black'>".$rec10['klasnaam']."</a></h4></b>";
+              $sql2 = "SELECT * FROM `user_klas_koppel` WHERE `klas_id` = $ki";
               $res2 = mysqli_query($conn, $sql2);
+              while($rec2 = mysqli_fetch_array($res2)) {
+                $ui = $rec2['userid'];
+                $sql11 = "SELECT * FROM `woodklep_users` WHERE `userid` = $ui AND `userroleid` = 1";
+                $res11 = mysqli_query($conn, $sql11);
+                if(mysqli_num_rows($res11)>0) {
+                  $rec11 = mysqli_fetch_array($res11);
+                  $sql12 = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $ui";
+                  $res12 = mysqli_query($conn, $sql12);
+                  $rec12 = mysqli_fetch_array($res12);
+                  if (is_null($rec12['name']) | !strcmp($rec12['name'], '')) {
+                    $fullname = $rec11['username'];
+                  }
+                  else {
+                    $fullname = $rec12['name']. " " . $rec12['infix'] . " " . $rec12['lastname'];
+                  }
+                  echo "<p class='lead'><b><a href='index.php?content=leerlingoverzicht&li=".$ui."&ki=".$ki."' style='color:black'>" . $fullname. "</a></b>
+                        <br>E-mail: " . $rec11['email']. "<br>
+                        <a href='mailto:". $rec11['email']. "' class='btn btn-dark'>Stuur bericht</a></p>";
+                }
+              }
             /*while ($userid = mysqli_fetch_array($res2)){
               $userid = $userid['userid'];
               $sql8 = "SELECT * FROM `woodklep_users` WHERE `userid` = $userid AND `userroleid` = 1";

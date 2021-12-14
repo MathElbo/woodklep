@@ -39,6 +39,10 @@ if ($userinfo["userroleid"] == 1) {
             }
         }
     }
+    $sql = "SELECT * FROM `woodklep_user_koppel`
+    WHERE user_id = $id";
+    $result = mysqli_query($conn, $sql);
+    $woodklepid = mysqli_fetch_assoc($result);
 }
 ?>
 
@@ -51,7 +55,8 @@ if ($userinfo["userroleid"] == 1) {
                     <div class="row">
                         <?php
                         if (isset($klas)) {
-                            echo "<div class='col-12'>
+                            if ($woodklepid) {
+                                echo "<div class='col-12'>
                             <div class='card'>
                                 <div class='card-body'>
                                     <h5 class='card-title'>Mijn huiswerk</h5>
@@ -67,83 +72,105 @@ if ($userinfo["userroleid"] == 1) {
                                     <h5 class='card-title'>Volgende Opdracht.</h5>
                                     <p class='card-text'>De eerst volgende ongemaakte opdracht!</p>";
 
-                            $j = count($opdracht);
-                            for ($i = 1; $i <= $j; $i++) {
-                                $sqlv = "SELECT * from `huiswerk_opdrachten`
+                                $j = count($opdracht);
+                                for ($i = 1; $i <= $j; $i++) {
+                                    $sqlv = "SELECT * from `huiswerk_opdrachten`
                                         WHERE opdracht_id = '$i'";
-                                $resultv = mysqli_query($conn, $sqlv);
-                                $array = mysqli_fetch_assoc($resultv);
+                                    $resultv = mysqli_query($conn, $sqlv);
+                                    $array = mysqli_fetch_assoc($resultv);
 
 
 
-                                $sql = "SELECT * from `opdrachtvraag_koppel`";
-                                $result = mysqli_query($conn, $sql);
-                                $l = mysqli_num_rows($result);
+                                    $sql = "SELECT * from `opdrachtvraag_koppel`";
+                                    $result = mysqli_query($conn, $sql);
+                                    $l = mysqli_num_rows($result);
 
-                                $opdrachtcheck = array();
+                                    $opdrachtcheck = array();
 
-                                for ($k = 1; $k <= $l; $k++) {
-                                    $sqlc = "SELECT * FROM `opdrachtvraag_koppel`
+                                    for ($k = 1; $k <= $l; $k++) {
+                                        $sqlc = "SELECT * FROM `opdrachtvraag_koppel`
                                              WHERE ov_koppel  = '$k'";
-                                    $resultc = mysqli_query($conn, $sqlc);
-                                    $carray = mysqli_fetch_assoc($resultc);
-                                    if ($carray["opdracht_id"] == $i) {
-                                        $opdrachtcheck[] = $carray["vraag_id"];
+                                        $resultc = mysqli_query($conn, $sqlc);
+                                        $carray = mysqli_fetch_assoc($resultc);
+                                        if ($carray["opdracht_id"] == $i) {
+                                            $opdrachtcheck[] = $carray["vraag_id"];
+                                        }
                                     }
-                                }
 
-                                $o = 0;
-                                $l = count($opdrachtcheck);
-                                for ($k = 1; $k <= $l; $k++) {
-                                    $m = $k - 1;
-                                    $n = $opdrachtcheck["$m"];
-                                    $sqloc = "SELECT * from `huiswerk_vraag`
+                                    $o = 0;
+                                    $l = count($opdrachtcheck);
+                                    for ($k = 1; $k <= $l; $k++) {
+                                        $m = $k - 1;
+                                        $n = $opdrachtcheck["$m"];
+                                        $sqloc = "SELECT * from `huiswerk_vraag`
                                             WHERE vraag_id = '$n'";
-                                    $resultoc = mysqli_query($conn, $sqloc);
-                                    $ocarray = mysqli_fetch_assoc($resultoc);
-                                    if (isset($ocarray["antwoord"])) {
-                                        $o++;
+                                        $resultoc = mysqli_query($conn, $sqloc);
+                                        $ocarray = mysqli_fetch_assoc($resultoc);
+                                        if (isset($ocarray["antwoord"])) {
+                                            $o++;
+                                        }
+                                    }
+                                    if ($o  == 0) {
+                                        echo "<p>Je hebt alles af</p>";
+                                    } else {
+                                        echo "<a href='./index.php?content=myassignment&aid=";
+                                        echo $i;
+                                        echo "' class='btn btn-secondary'>Klik Hier!</a>";
+                                        $i = $j;
                                     }
                                 }
-                                if ($o == 0) {
-                                } else {
-                                    echo "<a href='./index.php?content=myassignment&aid=";
-                                    echo $i;
-                                    echo "' class='btn btn-secondary'>Klik Hier!</a>";
-                                    $i = $j;
+                                echo "</div>
+                                    </div>
+                                    </div>";
+                            } else {
+                                echo '<form action="index.php?content=script-user-woodklepselect" method="post">
+                            <div class="form-group">
+                                <select class="form-control" name="woodklep" id="woodklep" required>  
+                                    <option value="">Selecteer woodklep</option>';
+                                $sql = "SELECT * FROM `woodklep`";
+                                $result = mysqli_query($conn, $sql);
+                                $rows = mysqli_num_rows($result);
+
+                                for ($i = 1; $i <= $rows; $i++) {
+                                    $sql = "SELECT * FROM `woodklep`
+                                        WHERE wk_id = '$i'";
+                                    $result = mysqli_query($conn, $sql);
+                                    $array = mysqli_fetch_assoc($result);
+                                    echo '<option value="';
+                                    echo $array["wk_id"];
+                                    echo '">';
+                                    echo $array["wk_id"];
+                                    echo '</option>';
                                 }
+                                echo '</select>
+                                <input class="btn btn-dark" type="submit" value="Register">
+                            </div>
+                        </form>';
                             }
                         } else {
-                            echo "  <div class='col-12'>
-                                        <div class='card'>
-                                            <div class='card-body'>
-                                                <h5 class='card-title'>Vind jou klas!</h5>
-                                                <p class='card-text'>Je staat nog niet geregistreerd bij een klas, Selecteer deze hieronder!</p>
-                                                <div class='input-group'>
-                                                    <select class='form-select' id='inputGroupSelect04' aria-label='Example select with button addon'>
-                                                        <option selected>Kies een onderstaande optie:</option>";
-                                                        
-                                                        $sql = "SELECT * from `klas`";
-                                                        $result = mysqli_query($conn, $sql);
-                                                        $rows = mysqli_num_rows($result);
-                                                        for ($i = 1; $i <= $rows; $i++){
-                                                            $sql = "SELECT * FROM `klas`
-                                                            WHERE klas_id = '$i'";
-                                                            $result = mysqli_query($conn, $sql);
-                                                            $klas = mysqli_fetch_assoc($result);
-                                                            echo "<option value='";
-                                                            echo $klas["klas_id"];
-                                                            echo "'>";
-                                                            echo $klas["klasnaam"];
-                                                            echo "</option>";
-                                                            }
-                                                echo "  </select>
-                                                    <button class='btn btn-dark' type='button'>Button</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <br>
-                                    </div>";
+                            echo '<form action="index.php?content=script-user-klasselect" method="post">
+                                    <div class="form-group">
+                                        <select class="form-control" name="klas" id="klas" required>  
+                                            <option value="">Selecteer Klas</option>';
+                            $sql = "SELECT * FROM `klas`";
+                            $result = mysqli_query($conn, $sql);
+                            $rows = mysqli_num_rows($result);
+
+                            for ($i = 1; $i <= $rows; $i++) {
+                                $sql = "SELECT * FROM `klas`
+                                                WHERE klas_id = '$i'";
+                                $result = mysqli_query($conn, $sql);
+                                $array = mysqli_fetch_assoc($result);
+                                echo '<option value="';
+                                echo $array["klas_id"];
+                                echo '">';
+                                echo $array["klasnaam"];
+                                echo '</option>';
+                            }
+                            echo '</select>
+                                        <input class="btn btn-dark" type="submit" value="Register">
+                                    </div>
+                                </form>';
                         }
                         ?>
 
