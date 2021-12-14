@@ -125,5 +125,5 @@ FOREIGN KEY (user_id) REFERENCES woodklep_users(wk_id)
 CREATE TABLE IF NOT EXISTS woodklep_status(
 woodklep_id INT,
 locked BOOLEAN,
-FOREIGN KEY (woodklep_id) REFERENCES woodklep(userid)
+FOREIGN KEY (woodklep_id) REFERENCES woodklep(wk_id)
 );

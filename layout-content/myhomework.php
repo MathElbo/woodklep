@@ -92,22 +92,16 @@ if ($userinfo["userroleid"] == 1) {
                                 
                                 $o = 0;
                                 $l = count($opdrachtcheck);
-                                for ($k = 1; $k <= $l; $k++) {
-                                    $m = $k - 1;
-                                    $n = $opdrachtcheck["$m"];
-                                    $sqloc = "SELECT * from `huiswerk_vraag`
-                                    WHERE vraag_id = '$n'";
-                                    $resultoc = mysqli_query($conn, $sqloc);
-                                    $ocarray = mysqli_fetch_assoc($resultoc);
-                                    if (isset($ocarray["antwoord"])){
-                                        $o++ ;
-                                    }
+                                $opdrachtid = $array['opdracht_id'];
+                                $sql1 = "SELECT * FROM `student_opdracht_voortgang` WHERE `studentid` = $id AND `opdracht_id`=$opdrachtid";
+                                $res1 = mysqli_query($conn, $sql1);
+                                if (mysqli_num_rows($res1)==0) {
+                                    echo "<td>Te doen.</td>";
                                 }
-                                if ($o == 0){
-                                    echo "<td class='todo'>Te doen.</td>";
-                                } else {
-                                    echo "<td class='done'>Gedaan!</td>";
-                                } 
+                                else {
+                                    echo "<td>Gedaan!</td>";
+                            
+                            } 
                                 echo "<td><a class='btn btn-dark' href='index.php?content=myassignment&aid=";
                                 echo $i;
                                 echo "'>klik hier!</a></td>";
