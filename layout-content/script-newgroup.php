@@ -6,7 +6,10 @@ $groepsnaam = sanitize($_POST["name"]);
 $id = $_SESSION["id"];
 
 if(!empty($groepsnaam)){
-    $sql = "INSERT INTO `klas` (`klasnaam`)
+    $sql1 = "SELECT * FROM `klas` WHERE `klasnaam`='$groepsnaam'";
+    $res1 = mysqli_query($conn, $sql1);
+    if (mysqli_num_rows($res1)==0) {
+        $sql = "INSERT INTO `klas` (`klasnaam`)
                       VALUES ('$groepsnaam')";
     $creategroup = mysqli_query($conn, $sql);
     $query = mysqli_query($conn, "SELECT MAX(klas_id) as klas_id FROM klas"); 
@@ -17,6 +20,11 @@ if(!empty($groepsnaam)){
     $creategroupteacher = mysqli_query($conn, $sql);
     $_SESSION["nieuwgroep"] = "success";
     header("Location: index.php?content=docentgroepen");
+    }
+    else {
+        $_SESSION['nieuwgroep'] = 'error2';
+        header("Location: index.php?content=docentgroepen");
+    }
 }
 else {
     $_SESSION["nieuwgroep"] = "error1";

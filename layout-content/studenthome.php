@@ -9,8 +9,8 @@
                             <div class="card">
                                 <div class="card-body">
                                     <h5 class="card-title">Mijn huiswerk</h5>
-                                    <p class="card-text">Een overzicht van al jou gemaakte huiswerk.</p>
-                                    <a href="./index.php?content=myhomework" class="btn btn-secondary">Klik Hier!</a>
+                                    <p class="card-text">Een overzicht van al jouw gemaakte huiswerk.</p>
+                                    <a href="./index.php?content=myhomework" class="btn btn-dark">Ga naar jouw huiswerk!</a>
                                 </div>
                             </div>
                             <br>
@@ -18,9 +18,9 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-body">
-                                    <h5 class="card-title">Volgende opdracht</h5>
-                                    <p class="card-text">tekst.</p>
-                                    <a href="#" class="btn btn-secondary">Go somewhere</a>
+                                    <h5 class="card-title">Mijn klassen</h5>
+                                    <p class="card-text">Een overzicht van al jouw klassen</p>
+                                    <a href="./index.php?content=studentklassen" class="btn btn-dark">Ga naar jouw klassen</a>
                                 </div>
                             </div>
                         </div>

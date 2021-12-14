@@ -122,8 +122,12 @@ if(is_null(mysqli_fetch_assoc($result))){
                 else {
                   $studentfullname = $studentpinfo["name"] . ' ' . $studentpinfo["infix"] . ' ' . $studentpinfo["lastname"];
                 }
+                $href = "";
+                if ($userrole == 3) {
+                  $href = "href='index.php?content=leerlingoverzicht&li=".$studentinfo['userid']."&ki=".$klasid."' style='color:black'";
+                }
                 echo "<tr>
-                          <td><h6><a href='index.php?content=leerlingoverzicht&li=".$studentinfo['userid']."&ki=".$klasid."' style='color:black'>" . $studentfullname . "</a></h6></td>
+                          <td><h6><a ".$href.">" . $studentfullname . "</a></h6></td>
                       </tr>
                       <tr>
                           <td>E-mail</td>
@@ -165,8 +169,12 @@ if(is_null(mysqli_fetch_assoc($result))){
                 else {
                   $vraagaantal = mysqli_num_rows($res11);
                 }
+                $href = "";
+                if ($userrole == 3) {
+                  $href = "href='index.php?content=editopdracht&io=".$rec10['opdracht_id']."' style='color:black'";
+                }
                 echo "<tr>
-                      <td><h6><a href='index.php?content=editopdracht&oi=".$rec10['opdracht_id']."' style='color:black'><b>" . $rec10['opdracht_naam'] . "</b></a></h6></td> <td>".$vraagaantal." vragen</td>
+                      <td><h6><a ".$href."><b>" . $rec10['opdracht_naam'] . "</b></a></h6></td> <td>".$vraagaantal." vragen</td>
                     </tr>";
               }
             }
@@ -178,27 +186,38 @@ if(is_null(mysqli_fetch_assoc($result))){
     <!-- Aanpassen/wijzigen -->
     <div class="row">
       <div class="col-12">
+        <?php if ($userrole == 3) {echo '
         <h2 class="text-center" id="aanpassen">Aanpassen/wijzigen</h2>
-        <hr>
+        <hr>';}
+        ?>
       </div>
       <div class="col-12">
-        <table class="table table-hover myacc-card tablelinks" width="100%">
+        <?php if ($userrole == 3){ echo"
+        <table class='table table-hover myacc-card tablelinks' width='100%'>
           <thead>
             <tr>
-              <th scope="col">Aanpassen/wijzigen</th>
+              <th scope='col'>Aanpassen/wijzigen</th>
             </tr>
-          </thead>
+          </thead>";}?>
           <tbody>
             <?php
-            if ($userrole = 3) {
+            if ($userrole == 3) {
               echo "<tr>
               <td><a href='index.php?content=editklas&ki=". $klasid ."'>Mijn klas wijzigen</a></td>
               <td><a href='index.php?content=changeassignements&ki=" . $klasid. "'>Verander opdrachten</a></td>
             </tr>";
             }
+            if ($userrole == 1) {
+              $content = "studentklassen";
+              $tekst = "klassen";
+            }
+            else {
+              $content = "docentgroepen";
+              $tekst = "leerlingen";
+            }
             ?>
             <tr>
-              <td><a href='index.php?content=docentgroepen' class='btn btn-dark'>Terug naar mijn leerlingen</a></td>
+              <td><a href='index.php?content=<?php echo $content?>' class='btn btn-dark'>Terug naar mijn <?php echo $tekst?></a></td>
             </tr>
           </tbody>
         </table>
