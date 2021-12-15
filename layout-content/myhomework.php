@@ -63,49 +63,35 @@ if ($userinfo["userroleid"] == 1) {
                             <tbody>
                                 <!-- loop opracht + link en geef Opdracht ID mee  -->
                                 <?php
-                                $j = count($opdracht);
-                                for ($i = 1 ;$i <= $j; $i++){
-                                $sqlv = "SELECT * from `huiswerk_opdrachten`
-                                WHERE opdracht_id = '$i'";
-                                $resultv = mysqli_query($conn, $sqlv);
-                                $array = mysqli_fetch_assoc($resultv);
-                                echo '<tr><td>Te doen: </td> <td>';
-                                echo $array["opdracht_naam"];
-                                echo "</td>";
-
-
-                                $sql = "SELECT * from `opdrachtvraag_koppel`";
-                                $result = mysqli_query($conn, $sql);
-                                $l = mysqli_num_rows($result);
-                        
-                                $opdrachtcheck = array();
-                                
-                                for ($k = 1 ;$k <= $l; $k++){
-                                $sqlc = "SELECT * FROM `opdrachtvraag_koppel`
-                                WHERE ov_koppel  = '$k'";
-                                $resultc = mysqli_query($conn, $sqlc);
-                                $carray = mysqli_fetch_assoc($resultc);
-                                if ($carray["opdracht_id"] == $i){
-                                    $opdrachtcheck[] = $carray["vraag_id"];
+                                $sql2 = "SELECT * FROM `user_klas_koppel` WHERE `userid` = 2";
+                                $res2 = mysqli_query($conn, $sql2);
+                                while ($rec2 = mysqli_fetch_array($res2)){
+                                    $ki = $rec2['klas_id'];
+                                    $sql5 = "SELECT * FROM `klas` WHERE `klas_id` = $ki";
+                                    $res5 = mysqli_query($conn, $sql5);
+                                    $rec5 = mysqli_fetch_array($res5);
+                                    $klasnaam = $rec5['klasnaam'];
+                                    $sql3 = "SELECT * FROM `hw_klas_koppel` WHERE `klas_id` = $ki";
+                                    $res3 = mysqli_query($conn, $sql3);
+                                    while ($rec3 = mysqli_fetch_array($res3)){
+                                        $oi = $rec3['hw_opdracht_id'];
+                                        $sql4 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $oi";
+                                        $res4 = mysqli_query($conn, $sql4);
+                                        $rec4 = mysqli_fetch_array($res4);
+                                        echo "<tr><td>Te doen: </td><td>".$klasnaam."</td><td>".$rec4['opdracht_naam']."</td>";
+                                        $sql1 = "SELECT * FROM `student_opdracht_voortgang` WHERE `studentid` = $id AND `opdracht_id`=$oi";
+                                        $res1 = mysqli_query($conn, $sql1);
+                                        if (mysqli_num_rows($res1)==0) {
+                                            echo "<td>Te doen.</td>";
+                                        }
+                                        else {
+                                            echo "<td>Gedaan!</td>";
+                                        }
+                                        echo "<td><a class='btn btn-dark' href='index.php?content=myassignment&aid=";
+                                        echo $oi;
+                                        echo "'>Maak opdracht!</a></td>";
                                 }
-                                }
-                                
-                                $o = 0;
-                                $l = count($opdrachtcheck);
-                                $opdrachtid = $array['opdracht_id'];
-                                $sql1 = "SELECT * FROM `student_opdracht_voortgang` WHERE `studentid` = $id AND `opdracht_id`=$opdrachtid";
-                                $res1 = mysqli_query($conn, $sql1);
-                                if (mysqli_num_rows($res1)==0) {
-                                    echo "<td>Te doen.</td>";
-                                }
-                                else {
-                                    echo "<td>Gedaan!</td>";
-                            
-                            } 
-                                echo "<td><a class='btn btn-dark' href='index.php?content=myassignment&aid=";
-                                echo $i;
-                                echo "'>klik hier!</a></td>";
-                                }
+                            }
                                 ?>
                             </tbody>
                         </table>
