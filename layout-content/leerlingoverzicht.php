@@ -56,14 +56,11 @@ else {
                 <td><b>E-mail</b></td><td><?php echo $leerlinginfo['email']?></td>
             </tr>
             <tr>
-              <td><b>Gekoppelde Woodkleps</b></td><td></td>
-            </tr>
-            <tr>
                 <td><a href='mailto:<?php echo $leerlinginfo['email']?>' class='btn btn-dark'>Stuur bericht</a></td>
             </tr>
-            <tr>
+            <!--<tr>
             <td><a href='index.php?content=klas&ki=<?php echo $ki?>' class='btn btn-dark'>Terug naar klas</a></td>
-            </tr>
+            </tr>-->
         </tbody>
       </table>
       <!-- Leerlingen -->
@@ -141,6 +138,54 @@ else {
             }
         //}
         ?>
+        </tbody>
+      </table>
+      <table class="table table-hover col-12 col-md-5">
+        <thead>
+          <tr>
+            <th scope="col"><h3>Woodkleps</h3></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php
+          $sql11 = "SELECT * FROM `wk_leerling_koppel` WHERE `leerlingid` = $leerlingid";
+          $res11 = mysqli_query($conn, $sql11);
+          while ($rec11 = mysqli_fetch_array($res11)) {
+            $wkid = $rec11['wk_id'];
+            $sql12 = "SELECT * FROM `woodklep_status` WHERE `woodklep_id` = $wkid";
+            $res12 = mysqli_query($conn, $sql12);
+            $rec12 = mysqli_fetch_array($res12);
+            if(!$rec12['locked']) {
+              $status = "Dicht";
+            }
+            else {
+              $status = "Open";
+            }
+            if (is_null($rec11['wkopdracht'])) {
+              $kopdracht = "";
+            }
+            else {
+              $kopdracht = $rec11['wkopdracht'];
+              $sql13 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $kopdracht";
+              $res13 = mysqli_query($conn, $sql13);
+              $rec13 = mysqli_fetch_array($res13);
+              $kopdracht = $rec13['opdracht_naam'];
+            }
+            echo "<tr>
+                    <td><b>Woodklepnaam</b></td><td>".$rec11['wkname']."</td>
+                  </tr>
+                  <tr>
+                    <td><b>Status</b></td><td>".$status."</td>
+                  </tr>
+                  <tr>
+                    <td><b>Gekoppelde opdracht</b></td><td>".$kopdracht."</td>
+                  </tr>";
+          }
+          ?>
+            <tr>
+            <td><a href='index.php?content=klas&ki=<?php echo $ki?>' class='btn btn-dark'>Terug naar klas</a></td>
+            </tr>
         </tbody>
       </table>
     </div>
