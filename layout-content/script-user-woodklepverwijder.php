@@ -12,6 +12,8 @@ if(!empty($res1)) {
     $sql2 = "DELETE FROM `wk_leerling_koppel` WHERE `wk_id` = $wkid AND `leerlingid` = $id";
     $res2 = mysqli_query($conn,$sql2);
     if ($res2) {
+        $sql3 = "UPDATE `woodklep_status` SET `locked` = 0 WHERE `woodklep_id` = $wkid";
+        $res3 = mysqli_query($conn, $sql3);
         $_SESSION['woodklepverwijder'] = 'success';
         header('Location: index.php?content=mywoodkleps');
     }
