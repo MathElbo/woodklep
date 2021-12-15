@@ -107,15 +107,21 @@ if (isset($_SESSION['woodklepverwijder'])) {
               $res2 = mysqli_query($conn, $sql2);
               $rec2 = mysqli_fetch_array($res2);
               $wkopdracht = $rec1['wkopdracht'];
-              $sql3 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $wkopdracht";
+              if(is_null($wkopdracht)) {
+                $status = "Dicht";
+                $oname = 'Geen';
+              }
+              else {
+                $sql3 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $wkopdracht";
               $res3 = mysqli_query($conn, $sql3);
               $rec3 = mysqli_fetch_array($res3);
               $oname = $rec3['opdracht_naam'];
               if ($rec2['locked']==0) {
-                  $status = "Dicht";
+                $status = "Dicht";
               }
               else {
-                  $status = "Open";
+                $status = "Open";
+              }
               }
               echo "<p class='lead'><b><a>" . $wkname. "</a></b>
                     <br>Status: " . $status. "<br>
