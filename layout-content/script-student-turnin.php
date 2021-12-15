@@ -53,5 +53,18 @@ $result = mysqli_query($conn, $sql);
 if ($result){};
 
 
+$sql = "SELECT * FROM `woodklep_user_koppel`
+WHERE user_id = '$id'";
+$result = mysqli_query($conn, $sql);
+$array = mysqli_fetch_assoc($result);
+$wkid = $array["woodklep_id"];
+
+
+$sql = "INSERT INTO `woodklep_status`
+(`woodklep_id`,`locked`)
+VALUES ($wkid,1)";
+$result = mysqli_query($conn, $sql);
+if ($result){};
+
 header("Location: index.php?content=myassignment&aid=$assignmentid")
 ?>

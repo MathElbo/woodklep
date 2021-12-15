@@ -69,7 +69,7 @@ if ($userinfo["userroleid"] == 1) {
                                 WHERE opdracht_id = '$i'";
                                 $resultv = mysqli_query($conn, $sqlv);
                                 $array = mysqli_fetch_assoc($resultv);
-                                echo '<tr> <td>';
+                                echo '<tr><td>Te doen: </td> <td>';
                                 echo $array["opdracht_naam"];
                                 echo "</td>";
 
@@ -92,16 +92,6 @@ if ($userinfo["userroleid"] == 1) {
                                 
                                 $o = 0;
                                 $l = count($opdrachtcheck);
-                                /*for ($k = 1; $k <= $l; $k++) {
-                                    $m = $k - 1;
-                                    $n = $opdrachtcheck["$m"];
-                                    $sqloc = "SELECT * FROM `huiswerk_vraag` WHERE `vraag_id` = $n";
-                                    $resultoc = mysqli_query($conn, $sqloc);
-                                    $ocarray = mysqli_fetch_assoc($resultoc);
-                                    if (isset($ocarray["antwoord"])){
-                                        $o++ ;
-                                    }
-                                }*/
                                 $opdrachtid = $array['opdracht_id'];
                                 $sql1 = "SELECT * FROM `student_opdracht_voortgang` WHERE `studentid` = $id AND `opdracht_id`=$opdrachtid";
                                 $res1 = mysqli_query($conn, $sql1);
@@ -110,13 +100,8 @@ if ($userinfo["userroleid"] == 1) {
                                 }
                                 else {
                                     echo "<td>Gedaan!</td>";
-                                }
-                                /*if ($o == 0){
-                                    echo "<td>Te doen.</td>";
-                                } 
-                                else {
-                                    echo "<td>Gedaan!".$o."</td>";
-                                } */
+                            
+                            } 
                                 echo "<td><a class='btn btn-dark' href='index.php?content=myassignment&aid=";
                                 echo $i;
                                 echo "'>klik hier!</a></td>";

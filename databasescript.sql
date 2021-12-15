@@ -113,3 +113,17 @@ PRIMARY KEY (sov_id),
 FOREIGN KEY (studentid) REFERENCES woodklep_users(userid),
 FOREIGN KEY (opdracht_id) REFERENCES huiswerk_opdrachten(opdracht_id)
 );
+
+
+CREATE TABLE IF NOT EXISTS woodklep_user_koppel(
+woodklep_id INT,
+user_id INT,
+FOREIGN KEY (woodklep_id) REFERENCES woodklep(userid),
+FOREIGN KEY (user_id) REFERENCES woodklep_users(wk_id)
+);
+
+CREATE TABLE IF NOT EXISTS woodklep_status(
+woodklep_id INT,
+locked BOOLEAN,
+FOREIGN KEY (woodklep_id) REFERENCES woodklep(wk_id)
+);
