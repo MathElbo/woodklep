@@ -110,7 +110,7 @@ for ($i = 1; $i <= $rows; $i++) {
                             <br>
                             <input class="btn btn-dark" type="submit" value="Lever in">
                             <br>
-                            <a href="./index.php?content=myhomework" class="btn btn-dark">Terug naar mijn huiswerk</a>
+                            <br><a href="./index.php?content=myhomework" class="btn btn-dark">Terug naar mijn huiswerk</a>
                 </div>
                 </form>
             </div>
