@@ -90,9 +90,9 @@ for ($i = 1; $i <= $rows; $i++) {
                         echo $i;
                         echo '" id="antwoord';
                         echo $i;
-                        echo '" value="';
                         
                         if (empty($array)) {
+                            echo '" placeholder="';
                             echo 'Antwoord';                        
                             } else {
                             $sql = "SELECT * FROM `student_antwoord`
@@ -100,6 +100,7 @@ for ($i = 1; $i <= $rows; $i++) {
                             $resulta = mysqli_query($conn, $sql);
                             $aarray = mysqli_fetch_assoc($resulta);
                             $antwoord = $aarray["antwoord"]; 
+                            echo '" value="';
                             echo  $antwoord ;                   
                             }
                         
@@ -110,7 +111,7 @@ for ($i = 1; $i <= $rows; $i++) {
                             <br>
                             <input class="btn btn-dark" type="submit" value="Lever in">
                             <br>
-                            <a href="./index.php?content=myhomework" class="btn btn-dark">Terug naar mijn huiswerk</a>
+                            <br><a href="./index.php?content=myhomework" class="btn btn-dark">Terug naar mijn huiswerk</a>
                 </div>
                 </form>
             </div>
