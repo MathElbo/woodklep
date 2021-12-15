@@ -14,8 +14,13 @@ if (isset($_SESSION["nieuwgroep"])){
       break;
     case "error1":
       $pwclasses = "error";
-      $msg = "U heeft geen groepsnaam ingevuld!";
+      $msg = "U heeft geen klasnaam ingevuld!";
       unset($_SESSION["nieuwgroep"]);
+      break;
+    case "error2":
+      $pwclasses = 'error';
+      $msg = 'Klas met klasnaam bestaat al';
+      unset($_SESSION['nieuwgroep']);
       break;
   }
 }
@@ -81,7 +86,7 @@ if (isset($_SESSION["groepselect"])){
         <!-- Nieuwe groep -->
         <form action="index.php?content=script-newgroup" method="post">
           <div class="form-group">
-            <input class="form-control" style="width:320px" type="name" name="name" id="name" placeholder="Groepsnaam" required>
+            <input class="form-control" style="width:320px" type="name" name="name" id="name" placeholder="Klasnaam" required>
             <input class="btn btn-dark" style="width:320px"type="submit" value="Maak nieuwe groep">
           </div>
         </form>
