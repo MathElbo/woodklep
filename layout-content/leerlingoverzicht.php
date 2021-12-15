@@ -26,6 +26,31 @@ if(is_null($leerlingpinfo['name']) | !strcmp($leerlingpinfo['name'], "")) {
 else {
     $leerlingnaam = $leerlingpinfo['name']." ".$leerlingpinfo['infix']." ".$leerlingpinfo['lastname'];
 }
+
+if (isset($_SESSION["koppelopdracht"])) {
+  switch ($_SESSION["koppelopdracht"]) {
+    case "error1":
+      $pwclasses = "error";
+      $msg = "Huiswerkopdracht bestaat niet.";
+      unset($_SESSION["koppelopdracht"]);
+      break;
+    case "success":
+      $pwclasses = "success";
+      $msg = "De gekoppelde opdracht is succesvol veranderd.";
+      unset($_SESSION["koppelopdracht"]);
+      break;
+    case 'error2':
+      $pwclasses = 'error';
+      $msg = 'De huiswerkopdracht is al gekoppeld';
+      unset ($_SESSION['koppelopdracht']);
+      break;
+    case 'error3':
+      $pwclasses = 'error';
+      $msg = 'Er ging iets mis in de SQL Query';
+      unset ($_SESSION['koppelopdracht']);
+      break;
+    }
+  }
 ?>
 
 <div class="container-fluid">
@@ -38,7 +63,13 @@ else {
         <hr>
       </div>
     </div>
-
+    <div class="<?php if (isset($pwclasses)) echo "col-12 col-md-5 offset-md-1 display-message"; ?>">
+        <?php
+          if (isset($msg)) {
+            echo "<p class='". $pwclasses ."'>". $msg ."</p>";
+          }
+        ?>
+      </div>
     <div class="row">
       <!-- Informatie leraren -->
       <table class="table table-hover col-12 col-md-5">
@@ -163,7 +194,7 @@ else {
               $status = "Open";
             }
             if (is_null($rec11['wkopdracht'])) {
-              $kopdracht = "";
+              $kopdracht = "-";
             }
             else {
               $kopdracht = $rec11['wkopdracht'];
@@ -180,7 +211,33 @@ else {
                   </tr>
                   <tr>
                     <td><b>Gekoppelde opdracht</b></td><td>".$kopdracht."</td>
-                  </tr>";
+                  </tr>
+                  <tr>
+                    <td><b>Andere opdracht koppelen</b><td><form action='index.php?content=script-koppelwko' method='post'>
+                    <select class='form-control' style='width:320px' name='opdracht' id='opdracht' required>
+                      <option value=''>Selecteer opdracht</option>";
+                      $sql14 = "SELECT * FROM `hw_klas_koppel` WHERE `klas_id` = $ki";
+                      $res14 = mysqli_query($conn, $sql14);
+                      while($rec14 = mysqli_fetch_array($res14)) {
+                        $opdr = $rec14['hw_opdracht_id'];
+                        $sql15 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $opdr";
+                        $res15 = mysqli_query($conn, $sql15);
+                        $rec15 = mysqli_fetch_array($res15);
+                        echo "<option value='".$opdr."'>".$rec15['opdracht_naam']."</option>";
+                      }
+                      if(mysqli_num_rows($res14)>0) {
+                        $knop = "<br><input class='btn btn-dark' type='submit' value='Kies opdracht'></a>";
+                      }
+                      else {
+                        $knop="";
+                      }
+                      echo "</select>
+                      ".$knop."
+                      <input type='hidden' value='".$ki."' name='ki' id='ki'>
+                      <input type='hidden' value='".$leerlingid."' name='li' id='li'>
+                      <input type='hidden' value='".$wkid."' name='wk' id='wk'>
+                     </form></td>
+                    </tr>";
           }
           ?>
             <tr>
