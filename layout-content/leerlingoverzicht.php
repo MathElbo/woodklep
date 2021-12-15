@@ -56,6 +56,9 @@ else {
                 <td><b>E-mail</b></td><td><?php echo $leerlinginfo['email']?></td>
             </tr>
             <tr>
+              <td><b>Gekoppelde Woodkleps</b></td><td></td>
+            </tr>
+            <tr>
                 <td><a href='mailto:<?php echo $leerlinginfo['email']?>' class='btn btn-dark'>Stuur bericht</a></td>
             </tr>
             <tr>

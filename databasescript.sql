@@ -94,8 +94,10 @@ CREATE TABLE IF NOT EXISTS wk_leerling_koppel (
 wk_id INT,
 leerlingid INT,
 wkname VARCHAR(55),
+wkopdracht INT,
 FOREIGN KEY (wk_id) REFERENCES woodklep(wk_id),
-FOREIGN KEY (leerlingid) REFERENCES woodklep_users(userid)
+FOREIGN KEY (leerlingid) REFERENCES woodklep_users(userid),
+FOREIGN KEY (wkopdracht) REFERENCES huiswerk_opdrachten (opdracht_id)
 );
 
 CREATE TABLE IF NOT EXISTS student_antwoord (

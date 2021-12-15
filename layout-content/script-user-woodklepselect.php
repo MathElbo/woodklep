@@ -16,7 +16,7 @@ if (mysqli_num_rows($res1)>0) {
     $sql2 = "SELECT * FROM `wk_leerling_koppel` WHERE `wk_id` = $wi";
     $res2 = mysqli_query($conn, $sql2);
     if(!mysqli_num_rows($res2)) {
-        $sql3 = "INSERT INTO `wk_leerling_koppel` VALUES ($wi, $id, '$name')";
+        $sql3 = "INSERT INTO `wk_leerling_koppel` VALUES ($wi, $id, '$name', NULL)";
         $res3 = mysqli_query($conn, $sql3);
         if($res3) {
             //Succesvol
