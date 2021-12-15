@@ -77,13 +77,6 @@ FOREIGN KEY (userid) REFERENCES woodklep_users(userid),
 FOREIGN KEY (klas_id) REFERENCES klas(klas_id)
 );
 
-CREATE TABLE IF NOT EXISTS ouder_student_koppel (
-parentid INT,
-studentid INT,
-FOREIGN KEY (parentid) REFERENCES woodklep_users(userid),
-FOREIGN KEY (studentid) REFERENCES woodklep_users(userid)
-);
-
 CREATE TABLE IF NOT EXISTS woodklep (
 wk_id INT NOT NULL AUTO_INCREMENT,
 wkcode CHAR(10),
