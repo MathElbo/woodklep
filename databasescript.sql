@@ -86,14 +86,16 @@ FOREIGN KEY (studentid) REFERENCES woodklep_users(userid)
 
 CREATE TABLE IF NOT EXISTS woodklep (
 wk_id INT NOT NULL AUTO_INCREMENT,
+wkcode CHAR(10),
 PRIMARY KEY (wk_id)
 );
 
-CREATE TABLE IF NOT EXISTS wk_ouder_koppel (
+CREATE TABLE IF NOT EXISTS wk_leerling_koppel (
 wk_id INT,
-parentid INT,
+leerlingid INT,
+wkname VARCHAR(55),
 FOREIGN KEY (wk_id) REFERENCES woodklep(wk_id),
-FOREIGN KEY (parentid) REFERENCES woodklep_users(userid)
+FOREIGN KEY (leerlingid) REFERENCES woodklep_users(userid)
 );
 
 CREATE TABLE IF NOT EXISTS student_antwoord (
@@ -112,14 +114,6 @@ gemaakt BOOLEAN,
 PRIMARY KEY (sov_id),
 FOREIGN KEY (studentid) REFERENCES woodklep_users(userid),
 FOREIGN KEY (opdracht_id) REFERENCES huiswerk_opdrachten(opdracht_id)
-);
-
-
-CREATE TABLE IF NOT EXISTS woodklep_user_koppel(
-woodklep_id INT,
-user_id INT,
-FOREIGN KEY (woodklep_id) REFERENCES woodklep(userid),
-FOREIGN KEY (user_id) REFERENCES woodklep_users(wk_id)
 );
 
 CREATE TABLE IF NOT EXISTS woodklep_status(
