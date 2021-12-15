@@ -13,11 +13,11 @@ $resultu = getSpecificInfo('woodklep_users', 'userid', $id);
 $userinfo = mysqli_fetch_assoc($resultu);
 
 // get assignment_id
-if (isset($_GET["aid"])) {
-    $assignmentid = $_GET["aid"];
-} else {
-    echo "error";
-}
+$assignmentid = $_GET["aid"];
+$sql2 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $assignmentid";
+$res2 = mysqli_query($conn, $sql2);
+$rec2 = mysqli_fetch_array($res2);
+$oname = $rec2['opdracht_naam'];
 
 
 //count rows
@@ -49,7 +49,7 @@ for ($i = 1; $i <= $rows; $i++) {
     <div class="container">
         <h1 class="display-4">opdracht
             <?php
-            echo $assignmentid;
+            echo $oname;
             ?>
         </h1>
         <div class="container">
@@ -57,19 +57,15 @@ for ($i = 1; $i <= $rows; $i++) {
                 <div class="col-12 col-md-4 offset-md-1">
                     <form action="
                     <?php
-                    
                     $sql = "SELECT * FROM `student_opdracht_voortgang`
                     WHERE studentid = '$id' AND opdracht_id = '$assignmentid'";
                     $result = mysqli_query($conn, $sql);
                     $array = mysqli_fetch_assoc($result);
-                    
                     if (empty($array)) {
                     echo 'index.php?content=script-student-turnin&aid=';                        
                     } else {
                     echo 'index.php?content=script-student-redo&aid=';                        
                     }
-                    
-
                     echo $assignmentid;
                     echo '" method="post">
                         <div class="form-group">
@@ -94,7 +90,7 @@ for ($i = 1; $i <= $rows; $i++) {
                         echo $i;
                         echo '" id="antwoord';
                         echo $i;
-                        echo '" placeholder="';
+                        echo '" value="';
                         
                         if (empty($array)) {
                             echo 'Antwoord';                        
@@ -113,6 +109,8 @@ for ($i = 1; $i <= $rows; $i++) {
                     ?>
                             <br>
                             <input class="btn btn-dark" type="submit" value="Lever in">
+                            <br>
+                            <a href="./index.php?content=myhomework" class="btn btn-dark">Terug naar mijn huiswerk</a>
                 </div>
                 </form>
             </div>
