@@ -57,7 +57,7 @@ $res2 = mysqli_query($conn, $sql2);
 $rec2 = mysqli_fetch_array($res2);
 $wkid = $rec2['wk_id'];
 
-$sql3 = "UPDATE `woodklep_status` SET `locked` = 1 WHERE `woodklep_id` = $wkid"
+$sql3 = "UPDATE `woodklep_status` SET `locked` = 1 WHERE `woodklep_id` = $wkid";
 $res3 = mysqli_query($conn, $sql3);
 if ($res3){};
 
