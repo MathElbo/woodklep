@@ -52,19 +52,14 @@ VALUES (NULL,$id,$assignmentid,1)";
 $result = mysqli_query($conn, $sql);
 if ($result){};
 
+$sql2 = "SELECT * FROM `wk_leerling_koppel` WHERE `leerlingid` = $id";
+$res2 = mysqli_query($conn, $sql2);
+$rec2 = mysqli_fetch_array($res2);
+$wkid = $rec2['wk_id'];
 
-$sql = "SELECT * FROM `woodklep_user_koppel`
-WHERE user_id = '$id'";
-$result = mysqli_query($conn, $sql);
-$array = mysqli_fetch_assoc($result);
-$wkid = $array["woodklep_id"];
-
-
-$sql = "INSERT INTO `woodklep_status`
-(`woodklep_id`,`locked`)
-VALUES ($wkid,1)";
-$result = mysqli_query($conn, $sql);
-if ($result){};
+$sql3 = "UPDATE `woodklep_status` SET `locked` = 1 WHERE `woodklep_id` = $wkid"
+$res3 = mysqli_query($conn, $sql3);
+if ($res3){};
 
 header("Location: index.php?content=myassignment&aid=$assignmentid")
 ?>
