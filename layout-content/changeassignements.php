@@ -67,7 +67,7 @@ if (isset($_SESSION['opdrachtselect'])) {
       <h2 class="display-4"><?php echo $classinfo['klasnaam']?></h2>
       </div>
       <div class="col-12 col-md-4 offset-md-1">
-        <h3 class="display-5">Nieuwe opdracht</h3>
+        <h3 class="display-5">Verander opdrachten</h3>
         <!-- Naamveranderen -->
         <h4 class="lead">Nieuwe opdracht</h4>
         <form action="index.php?content=script-newassignment" method="post">
@@ -77,8 +77,30 @@ if (isset($_SESSION['opdrachtselect'])) {
                 <input class="btn btn-dark" type="submit" value="Maak nieuwe opdracht">
             </div>
         </form>
-        <a href="./index.php?content=klas&ki=<?php echo $klasid ?>" class="btn btn-dark">Terug naar klas: <?php echo $classinfo['klasnaam'] ?></a>
-        <a href="./index.php?content=docentopdrachten" class="btn btn-dark">Terug naar mijn opdrachten</a>
+        <!--<h4 class="lead">Verwijder opdracht</h4>
+        <form action="index.php?content=script-deleteassignment" method="post">
+            <div class="form-group">
+                <select class="form-control" style="width:320px" name="oi" id="oi" required>
+                <option value="">Selecteer opdracht</option>
+                    <?php
+                        /*$sql9 = "SELECT * FROM `hw_klas_koppel` WHERE `klas_id` = $klasid";
+                        $res9 = mysqli_query($conn, $sql9);
+                        while ($huiswerkid = mysqli_fetch_array($res9)){
+                          $huiswerkid = $huiswerkid['hw_opdracht_id'];
+                          $sql10 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $huiswerkid";
+                          $res10 = mysqli_query($conn, $sql10);
+                          while ($rec10 = mysqli_fetch_array($res10)) {
+                            echo "<option value='".$rec10['opdracht_id']."'>" .$rec10['opdracht_naam'] ."</option>";
+                          }
+                        }*/
+                    ?> 
+                </select>
+                <input type="hidden" value="<?php echo $klasid ?>" name="ki" id="ki">
+                <input class="btn btn-dark" type="submit" value="Maak nieuwe opdracht">
+            </div>
+        </form>-->
+        <a href="./index.php?content=klas&ki=<?php echo $klasid ?>" class="btn btn-dark">Terug naar klas: <?php echo $classinfo['klasnaam'] ?></a><br>
+        <br><a href="./index.php?content=docentopdrachten" class="btn btn-dark">Terug naar mijn opdrachten</a>
       </div>
       <!-- Register form -->
       <div class="col-12 col-md-4">
