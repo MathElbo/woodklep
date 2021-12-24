@@ -19,6 +19,13 @@ if(!empty($vraag)){
                 $sql3 = "UPDATE `student_opdracht_voortgang` SET `gemaakt` = 0 WHERE `opdracht_id` = $opdrachtid";
                 $res3 = mysqli_query($conn, $sql3);
                 if ($res3) {
+                    $sql4 = "SELECT * FROM `wk_leerling_koppel` WHERE `wkopdracht` = $opdrachtid";
+                    $res4 = mysqli_query($conn, $sql4);
+                    while ($rec4 = mysqli_fetch_array($res4)) {
+                        $wi = $rec4['wk_id'];
+                        $sql5 = "UPDATE `woodklep_status` SET `locked` = 0 WHERE `woodklep_id` = $wi";
+                        $res5 = mysqli_query($conn, $sql5);
+                    }
                     $_SESSION["bewerkvraag"] = "success";
                     header("Location: index.php?content=editopdracht&oi=$opdrachtid");
                 }
