@@ -9,7 +9,7 @@ $id = $_SESSION["id"];
 $userrole = $_SESSION["userrole"];
 
 // Opvragen opdrachtinfo
-$opdrachtid = $_GET["oi"];
+$opdrachtid = $_GET["io"];
 $sql1 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $opdrachtid";
 $res1 = mysqli_query($conn, $sql1);
 $opdrachtinfo = mysqli_fetch_array($res1);
@@ -108,12 +108,12 @@ if (isset($_SESSION["bewerkvraag"])){
         $sql2 = "SELECT * FROM `opdrachtvraag_koppel` WHERE `opdracht_id` = $opdrachtid";
         $res2 = mysqli_query($conn, $sql2);
         while ($rec2 = mysqli_fetch_array($res2)) {
-            $vraagid = $rec2['vraag_id'];
-            $sql3 = "SELECT * FROM `huiswerk_vraag` WHERE `vraag_id` = $vraagid";
-            $res3 = mysqli_query($conn, $sql3);
-            while ($rec3 = mysqli_fetch_array($res3)) {
-                echo "<a href='index.php?content=editopdracht&oi=".$opdrachtid."&vi=".$vraagid."' style='color:black'><p><b>Vraag:</b> ". $rec3['vraag'] . "<br><b>Antwoord:</b> ". $rec3['antwoord'] . "</p></a>";
-            }
+          $vraagid = $rec2['vraag_id'];
+          $sql3 = "SELECT * FROM `huiswerk_vraag` WHERE `vraag_id` = $vraagid";
+          $res3 = mysqli_query($conn, $sql3);
+          while ($rec3 = mysqli_fetch_array($res3)) {
+            echo "<a href='index.php?content=editopdracht&oi=".$opdrachtid."&vi=".$vraagid."' style='color:black'><p><b>Vraag:</b> ". $rec3['vraag'] . "<br><b>Antwoord:</b> ". $rec3['antwoord'] . "</p></a>";
+          }
         }
         if(isset($_GET['vi'])){
             $vraagsetid = $_GET['vi'];
