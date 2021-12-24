@@ -98,10 +98,16 @@ for ($i = 1; $i <= $rows; $i++) {
                             $sql = "SELECT * FROM `student_antwoord`
                             WHERE studentid  = '$id' AND vraag_id = '$l'";
                             $resulta = mysqli_query($conn, $sql);
-                            $aarray = mysqli_fetch_assoc($resulta);
-                            $antwoord = $aarray["antwoord"]; 
-                            echo '" value="';
-                            echo  $antwoord ;                   
+                            if (mysqli_num_rows($resulta)>0) {
+                                $aarray = mysqli_fetch_assoc($resulta);
+                                $antwoord = $aarray["antwoord"]; 
+                                echo '" value="';
+                                echo  $antwoord ;  
+                            }
+                            else {
+                                echo '" placeholder="';
+                                echo 'Antwoord';   
+                            }         
                             }
                         
                         

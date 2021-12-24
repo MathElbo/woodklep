@@ -85,7 +85,13 @@ if ($userinfo["userroleid"] == 1) {
                                             echo "<td>Te doen.</td>";
                                         }
                                         else {
-                                            echo "<td>Gedaan!</td>";
+                                            $rec1 = mysqli_fetch_array($res1);
+                                            if ($rec1['gemaakt']==1) {
+                                                echo "<td>Gedaan!</td>";
+                                            }
+                                            else {
+                                                echo "<td>Te doen.</td>";
+                                            }
                                         }
                                         echo "<td><a class='btn btn-dark' href='index.php?content=myassignment&aid=";
                                         echo $oi;
