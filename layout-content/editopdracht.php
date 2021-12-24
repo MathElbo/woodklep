@@ -9,7 +9,7 @@ $id = $_SESSION["id"];
 $userrole = $_SESSION["userrole"];
 
 // Opvragen opdrachtinfo
-$opdrachtid = $_GET["io"];
+$opdrachtid = $_GET["oi"];
 $sql1 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $opdrachtid";
 $res1 = mysqli_query($conn, $sql1);
 $opdrachtinfo = mysqli_fetch_array($res1);
