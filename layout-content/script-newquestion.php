@@ -18,8 +18,17 @@ if(!empty($vraag)){
             $sql2 = "INSERT INTO `opdrachtvraag_koppel` (`ov_koppel`, `opdracht_id`, `vraag_id`) VALUES (NULL, $opdrachtid, $vraagid)";
             $res2 = mysqli_query($conn, $sql2);
             if($res2) {
-                $_SESSION["nieuwvraag"] = "success";
-                header("Location: index.php?content=editopdracht&oi=$opdrachtid");
+                $sql4 = "UPDATE `student_opdracht_voortgang` SET `gemaakt` = 0 WHERE `opdracht_id` = $opdrachtid";
+                $res4 = mysqli_query($conn, $sql4);
+                if ($res4) {
+                    $_SESSION["nieuwvraag"] = "success";
+                    header("Location: index.php?content=editopdracht&oi=$opdrachtid");   
+                }
+                else {
+                    //SQL query mislukt
+                    $_SESSION['nieuwvraag'] = "error3";
+                    header("Location: index.php?content=editopdracht&oi=$opdrachtid");
+                }
             }
             else {
                 //SQL query mislukt
