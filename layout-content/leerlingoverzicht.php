@@ -51,6 +51,35 @@ if (isset($_SESSION["koppelopdracht"])) {
       break;
     }
   }
+if (isset($_SESSION['wkopendicht'])) {
+  switch ($_SESSION['wkopendicht']) {
+    case 'success1':
+      $pwclasses = 'success';
+      $msg = "De woodklep is succesvol geopend";
+      unset ($_SESSION['wkopendicht']);
+      break;
+    case 'success2':
+      $pwclasses = 'success';
+      $msg = 'De woodklep is succesvol gesloten';
+      unset ($_SESSION['wkopendicht']);
+      break;
+    case 'error1':
+      $pwclasses = 'error';
+      $msg = 'De woodklep kon niet geopend worden';
+      unset ($_SESSION['wkopendicht']);
+      break;
+    case 'error2':
+      $pwclasses = 'error';
+      $msg = 'De woodklep kon niet gesloten worden';
+      unset ($_SESSION['wkopendicht']);
+      break;
+    case 'error3':
+      $pwclasses = 'error';
+      $msg = 'Er ging iets mis';
+      unset($_SESSION['wkopendicht']);
+      break;
+  }
+}
 ?>
 
 <div class="container-fluid">
@@ -213,13 +242,13 @@ if (isset($_SESSION["koppelopdracht"])) {
                     <td><b>Woodklepnaam</b></td><td>".$rec11['wkname']."</td>
                   </tr>
                   <tr>
-                    <td><b>Status</b></td><td>".$status."</td>
+                    <td>Status</td><td>".$status."</td>
                   </tr>
                   <tr>
-                    <td><b>Gekoppelde opdracht</b></td><td>".$kopdracht."</td>
+                    <td>Gekoppelde opdracht</td><td>".$kopdracht."</td>
                   </tr>
                   <tr>
-                    <td><b>Andere opdracht koppelen</b><td><form action='index.php?content=script-koppelwko' method='post'>
+                    <td>Andere opdracht koppelen<td><form action='index.php?content=script-koppelwko' method='post'>
                     <select class='form-control' style='width:320px' name='opdracht' id='opdracht' required>
                       <option value=''>Selecteer opdracht</option>";
                       $sql14 = "SELECT * FROM `hw_klas_koppel` WHERE `klas_id` = $ki";
@@ -237,12 +266,28 @@ if (isset($_SESSION["koppelopdracht"])) {
                       else {
                         $knop="";
                       }
+                      if (!$rec12['locked']) {
+                        //Woodklep dicht
+                        $odknop = "<input class='btn btn-dark' type='submit' name='open' id='open' value='Open Woodklep'>";
+                      }
+                      else {
+                        $odknop="<input class='btn btn-dark' type='submit' name='close' id='close' value='Sluit Woodklep'>";
+                      }
                       echo "</select>
                       ".$knop."
                       <input type='hidden' value='".$ki."' name='ki' id='ki'>
                       <input type='hidden' value='".$leerlingid."' name='li' id='li'>
                       <input type='hidden' value='".$wkid."' name='wk' id='wk'>
                      </form></td>
+                    </tr>
+                    <tr>
+                      <form action='index.php?content=script-opensluit-woodklep' method='post'><td>
+                      ".$odknop."
+                      <input type='hidden' value='".$wkid."' name='wk' id='wk'>
+                      <input type='hidden' value='".$ki."' name='ki' id='ki'>
+                      <input type='hidden' value='".$leerlingid."' name='li' id='li'>
+                      </td>
+                      </form>
                     </tr>";
           }
           ?>
