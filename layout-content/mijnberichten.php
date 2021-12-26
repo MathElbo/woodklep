@@ -23,16 +23,6 @@ if (isset($_SESSION["nieuwbericht"])){
       $msg = 'Er ging iets mis met het versturen van het bericht';
       unset($_SESSION['nieuwbericht']);
       break;
-    case 'error3':
-      $pwclasses = 'error';
-      $msg = 'Er ging iets mis met SQL Query';
-      unset($_SESSION['nieuwbericht']);
-      break;
-    case 'error4':
-      $pwclasses = 'error';
-      $msg = 'Deze klas bestaat niet';
-      unset($_SESSION['nieuwbericht']);
-      break;
   }
 }
 ?>
@@ -71,16 +61,23 @@ if (isset($_SESSION["nieuwbericht"])){
                 else {
                     $fullnamea = $rec4['name'].' '.$rec4['infix'].' '.$rec4['lastname'];
                 }
-                echo "<tr><td>".$fullnamea."</td><td><a href='' style='color:black'>".$rec3['onderwerp']."</a></td><td>".$rec3['datum']."</td></tr>";
+                echo "<tr><td>".$fullnamea."</td><td><a href='index.php?content=mijnberichten&action=new' style='color:black'>".$rec3['onderwerp']."</a></td><td>".$rec3['datum']."</td></tr>";
             }
         ?>
         </table>
         </div>
         <!-- Error message display -->
-        <div class="col-24 col-sm-6 border border-dark p-4">
         <!--<h2 class="display-4">Nieuwbericht opstellen</h2>-->
-        <form action="index.php?content=script-nieuwbericht" method="post">
-            <?php
+        <?php 
+        if (!strcmp($action, 'new')|!strcmp($action, 'default')) {
+            $border = ' border border-dark p-4';
+        }
+        else {
+            $border = '';
+        }
+        echo '<div class="col-24 col-sm-6'.$border.'">';
+        if (!strcmp($action, 'new')) {
+            echo '<form action="index.php?content=script-nieuwbericht" method="post">';
             $sql1 = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $id";
             $res1 = mysqli_query($conn, $sql1);
             $rec1 = mysqli_fetch_array($res1);
@@ -93,8 +90,7 @@ if (isset($_SESSION["nieuwbericht"])){
             else {
                 $fullname = $rec1['name']." ".$rec1['infix'].' '.$rec1['lastname'];
             }
-            ?>
-            <div class="form-row">
+            echo '<div class="form-row">
                 <div class="col">
                     <label class="form-label"><b>Afzender: </b></label>
                 </div>
@@ -102,44 +98,49 @@ if (isset($_SESSION["nieuwbericht"])){
                     <label class="form-label"><?php echo $fullname?></label>
                 </div>
             </div>
-            <div class="form-row">
-                <div class='col'>
+            <div class="form-row">';
+                echo "<div class='col'>
                     <label class='form-label'><b>Ontvanger: </b></label>
                 </div>
                 <div class='col'>
                     <input class='form-control'type='name' name='ontvanger' id='ontvanger' placeholder='Gebruikersnaam' required>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class='col'>
+            </div>";
+            echo '<div class="form-row">';
+                echo "<div class='col'>
                     <label class='form-label'><b>Onderwerp: </b></label>
                 </div>
                 <div class='col'>
                     <input class='form-control' type='name' name='onderwerp' id='onderwerp' placeholder='Onderwerp' required>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class='col'>
+            </div>";
+            echo '<div class="form-row">';
+                echo "<div class='col'>
                     <label class='form-label'><b>Bericht: </b></label>
                 </div>
-            </div>
-            <div class="form-row">
-                <div class='col'>
+            </div>";
+            echo '<div class="form-row">';
+                echo "<div class='col'>
                     <textarea class='form-control' type='name' name='bericht' id='bericht' placeholder='Bericht' rows=5 required></textarea>
                 </div>
             </div>
             <div class='form-row'>
-                <div class='col'>
-                    <input class="btn btn-dark" type="submit" value="Verstuur">
+                <div class='col'>";
+                    echo '<input class="btn btn-dark" type="submit" value="Verstuur">
                 </div>
-            </div>
-            <div class='form-row'>
+            </div>';
+            echo "<div class='form-row'>
                 <div class='col'>
                     
                 </div>
             </div>
           </div>
-        </form>
+        </form>";
+        }
+        else if (!strcmp($action, 'default')){
+            echo "<center>Geen bericht geselecteerd</center>";
+        }
+        ?>
         </div>
 
       </div>
