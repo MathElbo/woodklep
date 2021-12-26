@@ -21,8 +21,26 @@ if(!empty($vraag)){
                 $sql4 = "UPDATE `student_opdracht_voortgang` SET `gemaakt` = 0 WHERE `opdracht_id` = $opdrachtid";
                 $res4 = mysqli_query($conn, $sql4);
                 if ($res4) {
-                    $_SESSION["nieuwvraag"] = "success";
-                    header("Location: index.php?content=editopdracht&oi=$opdrachtid");   
+                    $sql5 = "SELECT * FROM `wk_leerling_koppel` WHERE `wkopdracht` = $opdrachtid";
+                    $res5 = mysqli_query($conn, $sql5);
+                    $aantalwk = mysqli_num_rows($res5);
+                    $teller1 = 0;
+                    while ($rec5 = mysqli_fetch_array($res5)) {
+                        $woodklepid = $rec5['wk_id'];
+                        $sql6 = "UPDATE `woodklep_status` SET `locked` = 0 WHERE `woodklep_id` = $woodklepid";
+                        $res6 = mysqli_query($conn, $sql6);
+                        if ($res6) {
+                            $teller1++;
+                        }
+                    }
+                    if ($aantalwk == $teller1) {
+                        $_SESSION["nieuwvraag"] = "success";
+                        header("Location: index.php?content=editopdracht&oi=$opdrachtid"); 
+                    }  
+                    else {
+                        $_SESSION['nieuwvraag'] = 'error3';
+                        header("Location: index.php?content=editopdracht&oi=$opdrachtid");
+                    }
                 }
                 else {
                     //SQL query mislukt
