@@ -170,11 +170,32 @@ if(is_null(mysqli_fetch_assoc($result))){
                   $vraagaantal = mysqli_num_rows($res11);
                 }
                 $href = "";
+                $opdrachtid = $rec10['opdracht_id'];
                 if ($userrole == 3) {
-                  $href = "href='index.php?content=editopdracht&io=".$rec10['opdracht_id']."' style='color:black'";
+                  $href = "href='index.php?content=editopdracht&io=".$opdrachtid."' style='color:black'";
+                }
+                if ($userrole == 1) {
+                  $href = "href='index.php?content=myassignment&aid=".$opdrachtid."' style='color:black'";
+                }
+                $status = "";
+                if ($userrole == 1) {
+                  $sql5 = "SELECT * FROM `student_opdracht_voortgang` WHERE `studentid` = $id AND `opdracht_id` = $opdrachtid";
+                  $res5 = mysqli_query($conn, $sql5);
+                  if(mysqli_num_rows($res5)>0) {
+                    $rec5 = mysqli_fetch_array($res5);
+                    if ($rec5['gemaakt'] == 1) {
+                      $status = "<td>Gemaakt!</td>";
+                    }
+                    else {
+                      $status = "<td>Te doen.</td>";
+                    }
+                  }
+                  else {
+                    $status = "<td>Te doen.</td>";
+                  }
                 }
                 echo "<tr>
-                      <td><h6><a ".$href."><b>" . $rec10['opdracht_naam'] . "</b></a></h6></td> <td>".$vraagaantal." vragen</td>
+                      <td><h6><a ".$href."><b>" . $rec10['opdracht_naam'] . "</b></a></h6></td>".$status."<td>".$vraagaantal." vragen</td>
                     </tr>";
               }
             }
