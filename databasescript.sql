@@ -116,3 +116,15 @@ woodklep_id INT,
 locked BOOLEAN,
 FOREIGN KEY (woodklep_id) REFERENCES woodklep(wk_id)
 );
+
+CREATE TABLE IF NOT EXISTS bericht (
+    berichtid INT NOT NULL AUTO_INCREMENT,
+    afzender INT NOT NULL,
+    ontvanger INT NOT NULL,
+    onderwerp VARCHAR(100),
+    bericht VARCHAR(500),
+    datum DATE NOT NULL,
+    PRIMARY KEY (berichtid),
+    FOREIGN KEY (afzender) REFERENCES woodklep_users(userid),
+    FOREIGN KEY (ontvanger) REFERENCES woodklep_user(userid)
+);
