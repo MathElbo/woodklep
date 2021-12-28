@@ -22,17 +22,17 @@ if (mysqli_num_rows($res1)) {
     if ($res3) {
         //bericht is in database gezet
         $_SESSION['nieuwbericht'] = 'success';
-        header("Location: index.php?content=mijnberichten");
+        header("Location: index.php?content=mijnberichten&action=default");
     }
     else {
         //bericht is niet in database gezet
         $_SESSION['nieuwbericht'] = 'error2';
-        header("Location: index.php?content=mijnberichten");
+        header("Location: index.php?content=mijnberichten&action=default");
     }
 }
 else {
     //user does not exist
     $_SESSION['nieuwbericht'] = 'error1';
-    header("Location: index.php?content=mijnberichten");
+    header("Location: index.php?content=mijnberichten&action=default");
 }
 ?>
