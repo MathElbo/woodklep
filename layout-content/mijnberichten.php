@@ -4,6 +4,12 @@ include("./php-scripts/security.php");
 include("./php-scripts/connectDB.php");
 $id = $_SESSION['id'];
 $action = $_GET['action'];
+if (isset($_GET['io'])) {
+    $inout = $_GET['io'];
+}
+else {
+    $inout = 'in';
+}
 
 if (isset($_SESSION["nieuwbericht"])){
   switch ($_SESSION["nieuwbericht"]) {
@@ -43,8 +49,49 @@ if (isset($_SESSION["nieuwbericht"])){
       <div class="row">
         <div class="col-12 col-sm-6">
         <!--<h2 class="display-4">Mijn berichten</h2>-->
+        <div class='row'>
+            <div class='col'>
+                <?php
+                if (!strcmp($action, "new")) {
+                    $button1 = 'btn-light';
+                }
+                else {
+                    $button1 = 'btn-dark';
+                }
+                ?>
+            <a href='index.php?content=mijnberichten&action=new&io=<?php echo $inout?>' class='btn <?php echo $button1?>'>Nieuw bericht</a>
+            </div>
+        </div>
+        <div class='row'>
+            <br>
+        </div>
+        <div class='row'>
+            <div class='col'>
+            <?php
+                if (!strcmp($inout, "in")) {
+                    $button2 = 'btn-light';
+                }
+                else {
+                    $button2 = 'btn-dark';
+                }
+                ?>
+                <a href='index.php?content=mijnberichten&action=default&io=in' class='btn <?php echo $button2?>'>Inbox</a>
+            </div>
+            <div class='col'>
+            <?php
+                if (!strcmp($inout, "out")) {
+                    $button3 = 'btn-light';
+                }
+                else {
+                    $button3 = 'btn-dark';
+                }
+                ?>
+                <a href='index.php?content=mijnberichten&action=default&io=out' class='btn <?php echo $button3?>'>Verstuurd</a>
+            </div>
+        </div>
         <table class="table table-hover">
         <?php
+        if (!strcmp($inout, 'in')){
             $sql3 = "SELECT * FROM `bericht` WHERE `ontvanger` = $id";
             $res3 = mysqli_query($conn, $sql3);
             while ($rec3 = mysqli_fetch_array($res3)) {
@@ -63,6 +110,27 @@ if (isset($_SESSION["nieuwbericht"])){
                 }
                 echo "<tr><td>".$fullnamea."</td><td><a href='index.php?content=mijnberichten&action=new' style='color:black'>".$rec3['onderwerp']."</a></td><td>".$rec3['datum']."</td></tr>";
             }
+        } 
+        else if (!strcmp($inout, 'out')){
+            $sql3 = "SELECT * FROM `bericht` WHERE `afzender` = $id";
+            $res3 = mysqli_query($conn, $sql3);
+            while ($rec3 = mysqli_fetch_array($res3)) {
+                $ontvanger = $rec3 ['ontvanger'];
+                $sql4 = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $ontvanger";
+                $res4 = mysqli_query($conn, $sql4);
+                $rec4 = mysqli_fetch_array($res4);
+                $sql5 = "SELECT * FROM `woodklep_users` WHERE `userid` = $ontvanger";
+                $res5 = mysqli_query($conn, $sql5);
+                $rec5 = mysqli_fetch_array($res5);
+                if (is_null($rec4['name']) | !strcmp($rec4['name'], "")) {
+                    $fullnamea = $rec5['username'];
+                }
+                else {
+                    $fullnamea = $rec4['name'].' '.$rec4['infix'].' '.$rec4['lastname'];
+                }
+                echo "<tr><td>".$fullnamea."</td><td><a href='index.php?content=mijnberichten&action=default&io=".$inout."&text=".$rec3['berichtid']."' style='color:black'>".$rec3['onderwerp']."</a></td><td>".$rec3['datum']."</td></tr>";
+            }
+        } 
         ?>
         </table>
         </div>
@@ -95,7 +163,7 @@ if (isset($_SESSION["nieuwbericht"])){
                     <label class="form-label"><b>Afzender: </b></label>
                 </div>
                 <div class="col">
-                    <label class="form-label"><?php echo $fullname?></label>
+                    <label class="form-label">'.$fullname.'</label>
                 </div>
             </div>
             <div class="form-row">';
@@ -137,12 +205,29 @@ if (isset($_SESSION["nieuwbericht"])){
           </div>
         </form>";
         }
+        else if (isset($_GET['text'])) {
+            $berichtid = $_GET['text'];
+            $sql6 = "SELECT * FROM `bericht` WHERE `berichtid` = $berichtid";
+            $res6 = mysqli_query($conn, $sql6);
+            if (mysqli_num_rows($res6)==1) {
+                $rec6 = mysqli_fetch_array($res6);
+                echo "<table><tbody>
+                     <tr><td><b>Afzender:</b> </td><td style='width:100px'></td><td>".$rec6['afzender']."</td></tr>
+                     <tr><td><b>Ontvanger: </b></td><td></td><td>".$rec6['ontvanger']."</td></tr>
+                     <tr><td><b>Onderwerp: </b></td><td></td><td>".$rec6['onderwerp']."</td></tr>
+                     <tr><td><b>Bericht: </b></td></tr>
+                     <tr><td>".$rec6['bericht']."</td></tr>
+                     </tbody></table>";
+            }
+            else {
+                echo "<center>Geen bericht geselecteerd</center>";
+            }
+        }
         else if (!strcmp($action, 'default')){
             echo "<center>Geen bericht geselecteerd</center>";
         }
         ?>
         </div>
-
       </div>
     </div>
   </div>
