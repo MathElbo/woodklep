@@ -124,6 +124,7 @@ CREATE TABLE IF NOT EXISTS bericht (
     onderwerp VARCHAR(100),
     bericht VARCHAR(500),
     datum DATE NOT NULL,
+    antwoord INT,
     PRIMARY KEY (berichtid),
     FOREIGN KEY (afzender) REFERENCES woodklep_users(userid),
     FOREIGN KEY (ontvanger) REFERENCES woodklep_user(userid)
