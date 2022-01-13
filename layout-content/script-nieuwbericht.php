@@ -12,13 +12,20 @@ $id = $_SESSION["id"];
 $ontvanger = sanitize($_POST['ontvanger']);
 $onderwerp = sanitize($_POST['onderwerp']);
 $bericht = sanitize($_POST['bericht']);
+$antw = $_POST['antw'];
 $sql1 = "SELECT * FROM `woodklep_users` WHERE `username` = '$ontvanger'";
 $res1 = mysqli_query($conn, $sql1);
 if (mysqli_num_rows($res1)) {
     $rec1 = mysqli_fetch_array($res1);
     $ontvangerid = $rec1['userid'];
-    $sql3 = "INSERT INTO `bericht` VALUES (NULL, $id, $ontvangerid, '$onderwerp', '$bericht', CURRENT_DATE())";
-    $res3 = mysqli_query($conn, $sql3);
+    if ($antw==='NULL') {
+        $sql3 = "INSERT INTO `bericht` VALUES (NULL, $id, $ontvangerid, '$onderwerp', '$bericht', CURRENT_DATE(), NULL)";
+        $res3 = mysqli_query($conn, $sql3);
+    }
+    else {
+        $sql3 = "INSERT INTO `bericht` VALUES (NULL, $id, $ontvangerid, '$onderwerp', '$bericht', CURRENT_DATE(), $antw)";
+        $res3 = mysqli_query($conn, $sql3);
+    }
     if ($res3) {
         //bericht is in database gezet
         $_SESSION['nieuwbericht'] = 'success';

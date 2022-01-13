@@ -92,7 +92,7 @@ if (isset($_SESSION["nieuwbericht"])){
         <table class="table table-hover">
         <?php
         if (!strcmp($inout, 'in')){
-            $sql3 = "SELECT * FROM `bericht` WHERE `ontvanger` = $id";
+            $sql3 = "SELECT * FROM `bericht` WHERE `ontvanger` = $id ORDER BY `berichtid` DESC";
             $res3 = mysqli_query($conn, $sql3);
             while ($rec3 = mysqli_fetch_array($res3)) {
                 $afzender = $rec3 ['afzender'];
@@ -158,6 +158,31 @@ if (isset($_SESSION["nieuwbericht"])){
             else {
                 $fullname = $rec1['name']." ".$rec1['infix'].' '.$rec1['lastname'];
             }
+            if (isset($_GET['sub'])) {
+                $sub = $_GET['sub'];
+                if (substr($sub,0,3)==='re:') {
+                    $sub = substr($sub,3,strlen($sub)-3);
+                    $onderwerp = "value='re: ".$sub."'";
+                }
+                else {
+                    $onderwerp = "value=".$sub;
+                }
+            }
+            else {
+                $onderwerp = "placeholder='Onderwerp'";
+            }
+            if (isset($_GET['to'])) {
+                $to = "value='".$_GET['to']."'";
+            }
+            else {
+                $to = "placeholder='Gebruikersnaam'";
+            }
+            if (isset($_GET['antw'])) {
+                $antw = "<input type='hidden' value='".$_GET['antw']."' name='antw' id='antw'>";
+            }
+            else {
+                $anw = "<input type='hidden' value='NULL' name='antw' id='antw'>";
+            }
             echo '<div class="form-row">
                 <div class="col">
                     <label class="form-label"><b>Afzender: </b></label>
@@ -171,7 +196,7 @@ if (isset($_SESSION["nieuwbericht"])){
                     <label class='form-label'><b>Ontvanger: </b></label>
                 </div>
                 <div class='col'>
-                    <input class='form-control'type='name' name='ontvanger' id='ontvanger' placeholder='Gebruikersnaam' required>
+                    <input class='form-control'type='name' name='ontvanger' id='ontvanger' ".$to." required>
                 </div>
             </div>";
             echo '<div class="form-row">';
@@ -179,7 +204,7 @@ if (isset($_SESSION["nieuwbericht"])){
                     <label class='form-label'><b>Onderwerp: </b></label>
                 </div>
                 <div class='col'>
-                    <input class='form-control' type='name' name='onderwerp' id='onderwerp' placeholder='Onderwerp' required>
+                    <input class='form-control' type='name' name='onderwerp' id='onderwerp' ".$onderwerp." required>
                 </div>
             </div>";
             echo '<div class="form-row">';
@@ -199,7 +224,7 @@ if (isset($_SESSION["nieuwbericht"])){
             </div>';
             echo "<div class='form-row'>
                 <div class='col'>
-                    
+                    ".$antw."
                 </div>
             </div>
           </div>
@@ -240,7 +265,7 @@ if (isset($_SESSION["nieuwbericht"])){
                 $bericht = $rec6['bericht']; 
                 $bericht = nl2br($bericht);
                 echo "<table><tbody>
-                     <tr><td><b>Afzender:</b> </td><td style='width:100px'></td><td>".$fullnameafz."</td></tr>
+                     <tr><td><b>Afzender:</b> </td><td style='width:100px'></td><td>".$fullnameafz."</td><td width=30></td><td><a href='index.php?content=mijnberichten&action=new&io=in&sub=re:".$rec6['onderwerp']."&to=".$rec7['username']."&antw=".$rec6['berichtid']."' class='btn btn-dark'>Antwoord</a></td></tr>
                      <tr><td><b>Ontvanger: </b></td><td></td><td>".$fullnameontv."</td></tr>
                      <tr><td><b>Onderwerp: </b></td><td></td><td>".$rec6['onderwerp']."</td></tr>
                      <tr><td><b>Bericht: </b></td></tr>
