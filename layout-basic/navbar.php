@@ -81,9 +81,9 @@
         <a class ='nav-link' href='index.php?content=inloggen'>Inloggen</a></li>";
       }
         if (isset($_SESSION["id"])) {
-        echo /*"
-      <li><a class='nav-link' href='index.php?content=mijnberichten&action=default'>Mijn berichten</a></li>*/
-      "<li><a class='nav-link' href='index.php?content=myaccount'>Mijn account</a></li>
+        echo "
+      <li><a class='nav-link' href='index.php?content=mijnberichten&action=default'>Mijn berichten</a></li>
+      <li><a class='nav-link' href='index.php?content=myaccount'>Mijn account</a></li>
       <li><a class='nav-link' href='index.php?content=uitloggen'>Uitloggen</a></li>
       ";
       }

@@ -238,13 +238,13 @@ if (isset($_SESSION["nieuwbericht"])){
                     $fullnameontv = $rec10['name'].' '.$rec10['infix'].' '.$rec10['lastname'];
                 }
                 $bericht = $rec6['bericht']; 
-                $bericht = preg_replace("/\s+/", "<br>", $bericht);
+                $bericht = nl2br($bericht);
                 echo "<table><tbody>
                      <tr><td><b>Afzender:</b> </td><td style='width:100px'></td><td>".$fullnameafz."</td></tr>
                      <tr><td><b>Ontvanger: </b></td><td></td><td>".$fullnameontv."</td></tr>
                      <tr><td><b>Onderwerp: </b></td><td></td><td>".$rec6['onderwerp']."</td></tr>
                      <tr><td><b>Bericht: </b></td></tr>
-                     <tr><td>".$rec6['bericht']."</td></tr>
+                     <tr><td>".$bericht."</td></tr>
                      </tbody></table>";
             }
             else {
