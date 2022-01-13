@@ -78,19 +78,19 @@ if ($userinfo["userroleid"] == 1) {
                                         $sql4 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $oi";
                                         $res4 = mysqli_query($conn, $sql4);
                                         $rec4 = mysqli_fetch_array($res4);
-                                        echo "<tr><td>Te doen: </td><td><a href='index.php?content=klas&ki=".$ki."' style='color:black'>".$klasnaam."</a></td><td>".$rec4['opdracht_naam']."</td>";
+                                        echo "<tr><td><a href='index.php?content=klas&ki=".$ki."' style='color:black'>".$klasnaam."</a></td><td>".$rec4['opdracht_naam']."</td>";
                                         $sql1 = "SELECT * FROM `student_opdracht_voortgang` WHERE `studentid` = $id AND `opdracht_id`=$oi";
                                         $res1 = mysqli_query($conn, $sql1);
                                         if (mysqli_num_rows($res1)==0) {
-                                            echo "<td>Te doen.</td>";
+                                            echo "<td class='todo'>Te doen.</td>";
                                         }
                                         else {
                                             $rec1 = mysqli_fetch_array($res1);
                                             if ($rec1['gemaakt']==1) {
-                                                echo "<td>Gedaan!</td>";
+                                                echo "<td class='done'>Gedaan!</td>";
                                             }
                                             else {
-                                                echo "<td>Te doen.</td>";
+                                                echo "<td class='todo'>Te doen.</td>";
                                             }
                                         }
                                         echo "<td><a class='btn btn-dark' href='index.php?content=myassignment&aid=";
