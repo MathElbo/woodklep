@@ -108,7 +108,7 @@ if (isset($_SESSION["nieuwbericht"])){
                 else {
                     $fullnamea = $rec4['name'].' '.$rec4['infix'].' '.$rec4['lastname'];
                 }
-                echo "<tr><td>".$fullnamea."</td><td><a href='index.php?content=mijnberichten&action=new' style='color:black'>".$rec3['onderwerp']."</a></td><td>".$rec3['datum']."</td></tr>";
+                echo "<tr><td>".$fullnamea."</td><td><a href='index.php?content=mijnberichten&action=default&io=in&text=".$rec3['berichtid']."' style='color:black'>".$rec3['onderwerp']."</a></td><td>".$rec3['datum']."</td></tr>";
             }
         } 
         else if (!strcmp($inout, 'out')){
@@ -143,7 +143,7 @@ if (isset($_SESSION["nieuwbericht"])){
         else {
             $border = '';
         }
-        echo '<div class="col-24 col-sm-6'.$border.'">';
+        echo '<div class="col-24 col-sm-6'.$border.'" style="background: white">';
         if (!strcmp($action, 'new')) {
             echo '<form action="index.php?content=script-nieuwbericht" method="post">';
             $sql1 = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $id";
@@ -211,9 +211,37 @@ if (isset($_SESSION["nieuwbericht"])){
             $res6 = mysqli_query($conn, $sql6);
             if (mysqli_num_rows($res6)==1) {
                 $rec6 = mysqli_fetch_array($res6);
+                $afz = $rec6['afzender'];
+                $ontv = $rec6['ontvanger'];
+                $sql7 = "SELECT * FROM `woodklep_users` WHERE `userid` = $afz";
+                $res7 = mysqli_query($conn, $sql7);
+                $rec7 = mysqli_fetch_array($res7);
+                $sql8 = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $afz";
+                $res8 = mysqli_query($conn, $sql8);
+                $rec8 = mysqli_fetch_array($res8);
+                if (is_null($rec8['name']) | !strcmp($rec8['name'], "")) {
+                    $fullnameafz = $rec7['username'];
+                }
+                else {
+                    $fullnameafz = $rec8['name'].' '.$rec8['infix'].' '.$rec8['lastname'];
+                }
+                $sql9 = "SELECT * FROM `woodklep_users` WHERE `userid` = $ontv";
+                $res9 = mysqli_query($conn, $sql9);
+                $rec9 = mysqli_fetch_array($res9);
+                $sql10 = "SELECT * FROM `woodklep_personalinfo` WHERE `userid` = $ontv";
+                $res10 = mysqli_query($conn, $sql10);
+                $rec10 = mysqli_fetch_array($res10);
+                if (is_null($rec10['name']) | !strcmp($rec10['name'], "")) {
+                    $fullnameontv = $rec9['username'];
+                }
+                else {
+                    $fullnameontv = $rec10['name'].' '.$rec10['infix'].' '.$rec10['lastname'];
+                }
+                $bericht = $rec6['bericht']; 
+                $bericht = preg_replace("/\s+/", "<br>", $bericht);
                 echo "<table><tbody>
-                     <tr><td><b>Afzender:</b> </td><td style='width:100px'></td><td>".$rec6['afzender']."</td></tr>
-                     <tr><td><b>Ontvanger: </b></td><td></td><td>".$rec6['ontvanger']."</td></tr>
+                     <tr><td><b>Afzender:</b> </td><td style='width:100px'></td><td>".$fullnameafz."</td></tr>
+                     <tr><td><b>Ontvanger: </b></td><td></td><td>".$fullnameontv."</td></tr>
                      <tr><td><b>Onderwerp: </b></td><td></td><td>".$rec6['onderwerp']."</td></tr>
                      <tr><td><b>Bericht: </b></td></tr>
                      <tr><td>".$rec6['bericht']."</td></tr>
