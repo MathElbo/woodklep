@@ -131,7 +131,7 @@ CREATE TABLE IF NOT EXISTS bericht (
 );
 
 CREATE TABLE IF NOT EXISTS bericht_status (
-    berichtid INT NOT NULL,
+    berichtid INT NOT NULL AUTO_INCREMENT,
     status INT NOT NULL,
     PRIMARY KEY (berichtid),
     FOREIGN KEY (berichtid) REFERENCES bericht (berichtid)
