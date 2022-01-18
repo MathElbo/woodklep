@@ -41,8 +41,4 @@ function getSpecificInfo($tablename, $columnid, $id) {
 
   return $result;
 }
-
-
-
-
 ?>
