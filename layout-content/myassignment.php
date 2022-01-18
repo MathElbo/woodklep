@@ -40,6 +40,12 @@ if (isset($_SESSION["turnin"])) {
         $pwclasses = 'error';
         $msg = 'Er ging iets mis bij het updaten van de woodklepstatus';
         unset($_SESSION['turnin']);
+        break;
+      case 'error4':
+        $pwclasses = 'error';
+        $msg = 'Er ging iets mis bij het versturen van de notificatie';
+        unset($_SESSION['turnin']);
+        break;
       }
     }
 ?>
