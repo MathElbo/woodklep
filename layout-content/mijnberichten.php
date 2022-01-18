@@ -112,7 +112,7 @@ if (isset($_SESSION["nieuwbericht"])){
             }
         } 
         else if (!strcmp($inout, 'out')){
-            $sql3 = "SELECT * FROM `bericht` WHERE `afzender` = $id";
+            $sql3 = "SELECT * FROM `bericht` WHERE `afzender` = $id ORDER BY `berichtid` DESC";
             $res3 = mysqli_query($conn, $sql3);
             while ($rec3 = mysqli_fetch_array($res3)) {
                 $ontvanger = $rec3 ['ontvanger'];
@@ -262,7 +262,7 @@ if (isset($_SESSION["nieuwbericht"])){
                 else {
                     $fullnameontv = $rec10['name'].' '.$rec10['infix'].' '.$rec10['lastname'];
                 }
-                $bericht = $rec6['bericht']; 
+                $bericht = $rec6['bericht']."\n";
                 $bericht = nl2br($bericht);
                 echo "<table><tbody>
                      <tr><td><b>Afzender:</b> </td><td style='width:100px'></td><td>".$fullnameafz."</td><td width=30></td><td><a href='index.php?content=mijnberichten&action=new&io=in&sub=re:".$rec6['onderwerp']."&to=".$rec7['username']."&antw=".$rec6['berichtid']."' class='btn btn-dark'>Antwoord</a></td></tr>
