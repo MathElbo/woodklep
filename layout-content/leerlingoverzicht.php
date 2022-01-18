@@ -199,6 +199,7 @@ if (isset($_SESSION['wkopendicht'])) {
                                 }
                             }
                         }
+                        echo "<tr><td><a href='./index.php?content=docentnakijken&oi=".$oi."&li=".$leerlingid."' class='btn btn-dark'>Opdracht nakijken</a></td></tr>";
                     }
                 }
             }
