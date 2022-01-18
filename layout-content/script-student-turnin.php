@@ -86,7 +86,9 @@ if ($teller1 == $aantalvragen) {
                     $docent = $rec11['userid'];
                     $sql12 = "INSERT INTO `bericht` VALUES (NULL, $id, $docent, '$name heeft opdracht voltooid', '$name van klas $klasnaam heeft opdracht $opdrachtnaam afgerond.', CURRENT_DATE(), NULL)";
                     $res12 = mysqli_query($conn, $sql12);
-                    if ($res12) {
+                    $sql17 = "INSERT INTO `bericht_status` VALUES (NULL,0)";
+                    $res17 = mysqli_query($conn, $sql17);
+                    if ($res12&$res17) {
                         $teller3++;
                     }
                 }
@@ -141,7 +143,9 @@ if ($teller1 == $aantalvragen) {
                     $docent = $rec11['userid'];
                     $sql12 = "INSERT INTO `bericht` VALUES (NULL, $id, $docent, '$name heeft opdracht voltooid', '$name van klas $klasnaam heeft opdracht $opdrachtnaam afgerond.', CURRENT_DATE(), NULL)";
                     $res12 = mysqli_query($conn, $sql12);
-                    if ($res12) {
+                    $sql18 = "INSERT INTO `bericht_status` VALUES (NULL,0)";
+                    $res18 = mysqli_query($conn, $sql18);
+                    if ($res12&$res18) {
                         $teller3++;
                     }
                 }

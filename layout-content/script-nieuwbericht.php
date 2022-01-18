@@ -27,9 +27,17 @@ if (mysqli_num_rows($res1)) {
         $res3 = mysqli_query($conn, $sql3);
     }
     if ($res3) {
+        $sql2 = "INSERT INTO `bericht_status` VALUES (NULL, 0)";
+        $res2 = mysqli_query($conn, $sql2);
+        if ($res2) {
+            $_SESSION['nieuwbericht'] = 'success';
+            header("Location: index.php?content=mijnberichten&action=default");
+        }
         //bericht is in database gezet
-        $_SESSION['nieuwbericht'] = 'success';
-        header("Location: index.php?content=mijnberichten&action=default");
+        else {
+            $_SESSION['nieuwbericht'] = 'error2';
+            header("Location: index.php?content=mijnberichten&action=default");
+        }
     }
     else {
         //bericht is niet in database gezet
