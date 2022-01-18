@@ -10,7 +10,7 @@ $userrole = $_SESSION["userrole"];
 $resultu = getSpecificInfo('woodklep_users', 'userid', $id);
 $userinfo = mysqli_fetch_assoc($resultu);
 // First get u role from woodklep_users and see if role is student
-if ($userinfo["userroleid"] == 1) {
+/*if ($userinfo["userroleid"] == 1) {
     // Get klas from user_klas_koppel 
     $sql = "SELECT * FROM `user_klas_koppel`
             WHERE userid = '$id'";
@@ -39,7 +39,7 @@ if ($userinfo["userroleid"] == 1) {
     if(!empty($result)) {
         $woodklepid = mysqli_fetch_assoc($result);
     }
-}
+}*/
 ?>
 
 <div class="jumbotron jumbotron-fluid homeJumbo">

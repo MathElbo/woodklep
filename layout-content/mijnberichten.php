@@ -181,7 +181,7 @@ if (isset($_SESSION["nieuwbericht"])){
                 $antw = "<input type='hidden' value='".$_GET['antw']."' name='antw' id='antw'>";
             }
             else {
-                $anw = "<input type='hidden' value='NULL' name='antw' id='antw'>";
+                $antw = "<input type='hidden' value='NULL' name='antw' id='antw'>";
             }
             echo '<div class="form-row">
                 <div class="col">
