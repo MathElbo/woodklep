@@ -129,3 +129,12 @@ CREATE TABLE IF NOT EXISTS bericht (
     FOREIGN KEY (afzender) REFERENCES woodklep_users(userid),
     FOREIGN KEY (ontvanger) REFERENCES woodklep_user(userid)
 );
+
+CREATE TABLE IF NOT EXISTS bericht_status (
+    berichtid INT NOT NULL,
+    status INT NOT NULL,
+    PRIMARY KEY (berichtid),
+    FOREIGN KEY (berichtid) REFERENCES bericht (berichtid)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE
+);

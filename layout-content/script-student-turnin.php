@@ -7,8 +7,24 @@ include("./php-scripts/security.php");
 include("./php-scripts/connectDB.php");
 include("./php-scripts/functions.php");
 $id = $_SESSION["id"];
+$sql13 = "SELECT * FROM `woodklep_users` WHERE `userid` = $id";
+$res13 = mysqli_query($conn, $sql13);
+$rec13 = mysqli_fetch_array($res13);
+$sql14 = "SELECT * FROM `woodklep_personalinfo WHERE `userid` = $id";
+$res14 = mysqli_query($conn, $sql14);
+$rec14 = mysqli_fetch_array($res14);
+if ($rec14['name']==='' | is_null($rec14['name'])) {
+    $name = $rec13['username'];
+}
+else {
+    $name = $rec14['name']." ".$rec14['infix']." ".$rec14['lastname'];
+}
 
 $assignmentid = $_GET['aid'];
+$sql16 = "SELECT * FROM `huiswerk_opdrachten` WHERE `opdracht_id` = $assignmentid";
+$res16 = mysqli_query($conn, $sql16);
+$rec16 = mysqli_fetch_array($res16);
+$opdrachtnaam = $rec16['opdracht_naam'];
 
 $sql1 = "SELECT * FROM `opdrachtvraag_koppel` WHERE `opdracht_id` = $assignmentid";
 $res1 = mysqli_query($conn, $sql1);
@@ -54,7 +70,33 @@ if ($teller1 == $aantalvragen) {
                 }
             }
             if ($teller2 == $aantalwoodkleps) {
-                $_SESSION['turnin'] = 'success';
+                $sql10 = "SELECT * FROM `hw_klas_koppel` WHERE `hw_opdracht_id` = $assignmentid";
+                $res10 = mysqli_query($conn, $sql10);
+                $rec10 = mysqli_fetch_array($res10);
+                $klas = $rec10['klas_id'];
+                $sql15 = "SELECT * FROM `klas` WHERE `klas_id` = $klas";
+                $res15 = mysqli_query($conn, $sql15);
+                $rec15 = mysqli_fetch_array($res15);
+                $klasnaam = $rec15['klasnaam'];
+                $sql11 = "SELECT * FROM `user_klas_koppel` JOIN `woodklep_users` ON user_klas_koppel.userid=woodklep_users.userid WHERE `klas_id` = 1 AND `userroleid` = 3;";
+                $res11 = mysqli_query($conn, $sql11);
+                $resamount = mysqli_num_rows($res11);
+                $teller3 = 0;
+                while ($rec11 = mysqli_fetch_array($res11)) {
+                    $docent = $rec11['userid'];
+                    $sql12 = "INSERT INTO `bericht` VALUES (NULL, $id, $docent, '$name heeft opdracht voltooid', '$name van klas $klasnaam heeft opdracht $opdrachtnaam afgerond.', CURRENT_DATE(), NULL)";
+                    $res12 = mysqli_query($conn, $sql12);
+                    if ($res12) {
+                        $teller3++;
+                    }
+                }
+                if ($teller3==$resamount) {
+                    $_SESSION['turnin'] = 'success';
+                }
+                else {
+                    $_SESSION['turnin'] = 'error4';
+                    //Fout bij bericht
+                }
             }
             else {
                 //Fout bij updaten woodklepstatus
@@ -83,7 +125,33 @@ if ($teller1 == $aantalvragen) {
                 }
             }
             if ($teller2 == $aantalwoodkleps) {
-                $_SESSION['turnin'] = 'success';
+                $sql10 = "SELECT * FROM `hw_klas_koppel` WHERE `hw_opdracht_id` = $assignmentid";
+                $res10 = mysqli_query($conn, $sql10);
+                $rec10 = mysqli_fetch_array($res10);
+                $klas = $rec10['klas_id'];
+                $sql15 = "SELECT * FROM `klas` WHERE `klas_id` = $klas";
+                $res15 = mysqli_query($conn, $sql15);
+                $rec15 = mysqli_fetch_array($res15);
+                $klasnaam = $rec15['klasnaam'];
+                $sql11 = "SELECT * FROM `user_klas_koppel` JOIN `woodklep_users` ON user_klas_koppel.userid=woodklep_users.userid WHERE `klas_id` = 1 AND `userroleid` = 3;";
+                $res11 = mysqli_query($conn, $sql11);
+                $resamount = mysqli_num_rows($res11);
+                $teller3 = 0;
+                while ($rec11 = mysqli_fetch_array($res11)) {
+                    $docent = $rec11['userid'];
+                    $sql12 = "INSERT INTO `bericht` VALUES (NULL, $id, $docent, '$name heeft opdracht voltooid', '$name van klas $klasnaam heeft opdracht $opdrachtnaam afgerond.', CURRENT_DATE(), NULL)";
+                    $res12 = mysqli_query($conn, $sql12);
+                    if ($res12) {
+                        $teller3++;
+                    }
+                }
+                if ($teller3==$resamount) {
+                    $_SESSION['turnin'] = 'success';
+                }
+                else {
+                    $_SESSION['turnin'] = 'error4';
+                    //Fout bij bericht
+                }
             }
             else {
                 //Fout bij updaten woodklepstatus

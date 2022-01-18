@@ -22,6 +22,7 @@ if ($userinfo["userroleid"] == 1) {
     $klas = $userkoppelklas["klas_id"];
     if (isset($klas)) {
         // Get opdrachten from hw_klas_koppel
+        /*
         $sql = "SELECT * from `hw_klas_koppel`";
         $result = mysqli_query($conn, $sql);
         $rows = mysqli_num_rows($result);
@@ -37,9 +38,8 @@ if ($userinfo["userroleid"] == 1) {
         if ($klaskoppelhw["klas_id"] == $klas){
         $opdracht[] = $klaskoppelhw["hw_opdracht_id"];
         }
-
             
-        }
+        }*/
     }
 }
 ?>

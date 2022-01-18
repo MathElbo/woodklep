@@ -269,7 +269,9 @@ if (isset($_SESSION["nieuwbericht"])){
                      <tr><td><b>Ontvanger: </b></td><td></td><td>".$fullnameontv."</td></tr>
                      <tr><td><b>Onderwerp: </b></td><td></td><td>".$rec6['onderwerp']."</td></tr>
                      <tr><td><b>Bericht: </b></td></tr>
-                     <tr><td>".$bericht."</td></tr>
+                     </tbody></table>
+                     <table><tbody>
+                     <tr><td style='width:200%'>".$bericht."</td></tr>
                      </tbody></table>";
             }
             else {
