@@ -193,9 +193,23 @@ if (isset($_SESSION['wkopendicht'])) {
                                 $sql8 = "SELECT * FROM `student_antwoord` WHERE `vraag_id` = $vraagid AND `studentid` = $leerlingid";
                                 $res8 = mysqli_query($conn, $sql8);
                                 while($rec8 = mysqli_fetch_array($res8)) {
-                                    echo "<tr>
-                                        <td><i>Antwoord van ".$leerlingnaam."</i></td><td>".$rec8['antwoord']."</td>
+                                  if (!is_null($rec8['correctie'])){
+                                    if ($rec8['correctie']==1){
+                                      echo "<tr>
+                                        <td><i>Antwoord van ".$leerlingnaam."</i></td><td>".$rec8['antwoord']."</td><td><img src='./assets/img/bookmark-check.svg' class='card-img-top'></td>
                                     </tr.>";
+                                    }
+                                    else {
+                                      echo "<tr>
+                                        <td><i>Antwoord van ".$leerlingnaam."</i></td><td>".$rec8['antwoord']."</td><td><img src='./assets/img/bookmark-x.svg' class='card-img-top'></td>
+                                    </tr.>";
+                                    }
+                                  }
+                                  else {
+                                    echo "<tr>
+                                        <td><i>Antwoord van ".$leerlingnaam."</i></td><td></td>
+                                    </tr.>";
+                                  }
                                 }
                             }
                         }
