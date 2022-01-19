@@ -13,23 +13,17 @@
 
 function helloWorld(){
 
-exec("mode COM3 BAUD=115200 PARITY=n data=8 stop=1 xon=off");
+exec("mode COM5 BAUD=115200 PARITY=n data=8 stop=1 xon=off");
 
-$fp = fopen ("COM3", "w");
+$fp = fopen ("COM5", "w");
 
-$data = ",Hellow World,";
+$data = "Hellow World";
 
 fwrite($fp, $data);
 
 fclose($fp);
 
-}
 
-function NewWorld() {
-    $output = system(`mode COM3: BAUD=115200 PARITY=N data=8 stop=1 XON=off TO=on`);
-    $fp = fopen('COM3', 'w');
-    $writtenBytes = fwrite($fp, ",Hello,");
-    fclose($fp);
 }
 ?>
 
@@ -41,10 +35,8 @@ function NewWorld() {
 if (isset($_POST) && !empty($_POST)) {
 if ($_POST['action']=='Test') {
         helloWorld();
-        header('Location: index.php?content=qingstest');
     }
 }
-//<td><img src='./assets/img/bookmark-check.svg' class='card-img-top'></td><td><img src='./assets/img/bookmark-x.svg' class='card-img-top'></td>
 ?>
 
 </body>

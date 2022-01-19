@@ -36,7 +36,7 @@ while ($rec1 = mysqli_fetch_array($res1)) {
     $sql2 = "SELECT * FROM `student_antwoord` WHERE `studentid` = $id AND `vraag_id` = $vi";
     $res2 = mysqli_query($conn, $sql2);
     if (!mysqli_num_rows($res2)) {
-        $sql3 = "INSERT INTO `student_antwoord` VALUES ($id,$vi,'$studentantwoord')";
+        $sql3 = "INSERT INTO `student_antwoord` VALUES ($id,$vi,'$studentantwoord',NULL)";
         $res3 = mysqli_query($conn, $sql3);
         if ($res3) {
             $teller1++;
