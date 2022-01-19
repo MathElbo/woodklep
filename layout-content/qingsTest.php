@@ -13,17 +13,10 @@
 
 function helloWorld(){
 
-exec("mode COM5 BAUD=115200 PARITY=n data=8 stop=1 xon=off");
+exec("mode COM4 BAUD=115200 PARITY=n data=8 stop=1 xon=off");
 
-$fp = fopen ("COM5", "w");
-
-$data = "Hellow World";
-
-fwrite($fp, $data);
-
-fclose($fp);
-
-
+$fp = fopen ("COM4", "w");
+    fwrite($fp, ",");
 }
 ?>
 

@@ -13,6 +13,7 @@ $ki = sanitize($_POST['ki']);
 
 if (isset($_POST['open'])) {
     $sql1 = "UPDATE `woodklep_status` SET `locked` = 1 WHERE `woodklep_id` = $wk";
+    helloWorld();
     $res1 = mysqli_query($conn, $sql1);
     if ($res1) {
         $_SESSION['wkopendicht'] = 'success1';

@@ -66,8 +66,8 @@ if ($teller1 == $aantalvragen) {
             while ($rec8 = mysqli_fetch_array($res8)) {
                 $wi = $rec8['wk_id'];
                 $sql9 = "UPDATE `woodklep_status` SET `locked` = 1 WHERE `woodklep_id` = $wi";
-                $res9 = mysqli_query($conn, $sql9);
                 helloWorld();
+                $res9 = mysqli_query($conn, $sql9);
                 if ($res9) {
                     $teller2++;
                 }
