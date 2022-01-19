@@ -45,7 +45,9 @@ while ($rec1 = mysqli_fetch_array($res1)) {
     else {
         $sql4 = "UPDATE `student_antwoord` SET `antwoord` = '$studentantwoord' WHERE `studentid` = $id AND `vraag_id` = $vi";
         $res4 = mysqli_query($conn, $sql4);
-        if ($res4) {
+        $sql19 = "UPDATE `student_antwoord` SET `correctie` = NULL WHERE `studentid` = $id AND `vraag_id` = $vi";
+        $res19 = mysqli_query($conn, $sql19);
+        if ($res4&$res19) {
             $teller1++;
         }
     }
@@ -85,6 +87,7 @@ if ($teller1 == $aantalvragen) {
                 $teller3 = 0;
                 while ($rec11 = mysqli_fetch_array($res11)) {
                     $docent = $rec11['userid'];
+                    $link = 'index.php?content=docentnakijken&oi='.$assignmentid.'&li='.$id;
                     $sql12 = "INSERT INTO `bericht` VALUES (NULL, $id, $docent, '$name heeft opdracht voltooid', '$name van klas $klasnaam heeft opdracht $opdrachtnaam afgerond.', CURRENT_DATE(), NULL)";
                     $res12 = mysqli_query($conn, $sql12);
                     $sql17 = "INSERT INTO `bericht_status` VALUES (NULL,0)";
@@ -143,6 +146,7 @@ if ($teller1 == $aantalvragen) {
                 $teller3 = 0;
                 while ($rec11 = mysqli_fetch_array($res11)) {
                     $docent = $rec11['userid'];
+                    $link = 'index.php?content=docentnakijken&oi='.$assignmentid.'&li='.$id;
                     $sql12 = "INSERT INTO `bericht` VALUES (NULL, $id, $docent, '$name heeft opdracht voltooid', '$name van klas $klasnaam heeft opdracht $opdrachtnaam afgerond.', CURRENT_DATE(), NULL)";
                     $res12 = mysqli_query($conn, $sql12);
                     $sql18 = "INSERT INTO `bericht_status` VALUES (NULL,0)";

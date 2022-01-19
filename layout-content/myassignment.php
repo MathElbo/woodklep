@@ -71,7 +71,7 @@ if (isset($_SESSION["turnin"])) {
                 <div class="col-12 col-md-4 offset-md-1">
                     <form action="index.php?content=script-student-turnin&aid=
                     <?php
-                    echo $assignmentid.'" method="post"> <div class="form-group"><br>';
+                    echo $assignmentid.'" method="post"> <div class="form-group"><br><table><tbody>';
                     $sql3 = "SELECT * FROM `opdrachtvraag_koppel` WHERE `opdracht_id` = $assignmentid";
                     $res3 = mysqli_query($conn, $sql3);
                     while ($rec3 = mysqli_fetch_array($res3)) {
@@ -79,22 +79,32 @@ if (isset($_SESSION["turnin"])) {
                         $sql4 = "SELECT * FROM `huiswerk_vraag` WHERE `vraag_id` = $vi";
                         $res4 = mysqli_query($conn, $sql4);
                         $rec4 = mysqli_fetch_array($res4);
-                        echo '<label for="exampleFormControlInput1" class="form-label"><br>'.$rec4["vraag"].'</label>';
-                        echo '<input class="form-control" type="antwoord" name ="'.$vi.'" id="'.$vi.'"';
+                        echo '<tr><td><label for="exampleFormControlInput1" class="form-label"><br>'.$rec4["vraag"].'</label></td></tr>';
+                        echo '<tr><td><input class="form-control" type="antwoord" name ="'.$vi.'" id="'.$vi.'"';
                         $sql5 = "SELECT * FROM `student_antwoord` WHERE `vraag_id` = $vi AND `studentid` = $id";
                         $res5 = mysqli_query($conn, $sql5);
                         if (mysqli_num_rows($res5)>0){
                             $rec5 = mysqli_fetch_array($res5);
-                            echo '" value="'.$rec5["antwoord"].'" required>';
+                            echo '" value="'.$rec5["antwoord"].'" required></td>';
+                            if (!is_null($rec5['correctie'])){
+                              if ($rec5['correctie']==1) {
+                                echo "<td><img src='./assets/img/bookmark-check.svg' class='card-img-top'></td></tr>";
+                              }
+                              else {
+                                echo "<td><img src='./assets/img/bookmark-x.svg' class='card-img-top'></td></tr>";
+                              }
+                            }
+                            else {
+                              echo "</tr>";
+                            }
                         }
                         else {
-                            echo '" placeholder="Antwoord" required>';
+                            echo '" placeholder="Antwoord" required></td></tr>';
                         }
                     }
                     ?>
-                            <br>
-                            <input class='btn btn-dark' type="submit" value="Lever in">
-                            <br>
+                            <tr><td><input class='btn btn-dark' type="submit" value="Lever in"></td></tr>
+                  </tbody></table>
                             <br><a href="./index.php?content=myhomework" class="btn btn-dark">Terug naar mijn huiswerk</a>
                 </div>
                 </form>
