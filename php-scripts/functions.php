@@ -41,4 +41,13 @@ function getSpecificInfo($tablename, $columnid, $id) {
 
   return $result;
 }
+
+
+function helloWorld(){
+
+  exec("mode COM4 BAUD=115200 PARITY=n data=8 stop=1 xon=off");
+  
+  $fp = fopen ("COM4", "w");
+      fwrite($fp, ",");
+  }
 ?>
