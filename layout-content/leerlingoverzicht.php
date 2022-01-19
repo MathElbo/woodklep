@@ -116,7 +116,7 @@ if (isset($_SESSION['wkopendicht'])) {
                 <td><b>E-mail</b></td><td><?php echo $leerlinginfo['email']?></td>
             </tr>
             <tr>
-                <td><a href='mailto:<?php echo $leerlinginfo['email']?>' class='btn btn-dark'>Stuur bericht</a></td>
+                <td><a href='index.php?content=mijnberichten&action=new&io=in&to=<?php echo $leerlinginfo['username']?>' class='btn btn-dark'>Stuur bericht</a></td>
             </tr>
             <!--<tr>
             <td><a href='index.php?content=klas&ki=<?php echo $ki?>' class='btn btn-dark'>Terug naar klas</a></td>
@@ -199,7 +199,7 @@ if (isset($_SESSION['wkopendicht'])) {
                                 }
                             }
                         }
-                        echo "<tr><td><a href='./index.php?content=docentnakijken&oi=".$oi."&li=".$leerlingid."' class='btn btn-dark'>Opdracht nakijken</a></td></tr>";
+                        //echo "<tr><td><a href='./index.php?content=docentnakijken&oi=".$oi."&li=".$leerlingid."' class='btn btn-dark'>Opdracht nakijken</a></td></tr>";
                     }
                 }
             }
