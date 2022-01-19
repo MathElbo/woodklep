@@ -207,7 +207,7 @@ if (isset($_SESSION['wkopendicht'])) {
                                   }
                                   else {
                                     echo "<tr>
-                                        <td><i>Antwoord van ".$leerlingnaam."</i></td><td></td>
+                                        <td><i>Antwoord van ".$leerlingnaam."</i></td><td>".$rec8['antwoord']."</td><td></td>
                                     </tr.>";
                                   }
                                 }
