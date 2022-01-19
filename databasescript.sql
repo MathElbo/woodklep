@@ -97,6 +97,7 @@ CREATE TABLE IF NOT EXISTS student_antwoord (
 studentid INT,
 vraag_id INT,
 antwoord VARCHAR(255),
+correctie INT,
 FOREIGN KEY (studentid) REFERENCES woodklep_users(userid),
 FOREIGN KEY (vraag_id) REFERENCES huiswerk_vraag(vraag_id)
 );
