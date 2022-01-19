@@ -123,9 +123,15 @@ if (isset($_SESSION['woodklepverwijder'])) {
                 $status = "Open";
               }
               }
+              if (is_null($wkopdracht) | $wkopdracht===''){
+                $href = '';
+              }
+              else {
+                $href = 'index.php?content=myassignment&aid='.$wkopdracht;
+              }
               echo "<p class='lead'><b><a>" . $wkname. "</a></b>
                     <br>Status: " . $status. "<br>
-                    Gekoppelde opdracht: <a href='index.php?content=myassignment&aid=".$wkopdracht."' style='color:black'>".$oname." </a><br></p>";
+                    Gekoppelde opdracht: <a href='".$href."' style='color:black'>".$oname." </a><br></p>";
               }
         ?>
       </div>
