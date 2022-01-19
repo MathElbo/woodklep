@@ -267,6 +267,8 @@ if (isset($_SESSION["nieuwbericht"])){
                 echo "<table><tbody>
                      <tr><td><b>Afzender:</b> </td><td style='width:100px'></td><td>".$fullnameafz."</td><td width=30></td><td><a href='index.php?content=mijnberichten&action=new&io=in&sub=re:".$rec6['onderwerp']."&to=".$rec7['username']."&antw=".$rec6['berichtid']."' class='btn btn-dark'>Antwoord</a></td></tr>
                      <tr><td><b>Ontvanger: </b></td><td></td><td>".$fullnameontv."</td></tr>
+                     </tbody></table>
+                     <table><tbody>
                      <tr><td><b>Onderwerp: </b></td><td></td><td>".$rec6['onderwerp']."</td></tr>
                      <tr><td><b>Bericht: </b></td></tr>
                      </tbody></table>

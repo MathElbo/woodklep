@@ -45,7 +45,7 @@ if ($teller1 == $count1) {
     $res6 = mysqli_query($conn, $sql6);
     $rec6 = mysqli_fetch_array($res6);
     $opdrachtnaam = $rec6['opdracht_naam'];
-    $sql4 = "INSERT INTO `bericht` VALUES (NULL, $id, $li, '$name heeft je opdracht nagekeken', 'Opdracht $opdrachtnaam is nagekeken.', CURRENT_DATE(), NULL)";
+    $sql4 = "INSERT INTO `bericht` VALUES (NULL, $id, $li, '$name heeft je opdracht nagekeken', 'Opdracht $opdrachtnaam is nagekeken.\n<a href=index.php?content=myassignment&aid=$oi>Klik hier om het resultaat te zien.</a>', CURRENT_DATE(), NULL)";
     $res4 = mysqli_query($conn, $sql4);
     if ($res4) {
         $_SESSION['nakijken'] = 'success';
